@@ -1,0 +1,12 @@
+services:
+  db:
+    container_name: posadasdb
+    image: mysql
+    restart: always
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_DATABASE: posadasdb
+      MYSQL_ROOT_PASSWORD: securepass
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
