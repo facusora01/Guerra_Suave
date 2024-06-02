@@ -29,6 +29,16 @@ def search_query(query):
     result = db_connection.execute(text(query))
     return result.mappings().all()
 
+
+def removerUUID(data):
+    listaDatos = []
+    for row in data:
+        fila = dict(row)
+        fila.pop("personaUUID")
+        listaDatos.append(fila)
+    return listaDatos
+
+
 def filtrosPosadas(args):
     # if(request.args):
     #     filters = "WHERE"
@@ -36,7 +46,6 @@ def filtrosPosadas(args):
     #         filters += f""" {arg}={request.args.get(arg)} AND"""
     #     filters = filters[:-3]
     return ""
-
 
 @app.route("/posadas")
 def posadas():
@@ -50,7 +59,80 @@ def posadas():
     except SQLAlchemyError as err:
         print(err)
         return jsonify({'message': "Error en la solicitud"}), 400
- 
+    
+    
+@app.route("/reservas")
+def reservas():
+
+    filters = ""
+   
+    try:
+        if request.args.get('identificadorPosada'):
+            filters = f"""WHERE identificadorPosada={request.args.get('identificadorPosada')}"""
+
+        elif request.args.get('email'):
+            usuario = search_query(f"""SELECT * FROM usuarios WHERE email='{request.args.get('email')}' """)
+
+            if not len(usuario):
+                return jsonify({'message': 'Usuario inexistente'}), 400
+   
+            filters = f"""WHERE personaUUID='{usuario[0]['UUID']}' """
+
+        result = search_query(f"""SELECT * FROM reservas {filters}""")
+        reservas = removerUUID(result)
+        return jsonify({'reservas': reservas, 'cantidad': len(reservas)})
+    except SQLAlchemyError as err:
+        print(err)
+        return jsonify({'message': "Error en la solicitud"}), 400
+
+
+@app.route("/reservar", methods=["POST"])
+def reservar():
+
+    try:
+        content = request.json
+
+        if not len(search_query(f"""SELECT * FROM posadas WHERE identificador={content['identificadorPosada']}""")):
+            return jsonify({'message': 'Posada inexistente1'}), 400
+        
+        usuario = search_query(f"""SELECT * FROM usuarios WHERE UUID='{content['UUID']}' """)
+        if not len(usuario):
+            return jsonify({'message': 'Usuario inexistente'}), 400
+
+        result = search_query(f"""SELECT * FROM reservas WHERE identificadorPosada={content['identificadorPosada']}""")
+        reservas = [dict(row) for row in result]
+
+        dateFormat = '%Y-%m-%d'
+        fechaIngreso = datetime.strptime(content['fechaIngreso'], dateFormat)
+        fechaEgreso = datetime.strptime(content['fechaEgreso'], dateFormat)
+        fechaValida = True
+
+        for re in reservas:
+            if re['fechaIngreso'] <= fechaIngreso and re['fechaEgreso'] > fechaIngreso:
+                fechaValida = False
+
+            elif re['fechaIngreso'] < fechaEgreso and re['fechaEgreso'] >= fechaEgreso:
+                fechaValida = False
+
+            elif fechaEgreso <= fechaIngreso:
+                fechaValida = False
+
+            elif fechaIngreso < datetime.now():
+                fechaValida = False
+
+        if not fechaValida:
+            return jsonify({'message': 'La fecha seleccionada para la reseva no es valida.'}), 400
+        
+        print("B")
+
+        run_query(f"""INSERT INTO reservas VALUES ({content['identificadorPosada']}, "{content['UUID']}", "{content['fechaIngreso']}", "{content['fechaEgreso']}")""")
+        return jsonify({'message': "Reserva correcta"})
+    
+    except SQLAlchemyError as err:
+        print(err)
+        return jsonify({'message': 'Error generando la reserva'}), 500
+    except: 
+        return jsonify({'message': 'Error en la solicitud.'}), 400
 
 
 @app.errorhandler(404)
