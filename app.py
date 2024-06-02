@@ -4,7 +4,17 @@ import os
 app = Flask(__name__)
 
 #activar debugger
+
+'''
+ESTO ES PARA QUE EL DEBUGGER SE ACTIVE AUTOMATICAMENTE
+============================================================
+============================================================
+''' 
 os.environ['FLASK_DEBUG'] = '1'
+'''
+============================================================
+============================================================
+'''
 
 @app.route('/')
 def index():
@@ -33,6 +43,10 @@ def contact():
 @app.route('/rooms_single')
 def rooms_single():
     return render_template('rooms_single.html')
+
+@app.route('/Cabana_Lujosa')
+def Cabana_Lujosa():
+    return render_template('Cabana_Lujosa.html')
 
 @app.route('/blog_single')
 def blog_single():

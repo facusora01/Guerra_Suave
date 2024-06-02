@@ -3,7 +3,7 @@
 {% block body %}
 
 <section class="home-slider owl-carousel">
-	<div class="slider-item" style="background-image:url(../static/images/bg_1.jpg);">
+	<div class="slider-item" style="background-image:url(../static/images/Foto_Titulo_Cabanas.avif);">
 	<div class="overlay"></div>
 	<div class="container">
 		<div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -17,7 +17,7 @@
 	</div>
 	</div>
 
-	<div class="slider-item" style="background-image:url(../static/images/bg_2.jpg);">
+	<div class="slider-item" style="background-image:url(../static/images/Foto_Titulo_Camino.jpg);">
 	<div class="overlay"></div>
 	<div class="container">
 		<div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -41,7 +41,7 @@
 					<div class="col-md-3 d-flex">
 						<div class="form-group p-4 align-self-stretch d-flex align-items-end">
 							<div class="wrap">
-									<label for="#">Check-in Date</label>
+									<label for="#">Check-in</label>
 									<input type="text" class="form-control checkin_date" placeholder="Check-in date">
 								</div>
 							</div>
@@ -49,7 +49,7 @@
 					<div class="col-md-3 d-flex">
 						<div class="form-group p-4 align-self-stretch d-flex align-items-end">
 							<div class="wrap">
-									<label for="#">Check-out Date</label>
+									<label for="#">Check-out</label>
 									<input type="text" class="form-control checkout_date" placeholder="Check-out date">
 							</div>
 							</div>
@@ -57,17 +57,17 @@
 					<div class="col-md d-flex">
 						<div class="form-group p-4 align-self-stretch d-flex align-items-end">
 							<div class="wrap">
-								<label for="#">Room</label>
+								<label for="#">Nuestras Cabañas</label>
 								<div class="form-field">
-									<div class="select-wrap">
+								<div class="select-wrap">
 							<div class="icon"><span class="ion-ios-arrow-down"></span></div>
 							<select name="" id="" class="form-control">
-								<option value="">Suite</option>
-								<option value="">Family Room</option>
-								<option value="">Deluxe Room</option>
-								<option value="">Classic Room</option>
-								<option value="">Superior Room</option>
-								<option value="">Luxury Room</option>
+								<option value="">Amapola</option>
+								<option value="">Hierba Alta</option>
+								<option value="">Ciervo Blanco</option>
+								<option value="">Bosque Alto</option>
+								<option value="">Trucha Dorada</option>
+								<option value="">Carpincho</option>
 							</select>
 							</div>
 							</div>
@@ -77,17 +77,17 @@
 					<div class="col-md d-flex">
 						<div class="form-group p-4 align-self-stretch d-flex align-items-end">
 							<div class="wrap">
-								<label for="#">Customer</label>
+								<label for="#">Adultos</label>
 								<div class="form-field">
 									<div class="select-wrap">
 							<div class="icon"><span class="ion-ios-arrow-down"></span></div>
 							<select name="" id="" class="form-control">
-								<option value="">1 Adult</option>
-								<option value="">2 Adult</option>
-								<option value="">3 Adult</option>
-								<option value="">4 Adult</option>
-								<option value="">5 Adult</option>
-								<option value="">6 Adult</option>
+								<option value="">1</option>
+								<option value="">2</option>
+								<option value="">3</option>
+								<option value="">4</option>
+								<option value="">5</option>
+								<option value="">6</option>
 							</select>
 							</div>
 							</div>
@@ -110,7 +110,7 @@
 <section class="ftco-section ftc-no-pb ftc-no-pt">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-5 p-md-5 img img-2 d-flex justify-content-center align-items-center" style="background-image: url(../static/images/bg_2.jpg);">
+				<div class="col-md-5 p-md-5 img img-2 d-flex justify-content-center align-items-center" style="background-image: url(../static/images/Foto_Titulo_Cabanas.avif);">
 					<a href="https://vimeo.com/45830194" class="icon popup-vimeo d-flex justify-content-center align-items-center">
 						<span class="icon-play"></span>
 					</a>
@@ -206,43 +206,13 @@
 		<div class="row">
 			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
 				<div class="room">
-					<a href="{{ url_for('rooms') }}" class="img d-flex justify-content-center align-items-center" style="background-image: url(../static/images/room-1.jpg);">
+					<a href="{{ url_for('rooms') }}" class="img d-flex justify-content-center align-items-center" style="background-image: url(../static/images/Media/Cabana_Simple_Dormitorio.jpg);">
 						<div class="icon d-flex justify-content-center align-items-center">
 							<span class="icon-search2"></span>
 						</div>
 					</a>
 					<div class="text p-3 text-center">
-						<h3 class="mb-3"><a href="{{ url_for('rooms') }}">Suite Room</a></h3>
-						<p><span class="price mr-2">$120.00</span> <span class="per">per night</span></p>
-						<hr>
-						<p class="pt-1"><a href="{{ url_for('rooms_single') }}" class="btn-custom">View Room Details <span class="icon-long-arrow-right"></span></a></p>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
-				<div class="room">
-					<a href="{{ url_for('rooms') }}" class="img d-flex justify-content-center align-items-center" style="background-image: url(../static/images/room-2.jpg);">
-						<div class="icon d-flex justify-content-center align-items-center">
-							<span class="icon-search2"></span>
-						</div>
-					</a>
-					<div class="text p-3 text-center">
-						<h3 class="mb-3"><a href="{{ url_for('rooms') }}">Family Room</a></h3>
-						<p><span class="price mr-2">$20.00</span> <span class="per">per night</span></p>
-						<hr>
-						<p class="pt-1"><a href="{{ url_for('rooms_single') }}" class="btn-custom">View Room Details <span class="icon-long-arrow-right"></span></a></p>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
-				<div class="room">
-					<a href="{{ url_for('rooms') }}" class="img d-flex justify-content-center align-items-center" style="background-image: url(../static/images/room-3.jpg);">
-						<div class="icon d-flex justify-content-center align-items-center">
-							<span class="icon-search2"></span>
-						</div>
-					</a>
-					<div class="text p-3 text-center">
-						<h3 class="mb-3"><a href="{{ url_for('rooms') }}">Deluxe Room</a></h3>
+						<h3 class="mb-3"><a href="{{ url_for('rooms') }}">Amapola</a></h3>
 						<p><span class="price mr-2">$150.00</span> <span class="per">per night</span></p>
 						<hr>
 						<p class="pt-1"><a href="{{ url_for('rooms_single') }}" class="btn-custom">View Room Details <span class="icon-long-arrow-right"></span></a></p>
@@ -251,14 +221,14 @@
 			</div>
 			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
 				<div class="room">
-					<a href="{{ url_for('rooms') }}" class="img d-flex justify-content-center align-items-center" style="background-image: url(../static/images/room-4.jpg);">
+					<a href="{{ url_for('rooms') }}" class="img d-flex justify-content-center align-items-center" style="background-image: url(../static/images/Lujosa/Cabana_Lujosa_Cocina.jpg);">
 						<div class="icon d-flex justify-content-center align-items-center">
 							<span class="icon-search2"></span>
 						</div>
 					</a>
 					<div class="text p-3 text-center">
-						<h3 class="mb-3"><a href="{{ url_for('rooms') }}">Classic Room</a></h3>
-						<p><span class="price mr-2">$130.00</span> <span class="per">per night</span></p>
+						<h3 class="mb-3"><a href="{{ url_for('rooms') }}">Hierba Alta</a></h3>
+						<p><span class="price mr-2">$200.00</span> <span class="per">per night</span></p>
 						<hr>
 						<p class="pt-1"><a href="{{ url_for('rooms_single') }}" class="btn-custom">View Room Details <span class="icon-long-arrow-right"></span></a></p>
 					</div>
@@ -266,13 +236,13 @@
 			</div>
 			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
 				<div class="room">
-					<a href="{{ url_for('rooms') }}" class="img d-flex justify-content-center align-items-center" style="background-image: url(../static/images/room-5.jpg);">
+					<a href="{{ url_for('rooms') }}" class="img d-flex justify-content-center align-items-center" style="background-image: url(../static/images/Lujosa/Cabana_Lujosa_Dormitorio_3.jpg);">
 						<div class="icon d-flex justify-content-center align-items-center">
 							<span class="icon-search2"></span>
 						</div>
 					</a>
 					<div class="text p-3 text-center">
-						<h3 class="mb-3"><a href="{{ url_for('rooms') }}">Superior Room</a></h3>
+						<h3 class="mb-3"><a href="{{ url_for('rooms') }}">Ciervo Blanco</a></h3>
 						<p><span class="price mr-2">$300.00</span> <span class="per">per night</span></p>
 						<hr>
 						<p class="pt-1"><a href="{{ url_for('rooms_single') }}" class="btn-custom">View Room Details <span class="icon-long-arrow-right"></span></a></p>
@@ -281,16 +251,46 @@
 			</div>
 			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
 				<div class="room">
-					<a href="{{ url_for('rooms') }}" class="img d-flex justify-content-center align-items-center" style="background-image: url(../static/images/room-6.jpg);">
+					<a href="{{ url_for('rooms') }}" class="img d-flex justify-content-center align-items-center" style="background-image: url(../static/images/Lujosa/Cabana_Lujosa_Dormitorio_2.jpg);">
 						<div class="icon d-flex justify-content-center align-items-center">
 							<span class="icon-search2"></span>
 						</div>
 					</a>
 					<div class="text p-3 text-center">
-						<h3 class="mb-3"><a href="{{ url_for('rooms') }}">Luxury Room</a></h3>
-						<p><span class="price mr-2">$500.00</span> <span class="per">per night</span></p>
+						<h3 class="mb-3"><a href="{{ url_for('rooms') }}">Bosque Alto</a></h3>
+						<p><span class="price mr-2">$450.00</span> <span class="per">per night</span></p>
 						<hr>
 						<p class="pt-1"><a href="{{ url_for('rooms_single') }}" class="btn-custom">View Room Details <span class="icon-long-arrow-right"></span></a></p>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
+				<div class="room">
+					<a href="{{ url_for('rooms') }}" class="img d-flex justify-content-center align-items-center" style="background-image: url(../static/images/Lujosa/Cabana_Lujosa_Dormitorio.jpg);">
+						<div class="icon d-flex justify-content-center align-items-center">
+							<span class="icon-search2"></span>
+						</div>
+					</a>
+					<div class="text p-3 text-center">
+						<h3 class="mb-3"><a href="{{ url_for('rooms') }}">Trucha Dorada</a></h3>
+						<p><span class="price mr-2">$600.00</span> <span class="per">per night</span></p>
+						<hr>
+						<p class="pt-1"><a href="{{ url_for('rooms_single') }}" class="btn-custom">View Room Details <span class="icon-long-arrow-right"></span></a></p>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
+				<div class="room">
+					<a href="{{ url_for('Cabana_Lujosa') }}" class="img d-flex justify-content-center align-items-center" style="background-image: url(../static/images/Lujosa/Cabana_Lujosa_Living.jpg);">
+						<div class="icon d-flex justify-content-center align-items-center">
+							<span class="icon-search2"></span>
+						</div>
+					</a>
+					<div class="text p-3 text-center">
+						<h3 class="mb-3"><a href="{{ url_for('Cabana_Lujosa') }}">Carpincho</a></h3>
+						<p><span class="price mr-2">$800.00</span> <span class="per">per night</span></p>
+						<hr>
+						<p class="pt-1"><a href="{{ url_for('Cabana_Lujosa') }}" class="btn-custom">View Room Details <span class="icon-long-arrow-right"></span></a></p>
 					</div>
 				</div>
 			</div>

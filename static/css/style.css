@@ -1558,7 +1558,8 @@ pre {
 .form-control {
   display: block;
   width: 100%;
-  padding: 0.375rem 0.75rem;
+  min-width: 80px;
+  padding: 0.01rem 0.02rem;
   font-size: 1rem;
   line-height: 1.5;
   color: #495057;
@@ -7770,7 +7771,7 @@ h1, h2, h3, h4, h5,
     .booking-form .form-group .icon {
       position: absolute;
       top: 50% !important;
-      right: 0;
+      left: -15px;
       font-size: 14px;
       -webkit-transform: translateY(-50%);
       -ms-transform: translateY(-50%);
@@ -7791,6 +7792,8 @@ h1, h2, h3, h4, h5,
       display: block !important; }
   .booking-form .form-control {
     border: 2px solid #fff !important;
+    width: auto !important;
+    max-width: 150px;
     height: 40px !important;
     padding-left: 0;
     padding-right: 0;
