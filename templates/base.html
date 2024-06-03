@@ -32,15 +32,15 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="{{ url_for('index') }}">Deluxe</a>
+	      <a class="navbar-brand" href="{{ url_for('index') }}">Complejo de posadas</a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 			<ul class="navbar-nav ml-auto">
-				<li class="nav-item active"><a href="{{ url_for('index') }}" class="nav-link">Home</a></li>
-				<li class="nav-item"><a href="{{ url_for('rooms') }}" class="nav-link">Rooms</a></li>
+				<li class="nav-item active"><a href="{{ url_for('index') }}" class="nav-link">Inicio</a></li>
+				<li class="nav-item"><a href="{{ url_for('rooms') }}" class="nav-link">Habitaciones</a></li>
 				<li class="nav-item"><a href="{{ url_for('restaurant') }}" class="nav-link">Restaurant</a></li>
 				<li class="nav-item"><a href="{{ url_for('about') }}" class="nav-link">About</a></li>
 				<li class="nav-item"><a href="{{ url_for('blog') }}" class="nav-link">Blog</a></li>
@@ -55,53 +55,6 @@
 
     {% endblock %}
 
-    <section class="instagram pt-5">
-        <div class="container-fluid">
-          <div class="row no-gutters justify-content-center pb-5">
-            <div class="col-md-7 text-center heading-section ftco-animate">
-              <h2><span>Instagram</span></h2>
-            </div>
-          </div>
-          <div class="row no-gutters">
-            <div class="col-sm-12 col-md ftco-animate">
-              <a href="../static/images/insta-1.jpg" class="insta-img image-popup" style="background-image: url(../static/images/insta-1.jpg);">
-                <div class="icon d-flex justify-content-center">
-                  <span class="icon-instagram align-self-center"></span>
-                </div>
-              </a>
-            </div>
-            <div class="col-sm-12 col-md ftco-animate">
-              <a href="../static/images/insta-2.jpg" class="insta-img image-popup" style="background-image: url(../static/images/insta-2.jpg);">
-                <div class="icon d-flex justify-content-center">
-                  <span class="icon-instagram align-self-center"></span>
-                </div>
-              </a>
-            </div>
-            <div class="col-sm-12 col-md ftco-animate">
-              <a href="../static/images/insta-3.jpg" class="insta-img image-popup" style="background-image: url(../static/images/insta-3.jpg);">
-                <div class="icon d-flex justify-content-center">
-                  <span class="icon-instagram align-self-center"></span>
-                </div>
-              </a>
-            </div>
-            <div class="col-sm-12 col-md ftco-animate">
-              <a href="../static/images/insta-4.jpg" class="insta-img image-popup" style="background-image: url(../static/images/insta-4.jpg);">
-                <div class="icon d-flex justify-content-center">
-                  <span class="icon-instagram align-self-center"></span>
-                </div>
-              </a>
-            </div>
-            <div class="col-sm-12 col-md ftco-animate">
-              <a href="../static/images/insta-5.jpg" class="insta-img image-popup" style="background-image: url(../static/images/insta-5.jpg);">
-                <div class="icon d-flex justify-content-center">
-                  <span class="icon-instagram align-self-center"></span>
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
     <footer class="ftco-footer ftco-bg-dark ftco-section">
 
     <div class="container">
@@ -109,7 +62,7 @@
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
               <h2 class="ftco-heading-2">Complejo de posadas</h2>
-              <p>Ubicado en una hermosa zona montañosa, ofreciendo paisajes impresionantes y una tranquilidad incomparable.</p>
+              <p>Ubicado en San Carlos de Bariloche, en una hermosa zona montañosa, ofreciendo paisajes impresionantes y una tranquilidad incomparable.</p>
               <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                 <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
                 <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
@@ -121,10 +74,10 @@
             <div class="ftco-footer-widget mb-4 ml-md-5">
               <h2 class="ftco-heading-2">Links utiles</h2>
               <ul class="list-unstyled">
-                <li><a href="#" class="py-2 d-block">Blog</a></li>
-                <li><a href="#" class="py-2 d-block">Rooms</a></li>
-                <li><a href="#" class="py-2 d-block">Amenities</a></li>
-                <li><a href="#" class="py-2 d-block">Gift Card</a></li>
+                <li><a href="{{ url_for('index') }}" class="py-2 d-block">Inicio</a></li>
+                <li><a href="{{ url_for('rooms') }}" class="py-2 d-block">Habitaciones</a></li>
+                <li><a href="{{ url_for('restaurant') }}" class="py-2 d-block">Restaurante</a></li>
+                <li><a href="{{ url_for('contact') }}" class="py-2 d-block">Contactanos</a></li>
               </ul>
             </div>
           </div>
@@ -133,8 +86,8 @@
               <h2 class="ftco-heading-2">Privacidad</h2>
               <ul class="list-unstyled">
                 <li><a href="#" class="py-2 d-block">Career</a></li>
-                <li><a href="#" class="py-2 d-block">About Us</a></li>
-                <li><a href="#" class="py-2 d-block">Contact Us</a></li>
+                <li><a href="{{ url_for('about') }}" class="py-2 d-block">Sobre nosotros</a></li>
+                <li><a href="{{ url_for('contact') }}" class="py-2 d-block">Contactanos</a></li>
                 <li><a href="#" class="py-2 d-block">Services</a></li>
               </ul>
             </div>
