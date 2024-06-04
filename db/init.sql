@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
 
 
 -- Documentos precargados
-INSERT INTO usuarios VALUES (UUID(), "Pedro", "Lopez", "p.lopez@gmail.com", "Pedropass11");
+INSERT INTO usuarios VALUES ("69d07c33-1eec-11ef-bc3d-0242ac120002", "Pedro", "Lopez", "p.lopez@gmail.com", "Pedropass11");
 
 INSERT INTO posadas VALUES (
 	101,
