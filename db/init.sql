@@ -34,6 +34,16 @@ CREATE TABLE IF NOT EXISTS usuarios (
     PRIMARY KEY (UUID)
 );
 
+CREATE TABLE IF NOT EXISTS resenas (
+    idResena INT PRIMARY KEY AUTO_INCREMENT,
+    identificadorPosada SMALLINT NOT NULL,
+    personaUUID CHAR(36) NOT NULL,
+    fechaResena DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    puntuacion TINYINT NOT NULL CHECK (puntuacion BETWEEN 1 AND 5),
+    comentario TEXT,
+    FOREIGN KEY (identificadorPosada) REFERENCES posadas(identificador),
+    FOREIGN KEY (personaUUID) REFERENCES usuarios(UUID)
+);
 
 -- Usuarios precargados
 
@@ -47,7 +57,7 @@ INSERT INTO usuarios VALUES ("c3b1f29f-4567-89ab-cdef-0123456789ab", "Roberto", 
 
 INSERT INTO usuarios VALUES ("f4e23110-1234-5678-9abc-def012345678", "Ana", "López", "ana.lopez@otrodominio.com", "AnaLopez2024");
 
--- Posadas precargados
+-- Posadas precargadas
 
 INSERT INTO posadas VALUES (
 	101,
