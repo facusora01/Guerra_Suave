@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS posadas (
     precioNoche DECIMAL(10,2),
     metrosCuadrados SMALLINT,
     ambientes TINYINT,
-    camasUnicas TINYINT,
+    camasIndividuales TINYINT,
     camasMatrimoniales TINYINT,
     calefacción BOOLEAN,
     desayuno BOOLEAN,
