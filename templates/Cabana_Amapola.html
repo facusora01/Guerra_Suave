@@ -1,0 +1,48 @@
+{% extends "Cabana_Base.html" %}
+
+	{% block head %}
+    <title>Amapola</title>
+    {% endblock %}
+
+    {% block Titulo_Principal %}
+	<h1 class="mb-4 bread">Cabaña "Amapola"</h1>
+    {% endblock %}
+	
+					{% block Fotos %}
+          				<div class="item">
+          					<div class="room-img" style="background-image: url(../static/images/Amapola/amapola_Living.jpg);"></div>
+          				</div>
+          				<div class="item">
+          					<div class="room-img" style="background-image: url(../static/images/Amapola/amapola_Matrimonial.jpg);"></div>
+          				</div>
+          				<div class="item">
+          					<div class="room-img" style="background-image: url(../static/images/Amapola/amapola_Camas.jpg);"></div>
+          				</div>
+                          <div class="item">
+                            <div class="room-img" style="background-image: url(../static/images/Amapola/amapola_Sala.jpg);"></div>
+                        </div>
+						<div class="item">
+					  		<div class="room-img" style="background-image: url(../static/images/Amapola/amapola_Cocina.jpg);"></div>
+				  		</div>
+						{% endblock %}
+
+						{% block Caracteristicas %}
+    							<ul class="list">
+	    							<li><span>Max:</span> 4 Personas</li>
+	    							<li><span>Tamaño:</span> 300 m2</li>
+	    						</ul>
+	    						<ul class="list ml-md-5">
+	    							<li><span>Vistas:</span> Pradera</li>
+	    							<li><span>Baños:</span> 1</li>
+	    						</ul>
+								<ul class="list ml-md-5">
+	    							<li><span>Camas Matrimoniales:</span> 1</li>
+                                    <li><span>Camas Individuales:</span> 2</li>
+	    						</ul>
+    						</div>
+    						<p>RESUMEN DE AMAPOLA</p>
+						{% endblock %}
+						{% block Video %}
+		                <img src="{{ url_for('static', filename='images/room-4.jpg') }}" alt="Image placeholder" class="img-fluid">
+		                <a href="https://vimeo.com/45830194" class="play-button popup-vimeo"><span class="icon-play"></span></a>
+						{% endblock %}

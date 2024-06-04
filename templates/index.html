@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block head %}
+    <title>Inicio</title>
+    {% endblock %}
+
 {% block body %}
 
 <section class="home-slider owl-carousel">
@@ -123,7 +127,7 @@
 			</div>
 			</div>
 			<div class="pb-md-5">
-						<p>Bienvenidos a su paraiso vacaciona!</p>
+						<p>Bienvenidos a su paraiso vacacional!</p>
 						<p>Descubre el refugio perfecto para tus vacaciones en nuestras encantadoras posadas. Nuestras posadas ofrecen el equilibrio ideal entre comodidad y lujo. Ya sea que busques una escapada romántica, una aventura en familia o un retiro tranquilo, nuestras instalaciones y servicios te garantizan una experiencia inolvidable.</p>
 						<p> Con vistas panorámicas de los majestuosos picos nevados, bosques frondosos y cristalinos lagos, cada cabaña es un santuario de tranquilidad y comodidad. Dejate envolver por la calidez de la madera, el aroma fresco del aire de montaña y la sensacion de paz que solo Bariloche puede ofrecer. </p>
 						<p>Reserva hoy y comienza a soñar con tu próxima aventura. ¡Te esperamos!</p>
@@ -198,101 +202,103 @@
 	<div class="container">
 			<div class="row justify-content-center mb-5 pb-3">
 		<div class="col-md-7 heading-section text-center ftco-animate">
-		<h2 class="mb-4">Nuestras cabañas</h2>
+		<a href="{{ url_for('Cabanas') }}">
+			<h2 class="mb-4">Nuestras cabañas</h2>
+		</a>
 		</div>
 	</div>    		
 		<div class="row">
 			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
 				<div class="room">
-					<a href="{{ url_for('rooms') }}" class="img d-flex justify-content-center align-items-center" style="background-image: url(../static/images/Amapola/amapola_Living.jpg);">
+					<a href="{{ url_for('Amapola') }}" class="img d-flex justify-content-center align-items-center" style="background-image: url(../static/images/Amapola/amapola_Living.jpg);">
 						<div class="icon d-flex justify-content-center align-items-center">
 							<span class="icon-search2"></span>
 						</div>
 					</a>
 					<div class="text p-3 text-center">
-						<h3 class="mb-3"><a href="{{ url_for('rooms') }}">Amapola</a></h3>
-						<p><span class="price mr-2">60000</span> <span class="per">por noche</span></p>
+						<h3 class="mb-3"><a href="{{ url_for('Amapola') }}">Amapola</a></h3>
+						<p><span class="price mr-2">$60000</span> <span class="per">por noche</span></p>
 						<hr>
-						<p class="pt-1"><a href="{{ url_for('rooms_single') }}" class="btn-custom">Ver más detalles <span class="icon-long-arrow-right"></span></a></p>
+						<p class="pt-1"><a href="{{ url_for('Amapola') }}" class="btn-custom">Ver más detalles <span class="icon-long-arrow-right"></span></a></p>
 					</div>
 				</div>
 			</div>
 			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
 				<div class="room">
-					<a href="{{ url_for('rooms') }}" class="img d-flex justify-content-center align-items-center" style="background-image: url(../static/images/HierbaAlta/hierbaAlta_Cocina.jpg);">
+					<a href="{{ url_for('Hierba_Alta') }}" class="img d-flex justify-content-center align-items-center" style="background-image: url(../static/images/HierbaAlta/hierbaAlta_Cocina.jpg);">
 						<div class="icon d-flex justify-content-center align-items-center">
 							<span class="icon-search2"></span>
 						</div>
 					</a>
 					<div class="text p-3 text-center">
-						<h3 class="mb-3"><a href="{{ url_for('rooms') }}">Hierba Alta</a></h3>
+						<h3 class="mb-3"><a href="{{ url_for('Hierba_Alta') }}">Hierba Alta</a></h3>
 						<p><span class="price mr-2">$40000</span> <span class="per">por noche</span></p>
 						<hr>
-						<p class="pt-1"><a href="{{ url_for('rooms_single') }}" class="btn-custom">Ver más detalles <span class="icon-long-arrow-right"></span></a></p>
+						<p class="pt-1"><a href="{{ url_for('Hierba_Alta') }}" class="btn-custom">Ver más detalles <span class="icon-long-arrow-right"></span></a></p>
 					</div>
 				</div>
 			</div>
 			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
 				<div class="room">
-					<a href="{{ url_for('rooms') }}" class="img d-flex justify-content-center align-items-center" style="background-image: url(../static/images/CiervoBlanco/ciervoBlanco_Living.jpg);">
+					<a href="{{ url_for('Ciervo_Blanco') }}" class="img d-flex justify-content-center align-items-center" style="background-image: url(../static/images/CiervoBlanco/ciervoBlanco_Living.jpg);">
 						<div class="icon d-flex justify-content-center align-items-center">
 							<span class="icon-search2"></span>
 						</div>
 					</a>
 					<div class="text p-3 text-center">
-						<h3 class="mb-3"><a href="{{ url_for('rooms') }}">Ciervo Blanco</a></h3>
+						<h3 class="mb-3"><a href="{{ url_for('Ciervo_Blanco') }}">Ciervo Blanco</a></h3>
 						<p><span class="price mr-2">$200000</span> <span class="per">por noche</span></p>
 						<hr>
-						<p class="pt-1"><a href="{{ url_for('rooms_single') }}" class="btn-custom">Ver más detalles <span class="icon-long-arrow-right"></span></a></p>
+						<p class="pt-1"><a href="{{ url_for('Ciervo_Blanco') }}" class="btn-custom">Ver más detalles <span class="icon-long-arrow-right"></span></a></p>
 					</div>
 				</div>
 			</div>
 			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
 				<div class="room">
-					<a href="{{ url_for('rooms') }}" class="img d-flex justify-content-center align-items-center" style="background-image: url(../static/images/BosqueAlto/bosqueAlto_Living.jpg);">
+					<a href="{{ url_for('Bosque_Alto') }}" class="img d-flex justify-content-center align-items-center" style="background-image: url(../static/images/BosqueAlto/bosqueAlto_Living.jpg);">
 						<div class="icon d-flex justify-content-center align-items-center">
 							<span class="icon-search2"></span>
 						</div>
 					</a>
 					<div class="text p-3 text-center">
-						<h3 class="mb-3"><a href="{{ url_for('rooms') }}">Bosque Alto</a></h3>
+						<h3 class="mb-3"><a href="{{ url_for('Bosque_Alto') }}">Bosque Alto</a></h3>
 						<p><span class="price mr-2">$250000</span> <span class="per">por noche</span></p>
 						<hr>
-						<p class="pt-1"><a href="{{ url_for('rooms_single') }}" class="btn-custom">Ver más detalles <span class="icon-long-arrow-right"></span></a></p>
+						<p class="pt-1"><a href="{{ url_for('Bosque_Alto') }}" class="btn-custom">Ver más detalles <span class="icon-long-arrow-right"></span></a></p>
 					</div>
 				</div>
 			</div>
 			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
 				<div class="room">
-					<a href="{{ url_for('rooms') }}" class="img d-flex justify-content-center align-items-center" style="background-image: url(../static/images/TruchaDorada/truchaDorada_Living.jpg);">
+					<a href="{{ url_for('Trucha_Dorada') }}" class="img d-flex justify-content-center align-items-center" style="background-image: url(../static/images/TruchaDorada/truchaDorada_Living.jpg);">
 						<div class="icon d-flex justify-content-center align-items-center">
 							<span class="icon-search2"></span>
 						</div>
 					</a>
 					<div class="text p-3 text-center">
-						<h3 class="mb-3"><a href="{{ url_for('rooms') }}">Trucha Dorada</a></h3>
+						<h3 class="mb-3"><a href="{{ url_for('Trucha_Dorada') }}">Trucha Dorada</a></h3>
 						<p><span class="price mr-2">$80000</span> <span class="per">por noche</span></p>
 						<hr>
-						<p class="pt-1"><a href="{{ url_for('rooms_single') }}" class="btn-custom">Ver más detalles <span class="icon-long-arrow-right"></span></a></p>
+						<p class="pt-1"><a href="{{ url_for('Trucha_Dorada') }}" class="btn-custom">Ver más detalles <span class="icon-long-arrow-right"></span></a></p>
 					</div>
 				</div>
 			</div>
 			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
 				<div class="room">
-					<a href="{{ url_for('Cabana_Carpincho') }}" class="img d-flex justify-content-center align-items-center" style="background-image: url(../static/images/Carpincho/carpincho_Living.jpg);">
+					<a href="{{ url_for('Carpincho') }}" class="img d-flex justify-content-center align-items-center" style="background-image: url(../static/images/Carpincho/carpincho_Living.jpg);">
 						<div class="icon d-flex justify-content-center align-items-center">
 							<span class="icon-search2"></span>
 						</div>
 					</a>
 					<div class="text p-3 text-center">
-						<h3 class="mb-3"><a href="{{ url_for('Cabana_Carpincho') }}">Carpincho</a></h3>
+						<h3 class="mb-3"><a href="{{ url_for('Carpincho') }}">Carpincho</a></h3>
 						<p><span class="price mr-2">$125000</span> <span class="per">por noche</span></p>
 						<hr>
-						<p class="pt-1"><a href="{{ url_for('Cabana_Carpincho') }}" class="btn-custom">Ver más detalles <span class="icon-long-arrow-right"></span></a></p>
+						<p class="pt-1"><a href="{{ url_for('Carpincho') }}" class="btn-custom">Ver más detalles <span class="icon-long-arrow-right"></span></a></p>
 					</div>
 				</div>
 			</div>
-		</div>
+		</div>	
 	</div>
 </section>
 

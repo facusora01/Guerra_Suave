@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Guerra Suave</title>
+    {% block head %}
+    <title>Posadas del Lago</title>
+    {% endblock %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -40,7 +42,7 @@
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item active"><a href="{{ url_for('index') }}" class="nav-link">Inicio</a></li>
-				<li class="nav-item"><a href="{{ url_for('rooms') }}" class="nav-link">Habitaciones</a></li>
+				<li class="nav-item"><a href="{{ url_for('Cabanas') }}" class="nav-link">Cabañas</a></li>
 				<li class="nav-item"><a href="{{ url_for('restaurant') }}" class="nav-link">Restaurant</a></li>
 				<li class="nav-item"><a href="{{ url_for('about') }}" class="nav-link">About</a></li>
 				<li class="nav-item"><a href="{{ url_for('blog') }}" class="nav-link">Blog</a></li>
@@ -75,7 +77,7 @@
               <h2 class="ftco-heading-2">Links utiles</h2>
               <ul class="list-unstyled">
                 <li><a href="{{ url_for('index') }}" class="py-2 d-block">Inicio</a></li>
-                <li><a href="{{ url_for('rooms') }}" class="py-2 d-block">Habitaciones</a></li>
+                <li><a href="{{ url_for('Cabanas') }}" class="py-2 d-block">Habitaciones</a></li>
                 <li><a href="{{ url_for('restaurant') }}" class="py-2 d-block">Restaurante</a></li>
                 <li><a href="{{ url_for('contact') }}" class="py-2 d-block">Contactanos</a></li>
               </ul>

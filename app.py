@@ -20,9 +20,9 @@ os.environ['FLASK_DEBUG'] = '1'
 def index():
     return render_template('index.html')
 
-@app.route('/rooms')
-def rooms():
-    return render_template('rooms.html')
+@app.route('/Cabanas')
+def Cabanas():
+    return render_template('Cabanas.html')
 
 @app.route('/restaurant')
 def restaurant():
@@ -40,13 +40,29 @@ def blog():
 def contact():
     return render_template('contact.html')
 
-@app.route('/rooms_single')
-def rooms_single():
-    return render_template('rooms_single.html')
+@app.route('/Amapola')
+def Amapola():
+    return render_template('Cabana_Amapola.html')
 
-@app.route('/Cabana_Carpincho')
-def Cabana_Carpincho():
+@app.route('/Carpincho')
+def Carpincho():
     return render_template('Cabana_Carpincho.html')
+
+@app.route('/Ciervo_Blanco')
+def Ciervo_Blanco():
+    return render_template('Cabana_Ciervo_Blanco.html')
+
+@app.route('/Hierba_Alta')
+def Hierba_Alta():
+    return render_template('Cabana_Hierba_Alta.html')
+
+@app.route('/Bosque_Alto')
+def Bosque_Alto():
+    return render_template('Cabana_Bosque_Alto.html')
+
+@app.route('/Trucha_Dorada')
+def Trucha_Dorada():
+    return render_template('Cabana_Trucha_Dorada.html')
 
 @app.route('/blog_single')
 def blog_single():
