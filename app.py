@@ -45,7 +45,7 @@ def rooms_single():
     return render_template('rooms_single.html')
 
 @app.route('/Cabana_Carpincho')
-def Cabana_Lujosa():
+def Cabana_Carpincho():
     return render_template('Cabana_Carpincho.html')
 
 @app.route('/blog_single')
