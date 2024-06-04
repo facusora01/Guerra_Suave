@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import os
+import requests
 
 app = Flask(__name__)
 
@@ -67,6 +68,17 @@ def Trucha_Dorada():
 @app.route('/blog_single')
 def blog_single():
     return render_template('blog_single.html')
+
+@app.route("/conexion_a_reservas", methods=["GET"])
+def conexion_a_reservas():
+    response = requests.get('http://127.0.0.1:5050/reservas')
+    data = response.json()
+
+    reservas = data['reservas']
+    cantidad = data['cantidad']
+
+    return render_template("cone_a_rese.html", reservas=reservas, cantidad=cantidad)
+    #return jsonify(data)
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
