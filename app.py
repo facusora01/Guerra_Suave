@@ -44,10 +44,13 @@ def contact():
 def rooms_single():
     return render_template('rooms_single.html')
 
-@app.route('/Cabana_Lujosa')
-def Cabana_Lujosa():
-    return render_template('Cabana_Lujosa.html')
+@app.route('/Cabana_Carpincho')
+def Cabana_Carpincho():
+    return render_template('Cabana_Carpincho.html')
 
 @app.route('/blog_single')
 def blog_single():
     return render_template('blog_single.html')
+
+if __name__ == '__main__':
+    app.run(port=5000, debug=True)
