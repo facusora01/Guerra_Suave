@@ -35,8 +35,19 @@ CREATE TABLE IF NOT EXISTS usuarios (
 );
 
 
--- Documentos precargados
+-- Usuarios precargados
+
 INSERT INTO usuarios VALUES ("69d07c33-1eec-11ef-bc3d-0242ac120002", "Pedro", "Lopez", "p.lopez@gmail.com", "Pedropass11");
+
+INSERT INTO usuarios VALUES ("123e4567-e89b-12d3-a456-426655440001", "Juan", "Perez", "j.perez@gmail.com", "JuanPerez2023");
+
+INSERT INTO usuarios VALUES ("789a01bc-3456-789a-b2cd-e12345678901", "María", "Gómez", "maria.gomez@hotmail.com", "MariaGomez123");
+
+INSERT INTO usuarios VALUES ("c3b1f29f-4567-89ab-cdef-0123456789ab", "Roberto", "Blanco", "roberto.blanco@yahoo.com", "RobertoBlanco");
+
+INSERT INTO usuarios VALUES ("f4e23110-1234-5678-9abc-def012345678", "Ana", "López", "ana.lopez@otrodominio.com", "AnaLopez2024");
+
+-- Posadas precargados
 
 INSERT INTO posadas VALUES (
 	101,
@@ -131,7 +142,6 @@ INSERT INTO posadas VALUES (
 	"static/images/BosqueAlto/bosqueAlto4.jpg",
 	"static/images/BosqueAlto/bosqueAlto5.jpg"
 );
-
 
 INSERT INTO posadas VALUES (
 	601,
