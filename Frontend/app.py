@@ -80,5 +80,11 @@ def conexion_a_reservas():
     return render_template("cone_a_rese.html", reservas=reservas, cantidad=cantidad)
     #return jsonify(data)
 
+#error handler 404
+@app.errorhandler(404)
+# usar html Error_404.html
+def error(e):
+    return render_template('Error_404.html'), 404
+
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
