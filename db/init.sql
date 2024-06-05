@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS posadas (
     ambientes TINYINT,
     camasIndividuales TINYINT,
     camasMatrimoniales TINYINT,
-    calefacción BOOLEAN,
+    calefaccion BOOLEAN,
     desayuno BOOLEAN,
     accesoDiscapacitados BOOLEAN,
     vistaHacia VARCHAR(100),
@@ -19,10 +19,12 @@ CREATE TABLE IF NOT EXISTS posadas (
 );
 
 CREATE TABLE IF NOT EXISTS reservas (
+	id MEDIUMINT NOT NULL AUTO_INCREMENT,
     identificadorPosada SMALLINT,
     personaUUID CHAR(36),
     fechaIngreso DATETIME,
-    fechaEgreso DATETIME 
+    fechaEgreso DATETIME,
+	PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS usuarios (
@@ -171,3 +173,9 @@ INSERT INTO posadas VALUES (
 	"static/images/Carpincho/carpincho4.jpg",
 	"static/images/Carpincho/carpincho3.jpg"
 );
+
+-- Reservas
+
+INSERT INTO reservas (identificadorPosada, personaUUID, fechaIngreso, fechaEgreso) VALUES (101, "69d07c33-1eec-11ef-bc3d-0242ac120002", "2024-6-10", "2024-6-21");
+INSERT INTO reservas (identificadorPosada, personaUUID, fechaIngreso, fechaEgreso) VALUES (501, "c3b1f29f-4567-89ab-cdef-0123456789ab", "2024-5-10", "2024-6-10");
+INSERT INTO reservas (identificadorPosada, personaUUID, fechaIngreso, fechaEgreso) VALUES (101, "f4e23110-1234-5678-9abc-def012345678", "2024-5-22", "2024-6-30");
