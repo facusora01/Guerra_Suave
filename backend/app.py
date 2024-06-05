@@ -42,19 +42,22 @@ def removerUUID(data):
 def filtrosPosadas(args):
     filters = ""
 
-    if request.args.get('camasMatrimoniales'):
-        try:
-            camasMatrimoniales = int(request.args.get('camasMatrimoniales'))
-            filters += f""" AND camasMatrimoniales >= {camasMatrimoniales}"""
-        except ValueError:
-            return jsonify({'message': 'Valor inválido para camas matrimoniales'}), 400
+    # if request.args.get('camasMatrimoniales'):
+    #     try:
+    #         camasMatrimoniales = int(request.args.get('camasMatrimoniales'))
+    #         filters += f""" AND camasMatrimoniales >= {camasMatrimoniales}"""
+    #     except ValueError:
+    #         return jsonify({'message': 'Valor inválido para camas matrimoniales'}), 400
 
-    if request.args.get('camasIndividuales'):
-        try:
-            camasIndividuales = int(request.args.get('camasIndividuales'))
-            filters += f""" AND camasIndividuales >= {camasIndividuales}"""
-        except ValueError:
-            return jsonify({'message': 'Valor inválido para camas individuales'}), 400
+    # if request.args.get('camasIndividuales'):
+    #     try:
+    #         camasIndividuales = int(request.args.get('camasIndividuales'))
+    #         filters += f""" AND camasIndividuales >= {camasIndividuales}"""
+    #     except ValueError:
+    #         return jsonify({'message': 'Valor inválido para camas individuales'}), 400
+        
+    if request.args.get('identificador'):
+        filters = f"""WHERE identificador = {int(request.args.get('identificador'))}"""
 
     return filters
 
