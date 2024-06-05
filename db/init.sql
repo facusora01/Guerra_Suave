@@ -1,5 +1,6 @@
 CREATE TABLE IF NOT EXISTS posadas (
     identificador SMALLINT UNIQUE,
+	nombre VARCHAR(100),
     precioNoche DECIMAL(10,2),
     metrosCuadrados SMALLINT,
     ambientes TINYINT,
@@ -63,6 +64,7 @@ INSERT INTO usuarios VALUES ("f4e23110-1234-5678-9abc-def012345678", "Ana", "Ló
 
 INSERT INTO posadas VALUES (
 	101,
+	"Amapola",
 	60000.00,
 	70,
 	3,
@@ -82,6 +84,7 @@ INSERT INTO posadas VALUES (
 
 INSERT INTO posadas VALUES (
 	201,
+	"Trucha Dorada",
 	80000.00,
 	100,
 	3,
@@ -101,6 +104,7 @@ INSERT INTO posadas VALUES (
 
 INSERT INTO posadas VALUES (
 	301,
+	"Ciervo Blanco",
 	200000.00,
 	120,
 	5,
@@ -120,6 +124,7 @@ INSERT INTO posadas VALUES (
 
 INSERT INTO posadas VALUES (
 	401,
+	"Hierba Alta",
 	40000.00,
 	40,
 	2,
@@ -139,6 +144,7 @@ INSERT INTO posadas VALUES (
 
 INSERT INTO posadas VALUES (
 	501,
+	"Bosque Alto",
 	250000.00,
 	150,
 	5,
@@ -157,6 +163,7 @@ INSERT INTO posadas VALUES (
 
 INSERT INTO posadas VALUES (
 	601,
+	"Carpincho",
 	1250000.00,
 	200,
 	2,
