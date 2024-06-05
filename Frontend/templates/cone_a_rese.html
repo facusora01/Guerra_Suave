@@ -1,0 +1,9 @@
+<h1>Esto conecta con la tabla de reservas!!</h1>
+
+<p>Cantidad de reservas: {{ cantidad }}</p>
+
+<ul>
+    {% for reserva in reservas %}
+        <li>{{ reserva }}</li>
+    {% endfor %}
+</ul>
