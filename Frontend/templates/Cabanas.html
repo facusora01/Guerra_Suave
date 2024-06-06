@@ -26,139 +26,40 @@
     		<div class="row">
 	        <div class="col-lg-9">
 		    		<div class="row">
-		    			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
-		    				<div class="room">
-		    					<a href="{{ url_for('Amapola') }}" class="img d-flex justify-content-center align-items-center" style="background-image: url(../static/images/Amapola/amapola_Living.jpg);">
-		    						<div class="icon d-flex justify-content-center align-items-center">
-		    							<span class="icon-search2"></span>
+
+
+						
+						{% for posada in cabanas %}
+			
+		    				<div class="col-sm col-md-6 col-lg-4 ftco-animate">
+		    					<div class="room">
+		    						<a href="{{ url_for('Carpincho') }}" class="img d-flex justify-content-center align-items-center" style="background-image: url(../static/images/Amapola/amapola_Living.jpg);">
+		    							<div class="icon d-flex justify-content-center align-items-center">
+		    								<span class="icon-search2"></span>
+		    							</div>
+		    						</a>
+		    						<div class="text p-3 text-center">
+		    							<h3 class="mb-3"><a href="{{ url_for('Carpincho') }}">{{ posada['nombre']}}</a></h3>
+		    							<p><span class="price mr-2"> {{ posada['precioNoche'] }} </span> <span class="per">Por noche</span></p>
+		    							<ul class="list">
+		    								<li><span>Max:</span> {{ posada['camasIndividuales'] + posada['camasMatrimoniales']}} </li>
+		    								<li><span>Tamaño:</span> {{ posada['metrosCuadrados'] }} </li>
+		    								<li><span>Vistas:</span> {{ posada['vistaHacia'] }} </li>
+		    								<li><span>Matrimoniales:</span> {{ posada['camasMatrimoniales'] }} </li>
+                        	            	<li><span>Individuales:</span> {{ posada['camasIndividuales'] }} </li>
+		    							</ul>
+		    							<hr>
+		    							<p class="pt-1"><a href="{{ url_for('Carpincho') }}" class="btn-custom">Reservar ahora <span class="icon-long-arrow-right"></span></a></p>
 		    						</div>
-		    					</a>
-		    					<div class="text p-3 text-center">
-		    						<h3 class="mb-3"><a href="{{ url_for('Amapola') }}">Amapola</a></h3>
-		    						<p><span class="price mr-2">$60.000</span> <span class="per">Por noche</span></p>
-		    						<ul class="list">
-		    							<li><span>Max:</span> 4 Personas</li>
-		    							<li><span>Tamaño:</span> 300 m2</li>
-		    							<li><span>Vistas:</span> Pradera</li>
-		    							<li><span>Matrimoniales:</span> 1</li>
-                                    	<li><span>Individuales:</span> 2</li>
-		    						</ul>
-		    						<hr>
-		    						<p class="pt-1"><a href="{{ url_for('Amapola') }}" class="btn-custom">Reservar ahora <span class="icon-long-arrow-right"></span></a></p>
 		    					</div>
 		    				</div>
-		    			</div>
-		    			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
-		    				<div class="room">
-		    					<a href="{{ url_for('Hierba_Alta') }}" class="img d-flex justify-content-center align-items-center" style="background-image: url(../static/images/HierbaAlta/hierbaAlta_Cocina.jpg);">
-		    						<div class="icon d-flex justify-content-center align-items-center">
-		    							<span class="icon-search2"></span>
-		    						</div>
-		    					</a>
-		    					<div class="text p-3 text-center">
-		    						<h3 class="mb-3"><a href="{{ url_for('Hierba_Alta') }}">Hierba Alta</a></h3>
-		    						<p><span class="price mr-2">$40.000</span> <span class="per">Por noche</span></p>
-		    						<ul class="list">
-		    							<li><span>Max:</span> 2 Personas</li>
-		    							<li><span>Tamaño:</span> 250 m2</li>
-		    							<li><span>Vistas:</span> Pradera</li>
-		    							<li><span>Matrimoniales:</span> 1</li>
-                                    	<li><span>Individuales:</span> Ninguna</li>
-		    						</ul>
-		    						<hr>
-		    						<p class="pt-1"><a href="{{ url_for('Hierba_Alta') }}" class="btn-custom">Reservar ahora <span class="icon-long-arrow-right"></span></a></p>
-		    					</div>
-		    				</div>
-		    			</div>
-		    			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
-		    				<div class="room">
-		    					<a href="{{ url_for('Ciervo_Blanco') }}" class="img d-flex justify-content-center align-items-center" style="background-image: url(../static/images/CiervoBlanco/ciervoBlanco_Living.jpg);">
-		    						<div class="icon d-flex justify-content-center align-items-center">
-		    							<span class="icon-search2"></span>
-		    						</div>
-		    					</a>
-		    					<div class="text p-3 text-center">
-		    						<h3 class="mb-3"><a href="{{ url_for('Ciervo_Blanco') }}">Ciervo Blanco</a></h3>
-		    						<p><span class="price mr-2">$200.000</span> <span class="per">Por noche</span></p>
-		    						<ul class="list">
-		    							<li><span>Max:</span> 6 Personas</li>
-		    							<li><span>Tamaño:</span> 550 m2</li>
-		    							<li><span>Vistas:</span> Montaña </li>
-		    							<li><span>Matrimoniales:</span> 1</li>
-                                    	<li><span>Individuales:</span> 4</li>
-		    						</ul>
-		    						<hr>
-		    						<p class="pt-1"><a href="{{ url_for('Ciervo_Blanco') }}" class="btn-custom">Reservar Ahora <span class="icon-long-arrow-right"></span></a></p>
-		    					</div>
-		    				</div>
-		    			</div>
-		    			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
-		    				<div class="room">
-		    					<a href="{{ url_for('Bosque_Alto') }}" class="img d-flex justify-content-center align-items-center" style="background-image: url(../static/images/BosqueAlto/bosqueAlto_Living.jpg);">
-		    						<div class="icon d-flex justify-content-center align-items-center">
-		    							<span class="icon-search2"></span>
-		    						</div>
-		    					</a>
-		    					<div class="text p-3 text-center">
-		    						<h3 class="mb-3"><a href="{{ url_for('Bosque_Alto') }}"> Bosque Alto</a></h3>
-		    						<p><span class="price mr-2">$250.000</span> <span class="per">Por noche</span></p>
-		    						<ul class="list">
-		    							<li><span>Max:</span> 10 Personas</li>
-		    							<li><span>Tamaño:</span> 670 m2</li>
-		    							<li><span>Vistas:</span> Montaña</li>
-		    							<li><span>Matrimoniales:</span> 2</li>
-                                    	<li><span>Individuales:</span> 6</li>
-		    						</ul>
-		    						<hr>
-		    						<p class="pt-1"><a href="{{ url_for('Bosque_Alto') }}" class="btn-custom">Reservar Ahora <span class="icon-long-arrow-right"></span></a></p>
-		    					</div>
-		    				</div>
-		    			</div>
-		    			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
-		    				<div class="room">
-		    					<a href="{{ url_for('Trucha_Dorada') }}" class="img d-flex justify-content-center align-items-center" style="background-image: url(../static/images/TruchaDorada/truchaDorada_Living.jpg);">
-		    						<div class="icon d-flex justify-content-center align-items-center">
-		    							<span class="icon-search2"></span>
-		    						</div>
-		    					</a>
-		    					<div class="text p-3 text-center">
-		    						<h3 class="mb-3"><a href="{{ url_for('Trucha_Dorada') }}">Trucha Dorada</a></h3>
-		    						<p><span class="price mr-2">$80.000</span> <span class="per">Por noche</span></p>
-		    						<ul class="list">
-		    							<li><span>Max:</span> 5 Personas</li>
-		    							<li><span>Tamaño:</span> 400 m2</li>
-		    							<li><span>Vistas:</span> Lago </li>
-		    							<li><span>Matrimoniales:</span> 1</li>
-                                    	<li><span>Individuales:</span> 3</li>
-		    						</ul>
-		    						<hr>
-		    						<p class="pt-1"><a href="{{ url_for('Trucha_Dorada') }}" class="btn-custom">Reservar Ahora <span class="icon-long-arrow-right"></span></a></p>
-		    					</div>
-		    				</div>
-		    			</div>
-		    			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
-		    				<div class="room">
-		    					<a href="{{ url_for('Carpincho') }}" class="img d-flex justify-content-center align-items-center" style="background-image: url(../static/images/Carpincho/carpincho_Living.jpg);">
-		    						<div class="icon d-flex justify-content-center align-items-center">
-		    							<span class="icon-search2"></span>
-		    						</div>
-		    					</a>
-		    					<div class="text p-3 text-center">
-		    						<h3 class="mb-3"><a href="{{ url_for('Carpincho') }}">Carpincho</a></h3>
-		    						<p><span class="price mr-2">$125.000</span> <span class="per">Por noche</span></p>
-		    						<ul class="list">
-		    							<li><span>Max:</span> 12 Personas</li>
-		    							<li><span>Tamaño:</span> 650 m2</li>
-		    							<li><span>Vistas:</span> Lago</li>
-		    							<li><span>Matrimoniales:</span> 2</li>
-                                    	<li><span>Individuales:</span> 8</li>
-		    						</ul>
-		    						<hr>
-		    						<p class="pt-1"><a href="{{ url_for('Carpincho') }}" class="btn-custom">Reservar Ahora <span class="icon-long-arrow-right"></span></a></p>
-		    					</div>
-		    				</div>
-		    			</div>
+
+						{% endfor %}
 		    		</div>
+
+
+
+
 		    	</div>
 		    	<div class="col-lg-3 sidebar">
 	      		<div class="sidebar-wrap bg-light ftco-animate">
