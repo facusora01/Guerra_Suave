@@ -55,7 +55,7 @@ def Amapola():
 
     posada = None
     for cabana in Lista_Cabanas['posadas']:
-        if cabana['identificador'] == 501:  # Cambia el identificador por el que necesites
+        if cabana['identificador'] == 201:  # Cambia el identificador por el que necesites
             posada = cabana
             break
     
