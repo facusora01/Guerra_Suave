@@ -37,9 +37,29 @@ def blog():
 def contact():
     return render_template('contact.html')
 
-@app.route('/Amapola', methods=['GET'])  #TESTEO DE PASO DE PARAMETROS
+@app.route('/Amapola', methods=['GET'])
 def Amapola():
-    return render_template('Cabana_Amapola.html')
+    try:
+        response = requests.get('http://127.0.0.1:5050/posadas')
+        Lista_Cabanas = response.json()
+    except requests.exceptions.RequestException as error:
+        print("=====================================")
+        print(f"Error en la solicitud: {error}")
+        print("=====================================")
+        Lista_Cabanas = {'posadas': []}  # Inicializar con una lista vacía en caso de error
+    except ValueError as error:
+        print("=====================================")
+        print(f"Error al decodificar JSON: {error}")
+        print("=====================================")
+        Lista_Cabanas = {'posadas': []}  # Inicializar con una lista vacía en caso de error
+
+    posada = None
+    for cabana in Lista_Cabanas['posadas']:
+        if cabana['identificador'] == 201:  # Cambia el identificador por el que necesites
+            posada = cabana
+            break
+    
+    return render_template('Cabana_Amapola.html', posada=posada)
 
 @app.route('/Carpincho')
 def Carpincho():
