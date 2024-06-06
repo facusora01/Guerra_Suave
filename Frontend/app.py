@@ -37,7 +37,7 @@ def blog():
 def contact():
     return render_template('contact.html')
 
-@app.route('/Amapola/<id>', methods=['GET'])  #TESTEO DE PASO DE PARAMETROS
+@app.route('/Amapola', methods=['GET'])  #TESTEO DE PASO DE PARAMETROS
 def Amapola():
     return render_template('Cabana_Amapola.html')
 
