@@ -40,26 +40,47 @@ def removerUUID(data):
 
 
 def filtrosPosadas(args):
-    filters = ""
+    filters = []
 
-    # if request.args.get('camasMatrimoniales'):
-    #     try:
-    #         camasMatrimoniales = int(request.args.get('camasMatrimoniales'))
-    #         filters += f""" AND camasMatrimoniales >= {camasMatrimoniales}"""
-    #     except ValueError:
-    #         return jsonify({'message': 'Valor inválido para camas matrimoniales'}), 400
+    if args.get('identificador'):
+        try:
+            identificador = int(args.get('identificador'))
+            filters.append(f"identificador = {identificador}")
+        except ValueError:
+            return jsonify({'message': 'Valor inválido para identificador'}), 400
+    
+    if args.get('camasMatrimoniales'):
+        try:
+            camasMatrimoniales = int(args.get('camasMatrimoniales'))
+            filters.append(f"camasMatrimoniales >= {camasMatrimoniales}")
+        except ValueError:
+            return jsonify({'message': 'Valor inválido para camas matrimoniales'}), 400
 
-    # if request.args.get('camasIndividuales'):
-    #     try:
-    #         camasIndividuales = int(request.args.get('camasIndividuales'))
-    #         filters += f""" AND camasIndividuales >= {camasIndividuales}"""
-    #     except ValueError:
-    #         return jsonify({'message': 'Valor inválido para camas individuales'}), 400
-        
-    if request.args.get('identificador'):
-        filters = f"""WHERE identificador = {int(request.args.get('identificador'))}"""
+    if args.get('camasIndividuales'):
+        try:
+            camasIndividuales = int(args.get('camasIndividuales'))
+            filters.append(f"camasIndividuales >= {camasIndividuales}")
+        except ValueError:
+            return jsonify({'message': 'Valor inválido para camas individuales'}), 400
+    
+    if args.get('precioMax'):
+        try:
+            precioMax = float(args.get('precioMax'))
+            filters.append(f"precioNoche <= {precioMax}")
+        except ValueError:
+            return jsonify({'message': 'Valor inválido para precio máximo'}), 400
 
-    return filters
+    if args.get('precioMin'):
+        try:
+            precioMin = float(args.get('precioMin'))
+            filters.append(f"precioNoche >= {precioMin}")
+        except ValueError:
+            return jsonify({'message': 'Valor inválido para precio mínimo'}), 400
+
+    if filters:
+        return "WHERE " + " AND ".join(filters)
+    else:
+        return ""
 
 @app.route("/posadas")
 def posadas():
