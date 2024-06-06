@@ -21,10 +21,6 @@ os.environ['FLASK_DEBUG'] = '1'
 def index():
     return render_template('index.html')
 
-@app.route('/Cabanas')
-def Cabanas():
-    return render_template('Cabanas.html')
-
 @app.route('/restaurant')
 def restaurant():
     return render_template('restaurant.html')
@@ -68,6 +64,19 @@ def Trucha_Dorada():
 @app.route('/blog_single')
 def blog_single():
     return render_template('blog_single.html')
+
+
+@app.route('/Cabanas', methods=["GET"])
+def Cabanas():
+
+    response = requests.get('http://127.0.0.1:5050/posadas')
+    data = response.json()
+
+    posadas = data['posadas']
+    cantidad = data['cantidad']
+
+    return render_template('Cabanas.html', cabanas=posadas, cantidad=cantidad)
+
 
 @app.route("/conexion_a_reservas", methods=["GET"])
 def conexion_a_reservas():
