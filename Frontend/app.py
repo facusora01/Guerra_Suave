@@ -19,7 +19,22 @@ os.environ['FLASK_DEBUG'] = '1'
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    try:
+        response = requests.get('http://127.0.0.1:5050/posadas')
+        Lista_Cabanas = response.json()
+    except requests.exceptions.RequestException as error:
+        print("=====================================")
+        print(f"Error en la solicitud: {error}")
+        print("=====================================")
+        Lista_Cabanas = {'posadas': []}  # Inicializar con una lista vacía en caso de error
+    except ValueError as error:
+        print("=====================================")
+        print(f"Error al decodificar JSON: {error}")
+        print("=====================================")
+        Lista_Cabanas = {'posadas': []}  # Inicializar con una lista vacía en caso de error
+
+    Posadas = Lista_Cabanas['posadas']
+    return render_template('index.html',posadas=Posadas)
 
 @app.route('/restaurant')
 def restaurant():
