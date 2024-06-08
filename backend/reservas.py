@@ -10,10 +10,10 @@ def superposicionReservas(reservas, fechaI, fechaE):
     fechaValida = True
 
     for re in listaReservas:
-        if not fechaIngreso < re['fechaIngreso'] and fechaEgreso <= re['fechaIngreso']:
+        if not fechaIngreso <= re['fechaIngreso'] and fechaEgreso <= re['fechaIngreso']:
             fechaValida = False
 
-        elif not fechaIngreso >= re['fechaEgreso'] and fechaEgreso > re['fechaEgreso']:
+        elif not fechaIngreso >= re['fechaEgreso'] and fechaEgreso >= re['fechaEgreso']:
             fechaValida = False
 
         elif fechaEgreso <= fechaIngreso:

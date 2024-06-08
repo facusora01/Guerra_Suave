@@ -93,9 +93,7 @@ def posadas():
         filters = filtrosPosadas(request.args)
         result = search_query(f"""SELECT * FROM posadas {filters}""")
         posadas = [dict(row) for row in result]
-
         posadas = estaDisponible(request.args, posadas)
-
         return jsonify({'posadas': posadas, 'cantidad': len(posadas), 'filtros': request.args})
     
     except SQLAlchemyError as err:
