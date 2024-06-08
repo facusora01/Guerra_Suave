@@ -177,10 +177,10 @@ INSERT INTO posadas VALUES (
 	"-Hogar a lenia -Aire acondicionado - Baniera de hidromasaje -Smart TV -Cafetera -Heladera -Cafetera -Microondas -Secador de pelo - Horno -Tostadora",
 	"static/images/Carpincho/carpincho_Living.jpg",
 	"static/images/Carpincho/carpincho_Matrimonial.jpg",
-	"static/images/Carpincho/carpincho_Matrimonial_2.jpg",
+	-- "static/images/Carpincho/carpincho_Matrimonial_2.jpg",
 	"static/images/Carpincho/carpincho_Camas.jpg",
 	"static/images/Carpincho/carpincho_Bano_1.jpg",
-	"static/images/Carpincho/carpincho_Bano_2.jpg",
+	-- "static/images/Carpincho/carpincho_Bano_2.jpg",
 	"static/images/Carpincho/carpincho_Cocina.jpg"
 );
 
