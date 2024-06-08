@@ -33,8 +33,9 @@
 			
 		    				<div class="col-sm col-md-6 col-lg-4 ftco-animate">
 		    					<div class="room">
-									<a href="{{ url_for('Carpincho') }}" class="img d-flex justify-content-center align-items-center" style="background-image: url({{ posada['foto1'] }});">
-										<div class="icon d-flex justify-content-center align-items-center">
+		    						<a href="{{ url_for('Carpincho') }}" class="img d-flex justify-content-center align-items-center">
+										<img src="../{{ posada['foto1'] }}">
+		    							<div class="icon d-flex justify-content-center align-items-center">
 		    								<span class="icon-search2"></span>
 		    							</div>
 		    						</a>
