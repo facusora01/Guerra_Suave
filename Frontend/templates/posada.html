@@ -1,0 +1,87 @@
+{% extends "posadaBase.html" %}
+
+{% block head %}
+	<title>{{ posada['nombre'] }}</title>
+{% endblock %}
+
+{% block Titulo_Principal %}
+	<h1 class="mb-4 bread">Cabaña "{{ posada['nombre'] }}"</h1>
+{% endblock %}
+
+{% block Fotos %}
+
+	<div class="item">
+		<img class="room-img" src="/{{ posada['foto1'] }}"> 
+	</div>
+	<div class="item">
+		<img class="room-img" src="/{{ posada['foto2'] }}">  
+	</div>
+	<div class="item">
+		<img class="room-img" src="/{{ posada['foto3'] }}">   
+	</div>
+	<div class="item">
+		<img class="room-img" src="/{{ posada['foto4'] }}">   
+	</div>
+	<div class="item">
+		<img class="room-img" src="/{{ posada['foto5'] }}">   
+	</div>
+
+{% endblock %}
+
+
+{% block Caracteristicas %}
+
+	{% set total_personas = posada['camasIndividuales'] + (posada['camasMatrimoniales'] * 2) %}
+
+		<ul class="list">
+			<li>Maximo personas: <span class="font-weight-bold text-dark"> {{ total_personas }} </span></li>
+			<li>Tamaño: <span class="font-weight-bold text-dark"> {{ posada['metrosCuadrados'] }}m2 </span></li>
+		</ul>
+		<ul class="list ml-md-5">
+			<li>Camas Matrimoniales: <span class="font-weight-bold text-dark"> {{ posada['camasMatrimoniales'] }}</span> </li>
+			<li>Camas Individuales: <span class="font-weight-bold text-dark"> {{ posada['camasIndividuales'] }}</span> </li>
+		</ul>
+		<ul class="list ml-md-5">
+			<li>Vista hacia: <span class="font-weight-bold text-dark"> {{ posada['vistaHacia'] }} </span></li>
+		</ul>
+	</div>
+	<p>{{ posada['descripcion'] }}</p>
+
+{% endblock %}
+
+{% block Video %}
+
+	<div class="room-img" style="background-image: url({{ posada['foto1'] }});"></div>
+	<a href="https://vimeo.com/45830194" class="play-button popup-vimeo"><span class="icon-play"></span></a>
+
+{% endblock %}
+
+{% block reserva %}
+
+	{% if reservable %}
+
+		<div class="sidebar-wrap bg-light ftco-animate">
+			<h3 class="heading mb-4">Reserva</h3>
+			<form action="{{ url_for('reservar')}}" method="post">
+				<div class="fields">
+					<div class="form-group">
+						<input type="date" class="form-control" placeholder="Fecha Ingreso" name="fechaIngreso">
+					</div>
+					<div class="form-group">
+						<input type="date" class="form-control" placeholder="Fecha Egreso" name="fechaEgreso">
+					</div>
+				 
+					<div class="form-group">
+						<input type="text" class="form-control d-none" value="{{ posada['identificador'] }}" name="identificadorPosada">
+					</div>
+			
+					<div class="form-group">
+						<input type="submit" value="Reservar" class="btn btn-primary py-3 px-5">
+					</div>
+				</div>
+			</form>
+		</div>
+
+	{% endif %}
+
+{% endblock %}

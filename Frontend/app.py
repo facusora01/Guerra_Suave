@@ -60,7 +60,7 @@ def Amapola():
             posada = cabana
             break
     
-    return render_template('Cabana_Amapola.html', posada=posada)
+    return render_template('posada.html', posada=posada)
 
 @app.route('/Carpincho')
 def Carpincho():
@@ -86,7 +86,28 @@ def Trucha_Dorada():
 def blog_single():
     return render_template('blog_single.html')
 
-### Consultar tus reservas y poder eliminarlas
+### Reservas
+@app.route('/reservar', methods=["POST"])
+def reservar():
+
+    print(request.form)
+    data = {
+        "UUID": "69d07c33-1eec-11ef-bc3d-0242ac120002",
+        "fechaIngreso": request.form['fechaIngreso'],
+        "fechaEgreso": request.form['fechaEgreso'],
+        "identificadorPosada": request.form['identificadorPosada'],
+    }
+
+    print(data)
+
+    response = requests.post('http://127.0.0.1:5050/reservas', json=data)
+    
+    print(response)
+    if(response.status_code == 200):
+        return redirect(url_for('misReservas'))
+    
+    return redirect(url_for('misReservas'))
+
 @app.route('/misreservas')
 def misReservas():
     response = requests.get('http://127.0.0.1:5050/reservas?email=p.lopez@gmail.com')
@@ -105,6 +126,12 @@ def cancelarReserva():
     return redirect(url_for('misReservas'))
 ###
 
+@app.route('/posadas/<id>', methods=['GET'])
+def obtenerPosada(id):
+    response = requests.get(f"""http://127.0.0.1:5050/posadas?identificador={id}""")
+    posada = response.json()['posadas'][0]
+    return render_template('posada.html', posada=posada, reservable=True)
+
 @app.route('/buscar', methods=["POST"])
 def buscarPosadas():
     response = requests.get('http://127.0.0.1:5050/posadas', params=request.form)
@@ -114,13 +141,10 @@ def buscarPosadas():
 
 @app.route('/Cabanas', methods=["GET"])
 def Cabanas():
-
     response = requests.get('http://127.0.0.1:5050/posadas')
     data = response.json()
-
     posadas = data['posadas']
     cantidad = data['cantidad']
-
     return render_template('Cabanas.html', cabanas=posadas, cantidad=cantidad, filtros={})
 
 
@@ -135,11 +159,9 @@ def conexion_a_reservas():
     return render_template("cone_a_rese.html", reservas=reservas, cantidad=cantidad)
     #return jsonify(data)
 
-#error handler 404
 @app.errorhandler(404)
-# usar html Error_404.html
 def error(e):
-    return render_template('Error_404.html'), 404
+    return render_template('404.html'), 404
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)

@@ -31,14 +31,14 @@
 		
 						<div class="col-sm col-md-6 col-lg-4 ftco-animate">
 							<div class="room">
-								<a href="{{ url_for('Carpincho') }}" class="img d-flex justify-content-center align-items-center" style="background-image: url({{ posada['foto1'] }});">
+								<a href="{{ url_for('obtenerPosada', id=posada['identificador']) }}" class="img d-flex justify-content-center align-items-center" style="background-image: url({{ posada['foto1'] }});">
 									<div class="icon d-flex justify-content-center align-items-center">
 										<span class="icon-search2"></span>
 									</div>
 								</a>
 								<div class="text p-3 text-center">
-									<h3 class="mb-3"><a href="{{ url_for('Carpincho') }}">{{ posada['nombre']}}</a></h3>
-									<p><span class="price mr-2"> {{ posada['precioNoche'] }} </span> <span class="per">Por noche</span></p>
+									<h3 class="mb-3"><a href="{{ url_for('obtenerPosada', id=posada['identificador']) }}">{{ posada['nombre']}}</a></h3>
+									<p><span class="price mr-2 h4"> {{ posada['precioNoche'] }} </span> <span class="per">Por noche</span></p>
 									<ul class="list">
 										<li><span>Max:</span> {{ posada['camasIndividuales'] + posada['camasMatrimoniales']}} </li>
 										<li><span>Tamaño:</span> {{ posada['metrosCuadrados'] }} </li>
@@ -46,8 +46,6 @@
 										<li><span>Matrimoniales:</span> {{ posada['camasMatrimoniales'] }} </li>
 										<li><span>Individuales:</span> {{ posada['camasIndividuales'] }} </li>
 									</ul>
-									<hr>
-									<p class="pt-1"><a href="{{ url_for('Carpincho') }}" class="btn-custom">Reservar ahora <span class="icon-long-arrow-right"></span></a></p>
 								</div>
 							</div>
 						</div>
@@ -56,7 +54,7 @@
 
 					{% if cantidad == 0 %}
 						<div class="w-100 text-center h3">
-							Sin cabañas
+							No se encontraron cabañas
 						</div> 
 						<div class="w-100 text-center">
 							En este momento no contamos con cabañas que cumplan con lo solicitado.
@@ -83,7 +81,7 @@
 							<div>Camas Matrimoniales</div>
 							<div class="font-weight-bold text-dark" id="mostrarCamasMatrimoniales">{{filtros['camasMatrimoniales']}}</div>
 						</div>
-		                <input type="range" min="1" max="2" id="camasMatrimoniales" name="camasMatrimoniales" required value="{{filtros['camasMatrimoniales']}}">
+		                <input type="range" min="1" max="2" value="1" id="camasMatrimoniales" name="camasMatrimoniales" required value="{{filtros['camasMatrimoniales']}}">
 		              </div>
 
 					  <div class="form-group">
@@ -91,7 +89,7 @@
 							<div>Camas Individuales</div>
 							<div class="font-weight-bold text-dark" id="mostrarCamasIndividuales">{{filtros['camasIndividuales']}}</div>
 						</div>
-		                <input type="range" min="0" max="6" id="camasIndividuales" name="camasIndividuales" required value="{{filtros['camasIndividuales']}}">
+		                <input type="range" min="0" max="6" value="0" id="camasIndividuales" name="camasIndividuales" required value="{{filtros['camasIndividuales']}}">
 		              </div>
 
 		              <!-- <div class="form-group">
@@ -134,41 +132,7 @@
 		            </div>
 	            </form>
 	      		</div>
-			<!-- <div class="sidebar-wrap bg-light ftco-animate">
-				<h3 class="heading mb-4">Estrellas</h3>
-				<form method="post" class="star-rating">
-				<div class="form-check">
-					<input type="checkbox" class="form-check-input" id="exampleCheck1">
-					<label class="form-check-label" for="exampleCheck1">
-						<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span></p>
-					</label>
-				</div>
-				<div class="form-check">
-				<input type="checkbox" class="form-check-input" id="exampleCheck1">
-				<label class="form-check-label" for="exampleCheck1">
-					<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i></span></p>
-				</label>
-				</div>
-				<div class="form-check">
-				<input type="checkbox" class="form-check-input" id="exampleCheck1">
-				<label class="form-check-label" for="exampleCheck1">
-				<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
-				</label>
-				</div>
-				<div class="form-check">
-				<input type="checkbox" class="form-check-input" id="exampleCheck1">
-				<label class="form-check-label" for="exampleCheck1">
-				<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
-				</label>
-				</div>
-				<div class="form-check">
-				<input type="checkbox" class="form-check-input" id="exampleCheck1">
-				<label class="form-check-label" for="exampleCheck1">
-				<p class="rate"><span><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
-				</label>
-			</div> -->
-							</form>
-	      		</div>
+			 
 	        </div>
 		    </div>
     	</div>
