@@ -25,150 +25,164 @@
     	<div class="container">
     		<div class="row">
 	        <div class="col-lg-9">
-		    		<div class="row">
+				<div class="row">
+					
+					{% for posada in cabanas %}
+		
+						<div class="col-sm col-md-6 col-lg-4 ftco-animate">
+							<div class="room">
+								<a href="{{ url_for('Carpincho') }}" class="img d-flex justify-content-center align-items-center" style="background-image: url({{ posada['foto1'] }});">
+									<div class="icon d-flex justify-content-center align-items-center">
+										<span class="icon-search2"></span>
+									</div>
+								</a>
+								<div class="text p-3 text-center">
+									<h3 class="mb-3"><a href="{{ url_for('Carpincho') }}">{{ posada['nombre']}}</a></h3>
+									<p><span class="price mr-2"> {{ posada['precioNoche'] }} </span> <span class="per">Por noche</span></p>
+									<ul class="list">
+										<li><span>Max:</span> {{ posada['camasIndividuales'] + posada['camasMatrimoniales']}} </li>
+										<li><span>Tamaño:</span> {{ posada['metrosCuadrados'] }} </li>
+										<li><span>Vistas:</span> {{ posada['vistaHacia'] }} </li>
+										<li><span>Matrimoniales:</span> {{ posada['camasMatrimoniales'] }} </li>
+										<li><span>Individuales:</span> {{ posada['camasIndividuales'] }} </li>
+									</ul>
+									<hr>
+									<p class="pt-1"><a href="{{ url_for('Carpincho') }}" class="btn-custom">Reservar ahora <span class="icon-long-arrow-right"></span></a></p>
+								</div>
+							</div>
+						</div>
 
+					{% endfor %}
 
-						
-						{% for posada in cabanas %}
-			
-		    				<div class="col-sm col-md-6 col-lg-4 ftco-animate">
-		    					<div class="room">
-									<a href="{{ url_for('Carpincho') }}" class="img d-flex justify-content-center align-items-center" style="background-image: url({{ posada['foto1'] }});">
-										<div class="icon d-flex justify-content-center align-items-center">
-		    								<span class="icon-search2"></span>
-		    							</div>
-		    						</a>
-		    						<div class="text p-3 text-center">
-		    							<h3 class="mb-3"><a href="{{ url_for('Carpincho') }}">{{ posada['nombre']}}</a></h3>
-		    							<p><span class="price mr-2"> {{ posada['precioNoche'] }} </span> <span class="per">Por noche</span></p>
-		    							<ul class="list">
-		    								<li><span>Max:</span> {{ posada['camasIndividuales'] + posada['camasMatrimoniales']}} </li>
-		    								<li><span>Tamaño:</span> {{ posada['metrosCuadrados'] }} </li>
-		    								<li><span>Vistas:</span> {{ posada['vistaHacia'] }} </li>
-		    								<li><span>Matrimoniales:</span> {{ posada['camasMatrimoniales'] }} </li>
-                        	            	<li><span>Individuales:</span> {{ posada['camasIndividuales'] }} </li>
-		    							</ul>
-		    							<hr>
-		    							<p class="pt-1"><a href="{{ url_for('Carpincho') }}" class="btn-custom">Reservar ahora <span class="icon-long-arrow-right"></span></a></p>
-		    						</div>
-		    					</div>
-		    				</div>
+					{% if cantidad == 0 %}
+						<div class="w-100 text-center h3">
+							Sin cabañas
+						</div> 
+						<div class="w-100 text-center">
+							En este momento no contamos con cabañas que cumplan con lo solicitado.
+						</div> 
+					{% endif %}
+					
+				</div>
+			</div>
 
-						{% endfor %}
-		    		</div>
-
-
-
-
-		    	</div>
 		    	<div class="col-lg-3 sidebar">
 	      		<div class="sidebar-wrap bg-light ftco-animate">
-	      			<h3 class="heading mb-4">Filtro</h3>
-	      			<form action="#">
+	      			<h3 class="heading mb-4">Filtros</h3>
+	      			<form action="/buscar" method="post">
 	      				<div class="fields">
 		              <div class="form-group">
-		                <input type="text" id="checkin_date" class="form-control checkin_date" placeholder="Check In Date">
+		                <input type="date" class="form-control" placeholder="Fecha Ingreso" name="fechaIngreso" required value="{{filtros['fechaIngreso']}}">
 		              </div>
 		              <div class="form-group">
-		                <input type="text" id="checkin_date" class="form-control checkout_date" placeholder="Check Out Date">
+		                <input type="date" class="form-control" placeholder="Fecha Egreso" name="fechaEgreso" required value="{{filtros['fechaEgreso']}}">
+		              </div>
+		               
+					  <div class="form-group">
+						<div class="d-flex justify-content-between w-100">
+							<div>Camas Matrimoniales</div>
+							<div class="font-weight-bold text-dark" id="mostrarCamasMatrimoniales">{{filtros['camasMatrimoniales']}}</div>
+						</div>
+		                <input type="range" min="1" max="2" id="camasMatrimoniales" name="camasMatrimoniales" required value="{{filtros['camasMatrimoniales']}}">
+		              </div>
+
+					  <div class="form-group">
+						<div class="d-flex justify-content-between w-100">
+							<div>Camas Individuales</div>
+							<div class="font-weight-bold text-dark" id="mostrarCamasIndividuales">{{filtros['camasIndividuales']}}</div>
+						</div>
+		                <input type="range" min="0" max="6" id="camasIndividuales" name="camasIndividuales" required value="{{filtros['camasIndividuales']}}">
+		              </div>
+
+		              <!-- <div class="form-group">
+		                <div class="select-wrap one-third">
+							<div class="icon"><span class="ion-ios-arrow-down"></span></div>
+							<select name="camasMatrimoniales" class="form-control" value="{{filtros['camasMatrimoniales']}}">
+								<option value=1>1 Matrimoniales</option>
+								<option value=2>2 Matrimoniales</option>
+							</select>
+						</div>
 		              </div>
 		              <div class="form-group">
 		                <div class="select-wrap one-third">
 	                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-	                    <select name="" id="" class="form-control">
-	                    	<option value="">Tipo de Cabaña</option>
-	                    	<option value="">Amapola</option>
-	                      <option value="">Hierba Alta</option>
-	                      <option value="">Ciervo Blanco</option>
-	                      <option value="">Bosque Alto</option>
-	                      <option value="">Trucha Dorada</option>
-	                      <option value="">Carpincho</option>
+	                    <select name="camasIndividuales" class="form-control" selected="{{filtros['camasIndividuales']}}">
+	                    	<option value=0>0 Individuales</option>
+	                    	<option value=1>1 Individuales</option>
+							<option value=2>2 Individuales</option>
+							<option value=3>3 Individuales</option>
+							<option value=4>4 Individuales</option>
+							<option value=5>5 Individuales</option>
+							<option value=6>6 Individuales</option>
 	                    </select>
 	                  </div>
-		              </div>
-		              <div class="form-group">
-		                <div class="select-wrap one-third">
-	                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-	                    <select name="" id="" class="form-control">
-	                    	<option value="">0 Adultos</option>
-	                    	<option value="">1 Adultos</option>
-	                      <option value="">2 Adultos</option>
-	                      <option value="">3 Adultos</option>
-	                      <option value="">4 Adultos</option>
-	                      <option value="">5 Adultos</option>
-	                      <option value="">6 Adultos</option>
-	                    </select>
-	                  </div>
-		              </div>
-		              <div class="form-group">
-		                <div class="select-wrap one-third">
-	                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-	                    <select name="" id="" class="form-control">
-	                    	<option value="">0 Niños</option>
-	                    	<option value="">1 Niños</option>
-	                      <option value="">2 Niños</option>
-	                      <option value="">3 Niños</option>
-	                      <option value="">4 Niños</option>
-	                      <option value="">5 Niños</option>
-	                      <option value="">6 Niños</option>
-	                    </select>
-	                  </div>
-		              </div>
-		              <div class="form-group">
+		              </div> -->
+		              <!-- <div class="form-group">
 		              	<div class="range-slider">
 		              		<span>
-										    <input type="number" value="25000" min="0" max="120000"/>	-
-										    <input type="number" value="50000" min="0" max="120000"/>
-										  </span>
-										  <input value="1000" min="0" max="120000" step="500" type="range"/>
-										  <input value="50000" min="0" max="120000" step="500" type="range"/>
-										  </svg>
-										</div>
-		              </div>
+								<input type="number" value="25000" min="0" max="120000"/>	-
+								<input type="number" value="50000" min="0" max="120000"/>
+							</span>
+							<input value="1000" min="0" max="120000" step="500" type="range"/>
+							<input value="50000" min="0" max="120000" step="500" type="range"/>
+							</svg>
+						</div>
+		              </div> -->
 		              <div class="form-group">
-		                <input type="submit" value="Buscar" class="btn btn-primary py-3 px-5"> <!--Value era "Search"-->
+		                <input type="submit" value="Buscar" class="btn btn-primary py-3 px-5">
 		              </div>
 		            </div>
 	            </form>
 	      		</div>
-	      		<div class="sidebar-wrap bg-light ftco-animate">
-	      			<h3 class="heading mb-4">Estrellas</h3>
-	      			<form method="post" class="star-rating">
-							  <div class="form-check">
-									<input type="checkbox" class="form-check-input" id="exampleCheck1">
-									<label class="form-check-label" for="exampleCheck1">
-										<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span></p>
-									</label>
-							  </div>
-							  <div class="form-check">
-						      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-						      <label class="form-check-label" for="exampleCheck1">
-						    	   <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i></span></p>
-						      </label>
-							  </div>
-							  <div class="form-check">
-						      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-						      <label class="form-check-label" for="exampleCheck1">
-						      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
-						     </label>
-							  </div>
-							  <div class="form-check">
-							    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-						      <label class="form-check-label" for="exampleCheck1">
-						      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
-						      </label>
-							  </div>
-							  <div class="form-check">
-						      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-						      <label class="form-check-label" for="exampleCheck1">
-						      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
-							    </label>
-							  </div>
+			<!-- <div class="sidebar-wrap bg-light ftco-animate">
+				<h3 class="heading mb-4">Estrellas</h3>
+				<form method="post" class="star-rating">
+				<div class="form-check">
+					<input type="checkbox" class="form-check-input" id="exampleCheck1">
+					<label class="form-check-label" for="exampleCheck1">
+						<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span></p>
+					</label>
+				</div>
+				<div class="form-check">
+				<input type="checkbox" class="form-check-input" id="exampleCheck1">
+				<label class="form-check-label" for="exampleCheck1">
+					<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i></span></p>
+				</label>
+				</div>
+				<div class="form-check">
+				<input type="checkbox" class="form-check-input" id="exampleCheck1">
+				<label class="form-check-label" for="exampleCheck1">
+				<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
+				</label>
+				</div>
+				<div class="form-check">
+				<input type="checkbox" class="form-check-input" id="exampleCheck1">
+				<label class="form-check-label" for="exampleCheck1">
+				<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
+				</label>
+				</div>
+				<div class="form-check">
+				<input type="checkbox" class="form-check-input" id="exampleCheck1">
+				<label class="form-check-label" for="exampleCheck1">
+				<p class="rate"><span><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
+				</label>
+			</div> -->
 							</form>
 	      		</div>
 	        </div>
 		    </div>
     	</div>
     </section>
+
+	<script>
+
+		document.getElementById("camasMatrimoniales").addEventListener('change', function(){
+			document.getElementById("mostrarCamasMatrimoniales").innerHTML = document.getElementById("camasMatrimoniales").value;
+		});
+		document.getElementById("camasIndividuales").addEventListener('change', function(){
+			document.getElementById("mostrarCamasIndividuales").innerHTML = document.getElementById("camasIndividuales").value;
+		});
+
+	</script>
 
 {% endblock %}

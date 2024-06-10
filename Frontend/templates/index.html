@@ -40,67 +40,27 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12">
-				<form action="#" class="booking-form">
-				<div class="row">
+				<form action="/buscar" class="booking-form" method="post">
+				<div class="row justify-content-center">
 					<div class="col-md-3 d-flex">
 						<div class="form-group p-4 align-self-stretch d-flex align-items-end">
 							<div class="wrap">
-									<label for="#">Check-in</label>
-									<input type="text" class="form-control checkin_date" placeholder="Check-in date">
-								</div>
+								<label for="#">Ingreso</label>
+								<input type="date" class="form-control " placeholder="Check-in date" name="fechaIngreso" required>
 							</div>
+						</div>
 					</div>
 					<div class="col-md-3 d-flex">
-						<div class="form-group p-4 align-self-stretch d-flex align-items-end">
+					<div class="form-group p-4 align-self-stretch d-flex align-items-end">
 							<div class="wrap">
-									<label for="#">Check-out</label>
-									<input type="text" class="form-control checkout_date" placeholder="Check-out date">
-							</div>
-							</div>
-					</div>
-					<div class="col-md d-flex">
-						<div class="form-group p-4 align-self-stretch d-flex align-items-end">
-							<div class="wrap">
-								<label for="#">Nuestras posadas</label>
-								<div class="form-field">
-								<div class="select-wrap">
-							<div class="icon"><span class="ion-ios-arrow-down"></span></div>
-							<select name="" id="" class="form-control">
-								<option value="">Amapola</option>
-								<option value="">Hierba Alta</option>
-								<option value="">Ciervo Blanco</option>
-								<option value="">Bosque Alto</option>
-								<option value="">Trucha Dorada</option>
-								<option value="">Carpincho</option>
-							</select>
-							</div>
+								<label for="#">Egreso</label>
+								<input type="date" class="form-control " placeholder="Check-out date" name="fechaEgreso" required>
 							</div>
 						</div>
 					</div>
-					</div>
-					<div class="col-md d-flex">
-						<div class="form-group p-4 align-self-stretch d-flex align-items-end">
-							<div class="wrap">
-								<label for="#">Adultos</label>
-								<div class="form-field">
-									<div class="select-wrap">
-							<div class="icon"><span class="ion-ios-arrow-down"></span></div>
-							<select name="" id="" class="form-control">
-								<option value="">1</option>
-								<option value="">2</option>
-								<option value="">3</option>
-								<option value="">4</option>
-								<option value="">5</option>
-								<option value="">6</option>
-							</select>
-							</div>
-							</div>
-						</div>
-					</div>
-					</div>
-					<div class="col-md d-flex">
+					<div class="col-md-3 d-flex">
 						<div class="form-group d-flex align-self-stretch">
-						<input type="submit" value="Check Availability" class="btn btn-primary py-3 px-4 align-self-stretch">
+						<input type="submit" value="Chequear Disponibilidad" class="btn btn-primary py-3 px-4 align-self-stretch">
 					</div>
 					</div>
 				</div>

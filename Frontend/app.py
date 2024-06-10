@@ -105,6 +105,13 @@ def cancelarReserva():
     return redirect(url_for('misReservas'))
 ###
 
+@app.route('/buscar', methods=["POST"])
+def buscarPosadas():
+    response = requests.get('http://127.0.0.1:5050/posadas', params=request.form)
+    data = response.json()
+    return render_template('Cabanas.html', cabanas=data['posadas'], cantidad=data['cantidad'], filtros=data['filtros'])
+
+
 @app.route('/Cabanas', methods=["GET"])
 def Cabanas():
 
@@ -114,7 +121,7 @@ def Cabanas():
     posadas = data['posadas']
     cantidad = data['cantidad']
 
-    return render_template('Cabanas.html', cabanas=posadas, cantidad=cantidad)
+    return render_template('Cabanas.html', cabanas=posadas, cantidad=cantidad, filtros={})
 
 
 @app.route("/conexion_a_reservas", methods=["GET"])
