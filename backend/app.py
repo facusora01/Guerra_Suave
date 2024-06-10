@@ -127,6 +127,7 @@ def obtenerReservas():
 def borrarReserva():
     try:
         content = request.json
+        print(content)
         
         reserva = search_query(f"""SELECT * FROM reservas WHERE id={content['idReserva']}  """)
         if not len(reserva):
@@ -149,9 +150,12 @@ def crearReserva():
     try:
         content = request.json
 
-        if not len(search_query(f"""SELECT * FROM posadas WHERE identificador={content['identificadorPosada']}""")):
+        posada = search_query(f"""SELECT * FROM posadas WHERE identificador={content['identificadorPosada']}""")
+        if not len(posada):
             return jsonify({'message': 'Posada inexistente'}), 400
         
+        print(posada)
+
         usuario = search_query(f"""SELECT * FROM usuarios WHERE UUID='{content['UUID']}' """)
         if not len(usuario):
             return jsonify({'message': 'Usuario inexistente'}), 400
@@ -161,7 +165,7 @@ def crearReserva():
         if not superposicionReservas(result, content['fechaIngreso'], content['fechaEgreso']):
             return jsonify({'message': 'La fecha seleccionada para la reseva no es valida.'}), 400
         
-        run_query(f"""INSERT INTO reservas (identificadorPosada, personaUUID, fechaIngreso, fechaEgreso) VALUES ({content['identificadorPosada']}, "{content['UUID']}", "{content['fechaIngreso']}", "{content['fechaEgreso']}")""")
+        run_query(f"""INSERT INTO reservas (identificadorPosada, personaUUID, fechaIngreso, fechaEgreso, nombrePosada, imagen) VALUES ({content['identificadorPosada']}, "{content['UUID']}", "{content['fechaIngreso']}", "{content['fechaEgreso']}", "{posada[0]['nombre']}", "{posada[0]['foto1']}")""")
         return jsonify({'message': "Reserva correcta"})
     
     except SQLAlchemyError as err:
