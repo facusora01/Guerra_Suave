@@ -33,8 +33,7 @@
 			
 		    				<div class="col-sm col-md-6 col-lg-4 ftco-animate">
 		    					<div class="room">
-		    						<a href="{{ url_for('Carpincho') }}" class="img d-flex justify-content-center align-items-center">
-										<img src="../{{ posada['foto1'] }}">
+		    						<a href="{{ url_for('Carpincho') }}" class="img d-flex justify-content-center align-items-center" style="background-image: url( {{ posada['foto1']}});">
 		    							<div class="icon d-flex justify-content-center align-items-center">
 		    								<span class="icon-search2"></span>
 		    							</div>
@@ -65,7 +64,7 @@
 		    	<div class="col-lg-3 sidebar">
 	      		<div class="sidebar-wrap bg-light ftco-animate">
 	      			<h3 class="heading mb-4">Filtro</h3>
-	      			<form action="#">
+	      			<form id="filtros" method="post" action="{{ url_for('Cabanas') }}">
 	      				<div class="fields">
 		              <div class="form-group">
 		                <input type="text" id="checkin_date" class="form-control checkin_date" placeholder="Check In Date">
@@ -76,7 +75,7 @@
 		              <div class="form-group">
 		                <div class="select-wrap one-third">
 	                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-	                    <select name="" id="" class="form-control">
+	                    <select name="filtros" id="identificador" class="form-control">
 	                    	<option value="">Tipo de Cabaña</option>
 	                    	<option value="">Amapola</option>
 	                      <option value="">Hierba Alta</option>
@@ -90,7 +89,7 @@
 		              <div class="form-group">
 		                <div class="select-wrap one-third">
 	                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-	                    <select name="" id="" class="form-control">
+	                    <select name="filtros" id="camasMatrimoniales" class="form-control">
 	                    	<option value="">0 Adultos</option>
 	                    	<option value="">1 Adultos</option>
 	                      <option value="">2 Adultos</option>
@@ -104,7 +103,7 @@
 		              <div class="form-group">
 		                <div class="select-wrap one-third">
 	                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-	                    <select name="" id="" class="form-control">
+	                    <select name="filtros" id="camasIndividuales" class="form-control">
 	                    	<option value="">0 Niños</option>
 	                    	<option value="">1 Niños</option>
 	                      <option value="">2 Niños</option>

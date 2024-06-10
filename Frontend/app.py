@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, url_for, redirect
 import os
 import requests
 
@@ -101,10 +101,14 @@ def blog_single():
     return render_template('blog_single.html')
 
 
-@app.route('/Cabanas', methods=["GET"])
+@app.route('/Cabanas', methods=["GET", "POST"])
 def Cabanas():
 
-    response = requests.get('http://127.0.0.1:5050/posadas')
+    if request.method == "POST":
+        response = requests.get('http://127.0.0.1:5050/posadas', request.values)
+    else:
+        response = requests.get('http://127.0.0.1:5050/posadas')
+
     data = response.json()
 
     posadas = data['posadas']
