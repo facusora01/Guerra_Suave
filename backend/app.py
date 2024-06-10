@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 from sqlalchemy import create_engine, text
 from sqlalchemy.exc import SQLAlchemyError
-from datetime import datetime
+from reservas import superposicionReservas, removerUUID
 
 def create_connection():
     password = "securepass"
@@ -28,15 +28,6 @@ def run_query(query):
 def search_query(query):
     result = db_connection.execute(text(query))
     return result.mappings().all()
-
-
-def removerUUID(data):
-    listaDatos = []
-    for row in data:
-        fila = dict(row)
-        fila.pop("personaUUID")
-        listaDatos.append(fila)
-    return listaDatos
 
 
 def filtrosPosadas(args):
@@ -81,6 +72,19 @@ def filtrosPosadas(args):
         return "WHERE " + " AND ".join(filters)
     else:
         return ""
+    
+def estaDisponible(args, posadas):
+ 
+    posadasValidas = posadas
+
+    if args.get('fechaIngreso') and args.get('fechaEgreso'):
+
+        for posada in posadas:
+            reservas = search_query(f"""SELECT * FROM reservas WHERE identificadorPosada={posada['identificador']} """)
+            if not superposicionReservas(reservas, args['fechaIngreso'], args['fechaEgreso']):
+                posadasValidas.remove(posada)
+
+    return posadasValidas
 
 @app.route("/posadas")
 def posadas():
@@ -89,7 +93,8 @@ def posadas():
         filters = filtrosPosadas(request.args)
         result = search_query(f"""SELECT * FROM posadas {filters}""")
         posadas = [dict(row) for row in result]
-        return jsonify({'posadas': posadas, 'cantidad': len(posadas)})
+        posadas = estaDisponible(request.args, posadas)
+        return jsonify({'posadas': posadas, 'cantidad': len(posadas), 'filtros': request.args})
     
     except SQLAlchemyError as err:
         print(err)
@@ -113,7 +118,7 @@ def obtenerReservas():
 
         result = search_query(f"""SELECT * FROM reservas {filters}""")
         reservas = removerUUID(result)
-        return jsonify({'reservas': reservas, 'cantidad': len(reservas)})
+        return jsonify({'reservas': reservas, 'cantidad': len(reservas), 'filtros': request.args})
     except SQLAlchemyError as err:
         print(err)
         return jsonify({'message': "Error en la solicitud"}), 400
@@ -122,6 +127,7 @@ def obtenerReservas():
 def borrarReserva():
     try:
         content = request.json
+        print(content)
         
         reserva = search_query(f"""SELECT * FROM reservas WHERE id={content['idReserva']}  """)
         if not len(reserva):
@@ -138,42 +144,28 @@ def borrarReserva():
         return jsonify({'message': 'No se pudo borrar la reserva'}), 500
 
 
+
+
 def crearReserva():
     try:
         content = request.json
 
-        if not len(search_query(f"""SELECT * FROM posadas WHERE identificador={content['identificadorPosada']}""")):
+        posada = search_query(f"""SELECT * FROM posadas WHERE identificador={content['identificadorPosada']}""")
+        if not len(posada):
             return jsonify({'message': 'Posada inexistente'}), 400
         
+        print(posada)
+
         usuario = search_query(f"""SELECT * FROM usuarios WHERE UUID='{content['UUID']}' """)
         if not len(usuario):
             return jsonify({'message': 'Usuario inexistente'}), 400
 
         result = search_query(f"""SELECT * FROM reservas WHERE identificadorPosada={content['identificadorPosada']}""")
-        reservas = [dict(row) for row in result]
-
-        dateFormat = '%Y-%m-%d'
-        fechaIngreso = datetime.strptime(content['fechaIngreso'], dateFormat)
-        fechaEgreso = datetime.strptime(content['fechaEgreso'], dateFormat)
-        fechaValida = True
-
-        for re in reservas:
-            if re['fechaIngreso'] <= fechaIngreso and re['fechaEgreso'] > fechaIngreso:
-                fechaValida = False
-
-            elif re['fechaIngreso'] < fechaEgreso and re['fechaEgreso'] >= fechaEgreso:
-                fechaValida = False
-
-            elif fechaEgreso <= fechaIngreso:
-                fechaValida = False
-
-            elif fechaIngreso < datetime.now():
-                fechaValida = False
-
-        if not fechaValida:
+        
+        if not superposicionReservas(result, content['fechaIngreso'], content['fechaEgreso']):
             return jsonify({'message': 'La fecha seleccionada para la reseva no es valida.'}), 400
         
-        run_query(f"""INSERT INTO reservas (identificadorPosada, personaUUID, fechaIngreso, fechaEgreso) VALUES ({content['identificadorPosada']}, "{content['UUID']}", "{content['fechaIngreso']}", "{content['fechaEgreso']}")""")
+        run_query(f"""INSERT INTO reservas (identificadorPosada, personaUUID, fechaIngreso, fechaEgreso, nombrePosada, imagen) VALUES ({content['identificadorPosada']}, "{content['UUID']}", "{content['fechaIngreso']}", "{content['fechaEgreso']}", "{posada[0]['nombre']}", "{posada[0]['foto1']}")""")
         return jsonify({'message': "Reserva correcta"})
     
     except SQLAlchemyError as err:
