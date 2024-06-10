@@ -33,12 +33,19 @@ def about():
 def blog():
     return render_template('blog.html')
 
-@app.route('/contact')
+@app.route('/contact', methods=['GET', 'POST'])
 def contact():
     try:
-        response = requests.get('http://127.0.0.1:5050/resenias')
-        result = response.json()
-        reseñas = result['resenias']
+        if request.method == "GET":
+            response = requests.get('http://127.0.0.1:5050/resenias')
+        elif request.method == "POST":
+            email = request.form.get("email")
+            cabaña = request.form.get("cabaña")
+            puntuacion = request.form.get("puntuacion")
+            comentario = request.form.get("reseña")
+            data = {'email': email, 'cabaña': cabaña, 'puntuacion': puntuacion, 'comentario': comentario}
+            print (data)
+            response = requests.post('http://127.0.0.1:5050/resenias', json=data)
     except requests.exceptions.RequestException as error:
         print("=====================================")
         print(f"Error en la solicitud: {error}")
@@ -49,10 +56,12 @@ def contact():
         print(f"Error al decodificar JSON: {error}")
         print("=====================================")
         reseñas = {'reseñas': []}  # Inicializar con una lista vacía en caso de error
-    
-    print(reseñas[0]['comentario'])
 
-
+    try:
+        result = response.json()
+        reseñas = result['resenias']
+    except:
+        reseñas = {'reseñas': []}
     return render_template('contact.html', Reseñas=reseñas)
 
 @app.route('/Amapola', methods=['GET'])
