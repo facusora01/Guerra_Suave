@@ -97,15 +97,12 @@ def reservar():
         "identificadorPosada": request.form['identificadorPosada'],
     }
 
-    print(data)
-
     response = requests.post('http://127.0.0.1:5050/reservas', json=data)
 
     if(response.status_code == 200):
         return redirect(url_for('misReservas', correcta=True))
     
-    # Resolver que la reserva sea erronea, lo ideal seria llevar a la misma pagina pero con el mensaje de error
-    return redirect(url_for('misReservas'))
+    return redirect(url_for('obtenerPosada', id=data['identificadorPosada'], fechaIngreso=data['fechaIngreso'], fechaEgreso=data['fechaEgreso'], error=response.json()['message']))
 
 @app.route('/misreservas')
 def misReservas():
@@ -123,7 +120,6 @@ def cancelarReserva():
 
     requests.delete('http://127.0.0.1:5050/reservas', json=data)
     return redirect(url_for('misReservas'))
-###
 
 @app.route('/posadas/<id>', methods=['GET'])
 def obtenerPosada(id):
@@ -133,7 +129,9 @@ def obtenerPosada(id):
     }
     response = requests.get(f"""http://127.0.0.1:5050/posadas?identificador={id}""")
     posada = response.json()['posadas'][0]
-    return render_template('posada.html', posada=posada, reservable=True, fechas=fechas)
+    posada['descripcion'] = posada['descripcion'].split("-")
+  
+    return render_template('posada.html', posada=posada, reservable=True, fechas=fechas, error=request.args.get("error"))
 
 @app.route('/buscar', methods=["POST"])
 def buscarPosadas():
