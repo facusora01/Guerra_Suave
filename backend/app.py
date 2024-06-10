@@ -191,7 +191,6 @@ def reservas():
     elif request.method == "DELETE":
         return borrarReserva()
 
-
 def obtenerResenias():
     try:
         result = search_query("""SELECT * FROM resenias""")
@@ -206,7 +205,6 @@ def obtenerResenias():
 def resenias():
     if request.method == "GET":
         return obtenerResenias()
-    
 
 @app.errorhandler(404)
 def error(e):

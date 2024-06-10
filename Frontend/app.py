@@ -35,7 +35,25 @@ def blog():
 
 @app.route('/contact')
 def contact():
-    return render_template('contact.html')
+    try:
+        response = requests.get('http://127.0.0.1:5050/resenias')
+        result = response.json()
+        reseñas = result['resenias']
+    except requests.exceptions.RequestException as error:
+        print("=====================================")
+        print(f"Error en la solicitud: {error}")
+        print("=====================================")
+        reseñas = {'reseñas': []}  # Inicializar con una lista vacía en caso de error
+    except ValueError as error:
+        print("=====================================")
+        print(f"Error al decodificar JSON: {error}")
+        print("=====================================")
+        reseñas = {'reseñas': []}  # Inicializar con una lista vacía en caso de error
+    
+    print(reseñas[0]['comentario'])
+
+
+    return render_template('contact.html', Reseñas=reseñas)
 
 @app.route('/Amapola', methods=['GET'])
 def Amapola():

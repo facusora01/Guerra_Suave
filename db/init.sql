@@ -192,5 +192,5 @@ INSERT INTO reservas (identificadorPosada, personaUUID, fechaIngreso, fechaEgres
 
 --Resenias
 
-INSERT INTO resenias (identificadorPosada, personaUUID, puntuacion, comentario) VALUES (101, "123e4567-e89b-12d3-a456-426655440001", 3, "Hermosa");
-INSERT INTO resenias (identificadorPosada, personaUUID, puntuacion, comentario) VALUES (201, "f4e23110-1234-5678-9abc-def012345678", 5, "recomendable");
+INSERT INTO resenias (identificadorPosada, personaUUID, puntuacion, comentario) VALUES (101, '123e4567-e89b-12d3-a456-426655440001', 3, "HERMOSA");
+INSERT INTO resenias (identificadorPosada, personaUUID, puntuacion, comentario) VALUES (301, '69d07c33-1eec-11ef-bc3d-0242ac120002', 5, "Muy recomendable");
