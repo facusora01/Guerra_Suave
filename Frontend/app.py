@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect, url_for
 import os
+import json
 import requests
 
 app = Flask(__name__)
@@ -85,6 +86,24 @@ def Trucha_Dorada():
 def blog_single():
     return render_template('blog_single.html')
 
+### Consultar tus reservas y poder eliminarlas
+@app.route('/misreservas')
+def misReservas():
+    response = requests.get('http://127.0.0.1:5050/reservas?email=p.lopez@gmail.com')
+    response = response.json()
+    return render_template('misreservas.html', reservas=response['reservas'])
+
+@app.route('/cancelar', methods=['POST'])
+def cancelarReserva():
+
+    data = {
+        "UUID": "69d07c33-1eec-11ef-bc3d-0242ac120002",
+        "idReserva": int(request.form['idReserva'])
+    }
+
+    requests.delete('http://127.0.0.1:5050/reservas', json=data)
+    return redirect(url_for('misReservas'))
+###
 
 @app.route('/Cabanas', methods=["GET"])
 def Cabanas():

@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+    <div class="hero-wrap" style="background-image: url('../static/images/image_2.jpg');">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
+          <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
+          	<div class="text">
+	            <p class="breadcrumbs mb-2"><span class="mr-2"><a href="{{ url_for('index') }}">Inicio</a></span> <span>Mis Reservas</span></p>
+	            <h1 class="mb-4 bread">Mis Reservas</h1>  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <section class="ftco-section contact-section bg-light">
+      <div class="container">
+        {% if reservas|length > 1 %}
+          <div class="row d-flex mb-5 contact-info">
+            <div class="col-md-12 mb-2">
+              <h2 class="h3">Tus reservas</h2>
+            </div> 
+          </div>
+        {% endif %}
+        
+        <div class="row block-9">
+          
+            {% for reserva in reservas %}
+          
+              <div class="shadow p-3 mb-3 w-100 border d-flex justify-content-between">
+                
+                <div class="d-flex">
+                  <div class="pr-3">
+                    <img alt="Imagen Posada" height="100px" src="{{reserva.imagen}}">
+                  </div> 
+                  
+                  <div>
+                    <div class="text-dark pb-1"><span class="font-weight-bold">{{reserva.nombrePosada}} </span>#{{reserva.identificadorPosada}}</div>
+                    <div><span class="text-black-50">Desde:</span> <span class="text-dark">{{reserva.fechaIngreso}}</span></div>
+                    <div><span class="text-black-50">Hasta:</span> <span class="text-dark">{{reserva.fechaEgreso}}</div>
+                  </div>
+
+                </div>
+
+                <form action="{{ url_for('cancelarReserva') }}" method="post">
+                  <input name="idReserva" value="{{reserva.id}}" class="d-none">
+                  <button class="btn btn-primary py-2 px-3 align-self-stretch" type="submit">Cancelar</button>
+                </form>
+                
+              </div>
+
+            {% endfor %}
+
+            {% if reservas|length < 1 %}
+                <div class="w-100 text-center h3">
+                  No tienes reservas
+                </div> 
+                <div class="w-100 text-center">
+                  En este momento no encontramos ninguna reserva creada con tu usuario.
+                </div> 
+            {% endif %}
+  
+        </div>
+      </div>
+    </section>
+
+
+{% endblock %}
