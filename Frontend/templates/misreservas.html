@@ -20,7 +20,7 @@
     <section class="ftco-section contact-section bg-light">
       <div class="container">
         {% if reservas|length > 1 %}
-          <div class="row d-flex mb-5 contact-info">
+          <div class="row d-flex mb-1 contact-info">
             <div class="col-md-12 mb-2">
               <h2 class="h3">Tus reservas</h2>
             </div> 
@@ -28,7 +28,11 @@
         {% endif %}
         
         <div class="row block-9">
-          
+
+            {% if correcta %}
+              <p class="w-100 text-center text-dark font-weight-bold border p-2 shadow">Reserva realizada correctamente.</p>
+            {% endif %}
+            
             {% for reserva in reservas %}
           
               <div class="shadow p-3 mb-3 w-100 border d-flex justify-content-between">
