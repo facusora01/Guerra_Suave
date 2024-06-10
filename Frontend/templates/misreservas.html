@@ -2,7 +2,7 @@
 
 {% block body %}
 
-    <div class="hero-wrap" style="background-image: url('../static/images/image_2.jpg');">
+    <div class="hero-wrap" style="background-image: url('../static/images/image_7.jpg');">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
@@ -15,7 +15,6 @@
         </div>
       </div>
     </div>
-
 
     <section class="ftco-section contact-section bg-light">
       <div class="container">
@@ -36,11 +35,11 @@
             {% for reserva in reservas %}
           
               <div class="shadow p-3 mb-3 w-100 border d-flex justify-content-between">
-                
+               
                 <div class="d-flex">
-                  <div class="pr-3">
-                    <img alt="Imagen Posada" height="100px" src="{{reserva.imagen}}">
-                  </div> 
+                  <a class="pr-3" href="{{ url_for('obtenerPosada', id=reserva['identificadorPosada']) }}">
+                    <img alt="Imagen Posada" width="150px" height="90px" src="{{reserva.imagen}}">
+                  </a> 
                   
                   <div>
                     <div class="text-dark pb-1"><span class="font-weight-bold">{{reserva.nombrePosada}} </span>#{{reserva.identificadorPosada}}</div>

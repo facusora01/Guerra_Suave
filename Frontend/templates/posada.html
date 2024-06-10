@@ -42,7 +42,7 @@
 
 		<ul class="list">
 			<li>Maximo personas: <span class="font-weight-bold text-dark"> {{ total_personas }} </span></li>
-			<li>Tamaño: <span class="font-weight-bold text-dark"> {{ posada['metrosCuadrados'] }}m2 </span></li>
+			<li>Ambientes: <span class="font-weight-bold text-dark"> {{ posada['ambientes'] }} </span></li>
 		</ul>
 		<ul class="list ml-md-5">
 			<li>Camas Matrimoniales: <span class="font-weight-bold text-dark"> {{ posada['camasMatrimoniales'] }}</span> </li>
@@ -50,13 +50,14 @@
 		</ul>
 		<ul class="list ml-md-5">
 			<li>Vista hacia: <span class="font-weight-bold text-dark"> {{ posada['vistaHacia'] }} </span></li>
+			<li>Tamaño: <span class="font-weight-bold text-dark"> {{ posada['metrosCuadrados'] }}m2 </span></li>
 		</ul>
 	</div>
 
 	<h3>Extras</h3>
 
 	{% for extra in posada['descripcion'] %}
-		<div>{{ extra }}</div>
+		<li>{{ extra }}</li>
 	{% endfor %}
 
 {% endblock %}
