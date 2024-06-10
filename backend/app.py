@@ -191,6 +191,23 @@ def reservas():
     elif request.method == "DELETE":
         return borrarReserva()
 
+
+def obtenerResenias():
+    try:
+        result = search_query("""SELECT * FROM resenias""")
+        resenias = [dict(row) for row in result]
+        return jsonify({'resenias': resenias, 'cantidad': len(resenias)}), 200
+
+    except SQLAlchemyError as err:
+        print(err)
+        return jsonify({'message': "Error en la solicitud"}), 400
+
+@app.route("/resenias", methods=["GET", "POST"])
+def resenias():
+    if request.method == "GET":
+        return obtenerResenias()
+    
+
 @app.errorhandler(404)
 def error(e):
     return jsonify({'message': 'No encontrado'}), 404
