@@ -76,7 +76,7 @@ INSERT INTO posadas VALUES (
 	1,
 	0,
 	"complejo",
-	" -Heladera -Microondas -Termotanque -Cocina a gas -Cafetera -Calefactor -Aire acondicionado frio-calor - Secador de pelo - Smart TV",
+	"-Heladera -Microondas -Termotanque -Cocina a gas -Cafetera -Calefactor -Aire acondicionado frio-calor - Secador de pelo - Smart TV",
 	"static/images/Amapola/amapola_Living.jpg",
 	"static/images/Amapola/amapola_Camas.jpg",
 	"static/images/Amapola/amapola_Matrimonial.jpg",
@@ -116,7 +116,7 @@ INSERT INTO posadas VALUES (
 	1,
 	0,
 	"lago",
-	" -Banio en suite -Cocina completa -Smart TV -Hogar a lenia -Banios completos",
+	"-Banio en suite -Cocina completa -Smart TV -Hogar a lenia -Banios completos",
 	"static/images/CiervoBlanco/ciervoBlanco_Living.jpg",
 	"static/images/CiervoBlanco/ciervoBlanco_Camas.jpg",
 	"static/images/CiervoBlanco/ciervoBlanco_Camas_2.jpg",
@@ -190,5 +190,4 @@ INSERT INTO posadas VALUES (
 
 INSERT INTO reservas (identificadorPosada, personaUUID, fechaIngreso, fechaEgreso, nombrePosada, imagen) VALUES (101, "69d07c33-1eec-11ef-bc3d-0242ac120002", "2024-6-10", "2024-6-21", "Amapola", "static/images/Amapola/amapola_Living.jpg");
 INSERT INTO reservas (identificadorPosada, personaUUID, fechaIngreso, fechaEgreso, nombrePosada, imagen) VALUES (501, "c3b1f29f-4567-89ab-cdef-0123456789ab", "2024-5-10", "2024-6-10", "Bosque Alto", "static/images/BosqueAlto/bosqueAlto_Living.jpg");
-INSERT INTO reservas (identificadorPosada, personaUUID, fechaIngreso, fechaEgreso, nombrePosada, imagen) VALUES (201, "69d07c33-1eec-11ef-bc3d-0242ac120002", "2024-5-22", "2024-6-30", "Trucha Dorada", "static/images/Amapola/truchaDorada_Living.jpg");
-INSERT INTO reservas (identificadorPosada, personaUUID, fechaIngreso, fechaEgreso, nombrePosada, imagen) VALUES (301, "69d07c33-1eec-11ef-bc3d-0242ac120002", "2024-1-22", "2024-2-30", "Ciervo Blanco", "static/images/Amapola/ciervoBlanco_Living.jpg");
+INSERT INTO reservas (identificadorPosada, personaUUID, fechaIngreso, fechaEgreso, nombrePosada, imagen) VALUES (301, "69d07c33-1eec-11ef-bc3d-0242ac120002", "2024-5-22", "2024-6-30", "Trucha Dorada", "static/images/CiervoBlanco/ciervoBlanco_Living.jpg");
