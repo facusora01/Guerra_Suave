@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect, url_for
 import os
 import requests
 
@@ -45,6 +45,7 @@ def contact():
             comentario = request.form.get("reseña")
             data = {'email': email, 'cabaña': cabaña, 'puntuacion': puntuacion, 'comentario': comentario}
             response = requests.post('http://127.0.0.1:5050/resenias', json=data)
+            return redirect(url_for('contact'))
     except requests.exceptions.RequestException as error:
         print("=====================================")
         print(f"Error en la solicitud: {error}")
@@ -55,7 +56,6 @@ def contact():
         print(f"Error al decodificar JSON: {error}")
         print("=====================================")
         reseñas = {'reseñas': []}  # Inicializar con una lista vacía en caso de error
-
     try:
         result = response.json()
         reseñas = result['resenias']
@@ -64,7 +64,7 @@ def contact():
         reseñas = {'reseñas': []}
     return render_template('contact.html', Reseñas=reseñas)
 
-@app.route('/Amapola', methods=['GET'])
+@app.route('/Nuestra_Cabana', methods=['GET'])
 def Amapola():
     try:
         response = requests.get('http://127.0.0.1:5050/posadas')
@@ -79,34 +79,21 @@ def Amapola():
         print(f"Error al decodificar JSON: {error}")
         print("=====================================")
         Lista_Cabanas = {'posadas': []}  # Inicializar con una lista vacía en caso de error
-
+    
+    print("=====================================")
+    #print(id)
+    print("=====================================")
+    
+    
     posada = None
+    id = 101  # ID DE LA CABAÑA QUE SE DESEE RENDERIZAR
+
     for cabana in Lista_Cabanas['posadas']:
-        if cabana['identificador'] == 201:  # Cambia el identificador por el que necesites
+        if cabana['identificador'] == id:
             posada = cabana
             break
     
     return render_template('Cabana_Amapola.html', posada=posada)
-
-@app.route('/Carpincho')
-def Carpincho():
-    return render_template('Cabana_Carpincho.html')
-
-@app.route('/Ciervo_Blanco')
-def Ciervo_Blanco():
-    return render_template('Cabana_Ciervo_Blanco.html')
-
-@app.route('/Hierba_Alta')
-def Hierba_Alta():
-    return render_template('Cabana_Hierba_Alta.html')
-
-@app.route('/Bosque_Alto')
-def Bosque_Alto():
-    return render_template('Cabana_Bosque_Alto.html')
-
-@app.route('/Trucha_Dorada')
-def Trucha_Dorada():
-    return render_template('Cabana_Trucha_Dorada.html')
 
 @app.route('/blog_single')
 def blog_single():

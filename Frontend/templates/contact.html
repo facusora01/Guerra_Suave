@@ -82,49 +82,46 @@
     </section>
 
 <!-- Testimonial Block 01-->
+
 <section id="testimonial" class="testimonial-section sec-bg-04 py-5 h-100">
-	<div class="container">
-		<div class="row">
-			<div class="head-box text-center mb-3 col-md-12 mt-5">
-				<h2 class="font-abril"> Qué dicen nuestros huéspedes: </h2>
-			</div>
-		</div>
+    <div class="container">
+        <div class="row">
+            <div class="head-box text-center mb-3 col-md-12 mt-5">
+                <h2 class="font-abril">Qué dicen nuestros huéspedes:</h2>
+            </div>
+        </div>
 		<div class="single-testimonial">
-		  <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
-		    <div class="carousel-inner pt-5" role="listbox">
-				{% for reseña in Reseñas %}
-		      <div class="carousel-item active">
-		        <div class="testimonial-box text-center">
-					<div class="testimonial-content w-100 bg-faded">
-						<p class="mb-0"><i class="fa fa-quote-left fa-3x" aria-hidden="true"></i></p>
-						<p class="lead font-abril"> {{ reseña['comentario'] }}</p>
-						<div class="testimonial-footer">
-							<h4 class="mt-2 mb-0 text-primary">{{ reseña['idResena'] }}</h4>
-							<p>-Cabaña Amapola</p>
+			<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+				<div class="carousel-inner pt-5" role="listbox">
+					{% for reseña in Reseñas %}
+					<div class="carousel-item {% if loop.first %}active{% endif %}">
+						<div class="testimonial-box text-center">
+							<div class="testimonial-content w-100 bg-faded">
+								<p class="mb-0"><i class="fa fa-quote-left fa-3x" aria-hidden="true"></i></p>
+								<p class="lead font-abril">{{ reseña['comentario'] }}</p>
+								<div class="testimonial-footer">
+									<h4 class="mt-2 mb-0 text-primary">Puntuación: {{ reseña['puntuacion'] }}/5</h4>
+									<p>{{ reseña['fechaResena'] }}</p>
+
+								</div>
+							</div>
 						</div>
 					</div>
+					{% endfor %}
 				</div>
-		      </div>
-			  {% endfor %}
-		      </div>
-		    </div>
-		    <div class="navigator-box">
-		    	<a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-			      <span class="fa fa-angle-left" aria-hidden="true">
-					<
-				  </span>
-			      <span class="sr-only"> Anterior </span>
-			    </a>
-			    <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-			      <span class="fa fa-angle-right" aria-hidden="true">
-					>
-				  </span>
-			      <span class="sr-only"> Siguiente </span>
-			    </a>
-		    </div>
-		  </div>
+				<div class="navigator-box">
+					<a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+					<span class="fa fa-angle-left" aria-hidden="true"><</span>
+					<span class="sr-only">Previous</span>
+					</a>
+					<a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+					<span class="fa fa-angle-right" aria-hidden="true">></span>
+					<span class="sr-only">Next</span>
+					</a>
+				</div>
+			</div>
 		</div>
-	</div>
+    </div>
 </section>
 
 {% endblock %}
