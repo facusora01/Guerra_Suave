@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 from sqlalchemy import create_engine, text
 from sqlalchemy.exc import SQLAlchemyError
-from reservas import superposicionReservas, removerUUID
+from reservas import superposicionReservas, removerUUID, fechaValida
 
 def create_connection():
     password = "securepass"
@@ -90,6 +90,9 @@ def estaDisponible(args, posadas):
 def posadas():
 
     try:
+        if not fechaValida(request.args.get('fechaIngreso'), request.args.get('fechaEgreso')):
+            return jsonify({'message': 'La fecha debe ser en el futuro y en el orden correcto.'}), 400
+
         filters = filtrosPosadas(request.args)
         result = search_query(f"""SELECT * FROM posadas {filters}""")
         posadas = [dict(row) for row in result]
@@ -144,8 +147,6 @@ def borrarReserva():
         return jsonify({'message': 'No se pudo borrar la reserva'}), 500
 
 
-
-
 def crearReserva():
     try:
         content = request.json
@@ -154,16 +155,16 @@ def crearReserva():
         if not len(posada):
             return jsonify({'message': 'Posada inexistente'}), 400
         
-        print(posada)
+        if not fechaValida(content['fechaIngreso'], content['fechaEgreso']):
+            return jsonify({'message': 'La fecha debe ser en el futuro y en el orden correcto.'}), 400
 
         usuario = search_query(f"""SELECT * FROM usuarios WHERE UUID='{content['UUID']}' """)
         if not len(usuario):
             return jsonify({'message': 'Usuario inexistente'}), 400
 
         result = search_query(f"""SELECT * FROM reservas WHERE identificadorPosada={content['identificadorPosada']}""")
-        
         if not superposicionReservas(result, content['fechaIngreso'], content['fechaEgreso']):
-            return jsonify({'message': 'La fecha seleccionada para la reseva no es valida.'}), 400
+            return jsonify({'message': 'La fecha seleccionada para la reserva se encuentra ocupada.'}), 400
         
         run_query(f"""INSERT INTO reservas (identificadorPosada, personaUUID, fechaIngreso, fechaEgreso, nombrePosada, imagen) VALUES ({content['identificadorPosada']}, "{content['UUID']}", "{content['fechaIngreso']}", "{content['fechaEgreso']}", "{posada[0]['nombre']}", "{posada[0]['foto1']}")""")
         return jsonify({'message': "Reserva correcta"})
@@ -173,6 +174,7 @@ def crearReserva():
         return jsonify({'message': 'Error generando la reserva'}), 500
     except: 
         return jsonify({'message': 'Error en la solicitud.'}), 400
+
 
 @app.route("/reservas", methods=["GET", "POST", "DELETE"])
 def reservas():

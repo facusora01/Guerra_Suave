@@ -7,19 +7,37 @@ def superposicionReservas(reservas, fechaI, fechaE):
     dateFormat = '%Y-%m-%d'
     fechaIngreso = datetime.strptime(fechaI, dateFormat)
     fechaEgreso = datetime.strptime(fechaE, dateFormat)
-    fechaValida = True
+    disponible = True
 
     for re in listaReservas:
         if not fechaIngreso <= re['fechaIngreso'] and fechaEgreso <= re['fechaIngreso']:
-            fechaValida = False
+            disponible = False
 
         elif not fechaIngreso >= re['fechaEgreso'] and fechaEgreso >= re['fechaEgreso']:
-            fechaValida = False
+            disponible = False
 
-        elif fechaEgreso <= fechaIngreso:
+        elif re['fechaIngreso'] < fechaIngreso < re['fechaEgreso']:
+            disponible = False
+
+        elif re['fechaIngreso'] < fechaEgreso < re['fechaEgreso']:
+            disponible = False
+
+    return disponible
+
+
+def fechaValida(fechaI, fechaE):
+
+    fechaValida = True
+
+    if fechaE and fechaI:
+        dateFormat = '%Y-%m-%d'
+        fechaIngreso = datetime.strptime(fechaI, dateFormat)
+        fechaEgreso = datetime.strptime(fechaE, dateFormat)
+        
+        if fechaEgreso <= fechaIngreso:
             fechaValida = False
-      
-        elif fechaIngreso < datetime.now():
+    
+        if fechaIngreso < datetime.now():
             fechaValida = False
     
     return fechaValida
