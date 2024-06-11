@@ -204,28 +204,31 @@ def obtenerResenias():
 def publicarResenias():
     try:
         content = request.json
-        print(content)
-        usuario = search_query("""SELECT * FROM usuarios WHERE email = %s""", (content['email'],))
+       
+        mailUsuario = content['email']
+        comentario = content['comentario']
+        puntuacion = content['puntuacion']
+        
+        usuario = search_query(f"""SELECT * FROM usuarios WHERE email= '{mailUsuario}' """)
+
         if not usuario:
             return jsonify({'message': 'Usuario inexistente'}), 400        
         else:
-            usuarioUUID = usuario['UUID']
-        
-        posada = search_query("""SELECT * FROM posadas WHERE nombre = %s""", (content['nombre'],))
+            usuarioUUID = usuario[0]['UUID']
+           
+        posada = search_query(f"""SELECT * FROM posadas WHERE nombre = '{content['cabaña']}' """)
+
         if not posada:
             return jsonify({'message': 'Posada no encontrada'}), 400
+        else:
+            identificadorPosada = posada[0]['identificador']
 
-        identificadorPosada = posada['identificador']
-
-        comentario = content['reseñas']
-        puntuacion = content['puntuacion']
-
-        run_query("""INSERT INTO resenias (identificadorPosada, personaUUID, puntuacion, comentario) VALUES (%s, %s, %s, %s)""", (identificadorPosada, usuarioUUID, puntuacion, comentario))
-        return jsonify({'message': "Reserva correcta"})
-
+        run_query(f"""INSERT INTO resenias (identificadorPosada, personaUUID, puntuacion, comentario) VALUES ({identificadorPosada}, '{usuarioUUID}', {puntuacion}, "{comentario}") """)
+        return jsonify({'message': "Se ha agregado la reseña correctamente"}), 200
+    
     except SQLAlchemyError as err:
         print(err)
-        return jsonify({'message': 'Error generando la reserva'}), 500
+        return jsonify({'message': 'Error generando la reseña'}), 500
     except: 
         return jsonify({'message': 'Error en la solicitud.'}), 400
 
@@ -235,6 +238,7 @@ def listarResenias():
         return obtenerResenias()
     if request.method == "POST":
         return publicarResenias()
+    
 @app.errorhandler(404)
 def error(e):
     return jsonify({'message': 'No encontrado'}), 404

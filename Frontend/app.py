@@ -56,7 +56,6 @@ def contact():
         print(f"Error al decodificar JSON: {error}")
         print("=====================================")
         reseñas = {'reseñas': []}  # Inicializar con una lista vacía en caso de error
-
     try:
         result = response.json()
         reseñas = result['resenias']
@@ -94,26 +93,6 @@ def Amapola():
             break
     
     return render_template('Cabana_Amapola.html', posada=posada)
-
-@app.route('/Carpincho')
-def Carpincho():
-    return render_template('Cabana_Carpincho.html')
-
-@app.route('/Ciervo_Blanco')
-def Ciervo_Blanco():
-    return render_template('Cabana_Ciervo_Blanco.html')
-
-@app.route('/Hierba_Alta')
-def Hierba_Alta():
-    return render_template('Cabana_Hierba_Alta.html')
-
-@app.route('/Bosque_Alto')
-def Bosque_Alto():
-    return render_template('Cabana_Bosque_Alto.html')
-
-@app.route('/Trucha_Dorada')
-def Trucha_Dorada():
-    return render_template('Cabana_Trucha_Dorada.html')
 
 @app.route('/blog_single')
 def blog_single():

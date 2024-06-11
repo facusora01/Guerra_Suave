@@ -507,7 +507,8 @@ pre {
   width: 100%;
   min-height: 1px;
   padding-right: 15px;
-  padding-left: 15px; }
+  padding-left: 15px;
+  padding-top: 15px; } /*esta linea es nueva */
 
 .col {
   -ms-flex-preferred-size: 0;
@@ -9113,9 +9114,12 @@ textarea.form-control {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
 
+
+  /* El testimonio es nuevo */
+  
 .testimonial-section{
   float: left;
-  width:100%;
+  width: 100%;
   position: relative;
   z-index: 1;
   background-color: white;
