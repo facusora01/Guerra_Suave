@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect, url_for
 import os
 import requests
 
@@ -45,6 +45,7 @@ def contact():
             comentario = request.form.get("reseña")
             data = {'email': email, 'cabaña': cabaña, 'puntuacion': puntuacion, 'comentario': comentario}
             response = requests.post('http://127.0.0.1:5050/resenias', json=data)
+            return redirect(url_for('contact'))
     except requests.exceptions.RequestException as error:
         print("=====================================")
         print(f"Error en la solicitud: {error}")
