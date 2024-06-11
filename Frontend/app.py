@@ -64,7 +64,7 @@ def contact():
         reseñas = {'reseñas': []}
     return render_template('contact.html', Reseñas=reseñas)
 
-@app.route('/Amapola', methods=['GET'])
+@app.route('/Nuestra_Cabana', methods=['GET'])
 def Amapola():
     try:
         response = requests.get('http://127.0.0.1:5050/posadas')
@@ -79,10 +79,17 @@ def Amapola():
         print(f"Error al decodificar JSON: {error}")
         print("=====================================")
         Lista_Cabanas = {'posadas': []}  # Inicializar con una lista vacía en caso de error
-
+    
+    print("=====================================")
+    #print(id)
+    print("=====================================")
+    
+    
     posada = None
+    id = 601  # ID DE LA CABAÑA QUE SE DESEE RENDERIZAR
+
     for cabana in Lista_Cabanas['posadas']:
-        if cabana['identificador'] == 201:  # Cambia el identificador por el que necesites
+        if cabana['identificador'] == id:
             posada = cabana
             break
     
