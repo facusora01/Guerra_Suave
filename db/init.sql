@@ -190,4 +190,4 @@ INSERT INTO posadas VALUES (
 
 INSERT INTO reservas (identificadorPosada, personaUUID, fechaIngreso, fechaEgreso, nombrePosada, imagen) VALUES (101, "69d07c33-1eec-11ef-bc3d-0242ac120002", "2024-6-10", "2024-6-21", "Amapola", "static/images/Amapola/amapola_Living.jpg");
 INSERT INTO reservas (identificadorPosada, personaUUID, fechaIngreso, fechaEgreso, nombrePosada, imagen) VALUES (501, "c3b1f29f-4567-89ab-cdef-0123456789ab", "2024-5-10", "2024-6-10", "Bosque Alto", "static/images/BosqueAlto/bosqueAlto_Living.jpg");
-INSERT INTO reservas (identificadorPosada, personaUUID, fechaIngreso, fechaEgreso, nombrePosada, imagen) VALUES (301, "69d07c33-1eec-11ef-bc3d-0242ac120002", "2024-5-22", "2024-6-30", "Trucha Dorada", "static/images/CiervoBlanco/ciervoBlanco_Living.jpg");
+INSERT INTO reservas (identificadorPosada, personaUUID, fechaIngreso, fechaEgreso, nombrePosada, imagen) VALUES (301, "69d07c33-1eec-11ef-bc3d-0242ac120002", "2024-5-22", "2024-6-29", "Trucha Dorada", "static/images/CiervoBlanco/ciervoBlanco_Living.jpg");
