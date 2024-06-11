@@ -86,7 +86,7 @@ def Amapola():
     
     
     posada = None
-    id = 601  # ID DE LA CABAÑA QUE SE DESEE RENDERIZAR
+    id = 101  # ID DE LA CABAÑA QUE SE DESEE RENDERIZAR
 
     for cabana in Lista_Cabanas['posadas']:
         if cabana['identificador'] == id:
