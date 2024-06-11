@@ -59,7 +59,6 @@ def contact():
     try:
         result = response.json()
         reseñas = result['resenias']
-        print(reseñas)
     except:
         reseñas = {'reseñas': []}
     return render_template('contact.html', Reseñas=reseñas)
