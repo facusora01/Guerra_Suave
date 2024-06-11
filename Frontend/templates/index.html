@@ -41,30 +41,36 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<form action="/buscar" class="booking-form" method="post">
-				<div class="row justify-content-center">
-					<div class="col-md-3 d-flex">
-						<div class="form-group p-4 align-self-stretch d-flex align-items-end">
-							<div class="wrap">
-								<label for="#">Ingreso</label>
-								<input type="date" class="form-control " placeholder="Check-in date" name="fechaIngreso" required>
+					<div class="row justify-content-center">
+						<div class="col-md-3 d-flex">
+							<div class="form-group p-3 align-self-stretch d-flex align-items-end">
+								<div class="wrap">
+									<label for="#">Ingreso</label>
+									<input type="date" class="form-control" placeholder="Check-in date" name="fechaIngreso" required>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="col-md-3 d-flex">
-					<div class="form-group p-4 align-self-stretch d-flex align-items-end">
-							<div class="wrap">
-								<label for="#">Egreso</label>
-								<input type="date" class="form-control " placeholder="Check-out date" name="fechaEgreso" required>
+						<div class="col-md-3 d-flex">
+							<div class="form-group p-3 align-self-stretch d-flex align-items-end">
+								<div class="wrap w-100">
+									<label for="#">Egreso</label>
+									<input type="date" class="form-control" placeholder="Check-out date" name="fechaEgreso" required>
+								</div>
 							</div>
 						</div>
+						<div class="col-md-3 d-flex">
+							<div class="form-group d-flex align-self-stretch">
+								<input type="submit" value="Chequear Disponibilidad" class="btn btn-primary py-3 px-4 align-self-stretch">
+							</div>
+						</div>
+						{% if error %}
+							<div class="px-2 col-md-9">
+								<div class="p-2 mt-4 bg-danger text-white text-center">{{error}}</div>
+							</div>
+						{% endif %}
 					</div>
-					<div class="col-md-3 d-flex">
-						<div class="form-group d-flex align-self-stretch">
-						<input type="submit" value="Chequear Disponibilidad" class="btn btn-primary py-3 px-4 align-self-stretch">
-					</div>
-					</div>
-				</div>
-			</form>
+				</form>
+				
 			</div>
 		</div>
 	</div>

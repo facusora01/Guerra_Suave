@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block head %}
+  <title>Mis Reservas</title>
+{% endblock %}
+
 {% block body %}
 
     <div class="hero-wrap" style="background-image: url('../static/images/image_7.jpg');">
@@ -21,7 +25,8 @@
         {% if reservas|length > 1 %}
           <div class="row d-flex mb-1 contact-info">
             <div class="col-md-12 mb-4">
-              <h2 class="h3">Tus reservas</h2>
+              <h2 class="h3">Reservas creadas</h2>
+              <p>Aqui puedes ver y administrar tus reservas.</p>
             </div> 
           </div>
         {% endif %}

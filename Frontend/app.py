@@ -19,7 +19,7 @@ os.environ['FLASK_DEBUG'] = '1'
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', error=request.args.get('error'))
 
 @app.route('/restaurant')
 def restaurant():
@@ -96,7 +96,11 @@ def obtenerPosada(id):
 @app.route('/buscar', methods=["POST"])
 def buscarPosadas():
     response = requests.get('http://127.0.0.1:5050/posadas', params=request.form)
+    
     data = response.json()
+    if response.status_code != 200:
+        return redirect(url_for("index", error=data['message']))
+
     return render_template('Cabanas.html', cabanas=data['posadas'], cantidad=data['cantidad'], filtros=data['filtros'])
 
 
