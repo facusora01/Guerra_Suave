@@ -44,7 +44,6 @@ def contact():
             puntuacion = request.form.get("puntuacion")
             comentario = request.form.get("reseña")
             data = {'email': email, 'cabaña': cabaña, 'puntuacion': puntuacion, 'comentario': comentario}
-            print (data)
             response = requests.post('http://127.0.0.1:5050/resenias', json=data)
     except requests.exceptions.RequestException as error:
         print("=====================================")
@@ -60,6 +59,7 @@ def contact():
     try:
         result = response.json()
         reseñas = result['resenias']
+        print(reseñas)
     except:
         reseñas = {'reseñas': []}
     return render_template('contact.html', Reseñas=reseñas)
