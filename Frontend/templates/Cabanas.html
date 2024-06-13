@@ -67,7 +67,7 @@
 		    	<div class="col-lg-3 sidebar">
 	      		<div class="sidebar-wrap bg-light ftco-animate">
 	      			<h3 class="heading mb-4">Filtros</h3>
-	      			<form action="/buscar" method="post">
+	      			<form action="{{ url_for('buscarPosadas') }}" method="post">
 	      				<div class="fields">
 		              <div class="form-group">
 		                <input type="date" class="form-control" placeholder="Fecha Ingreso" name="fechaIngreso"  value="{{filtros['fechaIngreso']}}">
