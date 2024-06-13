@@ -40,6 +40,22 @@ class TestApisUnicas(unittest.TestCase):
         response = requests.get('http://127.0.0.1:5050/posadas?camasMatrimoniales=3').json()
         self.assertEqual(response['cantidad'], 0)
 
+    def testObtenerPosadasFiltroFechas(self):
+        data = {
+            "fechaIngreso": (datetime.date.today() + datetime.timedelta(days=2)).strftime('%Y-%m-%d'),
+            "fechaEgreso": (datetime.date.today() + datetime.timedelta(days=5)).strftime('%Y-%m-%d')
+        }
+        reservaResponse = requests.get('http://127.0.0.1:5050/posadas', data)    
+        self.assertEqual(reservaResponse.json()['cantidad'], 4)
+
+    def testObtenerPosadasFiltroFechasErroneas(self):
+        data = {
+            "fechaIngreso": (datetime.date.today() + datetime.timedelta(days=20)).strftime('%Y-%m-%d'),
+            "fechaEgreso": (datetime.date.today() + datetime.timedelta(days=5)).strftime('%Y-%m-%d')
+        }
+        reservaResponse = requests.get('http://127.0.0.1:5050/posadas', data)    
+        self.assertEqual(reservaResponse.json()['message'], 'La fecha debe ser en el futuro y en el orden correcto.')
+
     def testObtenerReservas(self):
         response = requests.get('http://127.0.0.1:5050/reservas').json()
         self.assertGreaterEqual(response['cantidad'], 2)
