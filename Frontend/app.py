@@ -129,16 +129,16 @@ def buscarPosadas():
     if response.status_code != 200:
         return redirect(url_for("index", error=data['message']))
 
-    return render_template('Cabanas.html', cabanas=data['posadas'], cantidad=data['cantidad'], filtros=data['filtros'])
+    return render_template('cabanas.html', cabanas=data['posadas'], cantidad=data['cantidad'], filtros=data['filtros'])
 
 
-@app.route('/Cabanas', methods=["GET"])
-def Cabanas():
+@app.route('/cabanas', methods=["GET"])
+def cabanas():
     response = requests.get('http://127.0.0.1:5050/posadas')
     data = response.json()
     posadas = data['posadas']
     cantidad = data['cantidad']
-    return render_template('Cabanas.html', cabanas=posadas, cantidad=cantidad, filtros={})
+    return render_template('cabanas.html', cabanas=posadas, cantidad=cantidad, filtros={})
 
 
 @app.errorhandler(404)
