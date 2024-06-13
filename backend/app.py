@@ -81,11 +81,12 @@ def filtrosPosadas(args):
     
 def estaDisponible(args, posadas):
  
-    posadasValidas = posadas
+    posadasValidas = list(posadas)
 
     if args.get('fechaIngreso') and args.get('fechaEgreso'):
 
         for posada in posadas:
+            print(posada['identificador'])
             reservas = search_query(f"""SELECT * FROM reservas WHERE identificadorPosada={posada['identificador']} """)
             if not superposicionReservas(reservas, args['fechaIngreso'], args['fechaEgreso']):
                 posadasValidas.remove(posada)
