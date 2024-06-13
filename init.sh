@@ -5,3 +5,4 @@ pip install requests # para hacer requests a la API
 pip install pymysql # para la base de datos
 pip install cryptography # para encriptar la contraseña
 pip install python-dotenv # para el .flaskenv, hace correr el backend en el puerto 5050 directamente
+pip install unittest

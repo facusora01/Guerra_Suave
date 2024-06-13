@@ -35,3 +35,15 @@ flask run
 
 ### Testeo de APIs
 https://www.postman.com/julengaumard/workspace/guerra-suave-tp/overview
+
+### Testing
+1. Ejecutar backend (Con testing DB)
+```sh
+cd backend
+python3 app.py testing
+```
+
+2. Ejecutar tests
+```sh
+python3 test.py
+```

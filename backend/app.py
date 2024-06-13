@@ -2,11 +2,17 @@ from flask import Flask, jsonify, request
 from sqlalchemy import create_engine, text
 from sqlalchemy.exc import SQLAlchemyError
 from reservas import superposicionReservas, removerUUID, fechaValida
+import sys
 
-def create_connection():
+def create_connection(testing = False):
     password = "securepass"
     dbname = "posadasdb"
     port = 3306
+
+    if len(sys.argv) > 1 or testing: 
+        print("USING TESTING DB")
+        port = 3309
+        
     engine = create_engine(f"""mysql+pymysql://root:{password}@localhost:{port}/{dbname}""")
 
     try:
