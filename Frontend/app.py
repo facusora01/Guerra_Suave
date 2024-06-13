@@ -59,7 +59,7 @@ def Amapola():
         if cabana['identificador'] == 201:  # Cambia el identificador por el que necesites
             posada = cabana
             break
-    
+
     return render_template('Cabana_Amapola.html', posada=posada)
 
 @app.route('/Carpincho')

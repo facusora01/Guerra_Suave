@@ -28,9 +28,9 @@
 		    		<div class="row">
 
 
-						
+
 						{% for posada in cabanas %}
-			
+
 		    				<div class="col-sm col-md-6 col-lg-4 ftco-animate">
 		    					<div class="room">
 									<a href="{{ url_for('Cabana_especifica', cabana_id=posada['identificador']) }}" class="img d-flex justify-content-center align-items-center" style="background-image: url({{ posada['foto1'] }});">
