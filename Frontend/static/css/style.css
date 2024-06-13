@@ -507,7 +507,8 @@ pre {
   width: 100%;
   min-height: 1px;
   padding-right: 15px;
-  padding-left: 15px; }
+  padding-left: 15px;
+  padding-top: 15px; } /*esta linea es nueva */
 
 .col {
   -ms-flex-preferred-size: 0;
@@ -9112,3 +9113,50 @@ textarea.form-control {
   100% {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
+
+
+  /* El testimonio es nuevo */
+  
+.testimonial-section{
+  float: left;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  background-color: white;
+}
+.testimonial-section h2{
+  font-size: 3rem;
+}
+.testimonial-section .single-testimonial .carousel-item {
+    margin: 0 15%;
+    width: 70%;
+}
+.testimonial-section .single-testimonial .carousel-item-next, .testimonial-section .single-testimonial .carousel-item-prev{
+  top:3rem;
+}
+.testimonial-section .single-testimonial .carousel{
+  text-align: center;
+}
+.testimonial-section .single-testimonial .navigator-box{
+  display: inline-block;
+  position: relative;
+  top: 0px;
+}
+.testimonial-section .single-testimonial .carousel-control-next, .testimonial-section .single-testimonial .carousel-control-prev{
+  border: 1px solid #b47f41;
+  border-radius: 50%;
+  color: wheat;
+  display: block;
+  float: left;
+  font-size: 37px;
+  margin: 0 4px;
+  opacity: 1;
+  padding: 0 23px;
+  position: relative;
+  height: 70px;
+  width: 70px;
+}
+.testimonial-section .single-testimonial .carousel-control-next:hover, .testimonial-section .single-testimonial .carousel-control-prev:hover{
+  background-color: #b47f41;
+  color: #fff;
+}
