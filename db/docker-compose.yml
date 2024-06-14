@@ -1,16 +1,26 @@
+# Este archivo es el encargado de levantar los contenedores de la base de datos
 services:
   db:
+    # Nombre del contenedor
     container_name: posadasdb
+    # Imagen de la base de datos
     image: mysql
+    # Reiniciar el contenedor siempre
     restart: always
+    # Mapear el puerto 3306 del contenedor al puerto 3306 del host
     ports:
       - '3306:3306'
+    # Variables de entorno
     environment:
       MYSQL_DATABASE: posadasdb
       MYSQL_ROOT_PASSWORD: securepass
+    # Volumen para inicializar la base de datos
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
+
+      
+  # Contenedor de la base de datos para pruebas
   testingdb:
     container_name: testingdb
     image: mysql

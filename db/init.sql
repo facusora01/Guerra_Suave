@@ -1,53 +1,57 @@
+-- TABLA DE POSADAS
 CREATE TABLE IF NOT EXISTS posadas (
-    identificador SMALLINT UNIQUE,
-	nombre VARCHAR(100),
-    precioNoche DECIMAL(10,2),
-    metrosCuadrados SMALLINT,
-    ambientes TINYINT,
-    camasIndividuales TINYINT,
-    camasMatrimoniales TINYINT,
-    calefaccion BOOLEAN,
-    desayuno BOOLEAN,
-    accesoDiscapacitados BOOLEAN,
-    vistaHacia VARCHAR(100),
-    descripcion VARCHAR(500),
+    identificador SMALLINT UNIQUE, -- Identificador de la posada
+	nombre VARCHAR(100), -- Nombre de la posada
+    precioNoche DECIMAL(10,2), -- Precio por noche
+    metrosCuadrados SMALLINT, -- Metros cuadrados
+    ambientes TINYINT, -- Cantidad de ambientes
+    camasIndividuales TINYINT, -- Cantidad de camas individuales
+    camasMatrimoniales TINYINT, -- Cantidad de camas matrimoniales
+    calefaccion BOOLEAN, -- Si tiene callefaccion o no
+    desayuno BOOLEAN, -- Si incluye desayuno o no
+    accesoDiscapacitados BOOLEAN, -- Si tiene acceso para discapacitados o no
+    vistaHacia VARCHAR(100), -- Vista
+    descripcion VARCHAR(500), -- Descripcion
     foto1 VARCHAR(200),
     foto2 VARCHAR(200),
     foto3 VARCHAR(200),
     foto4 VARCHAR(200),
     foto5 VARCHAR(200),
-    PRIMARY KEY (identificador)
+    PRIMARY KEY (identificador) -- Clave primaria
 );
 
+-- TABLA DE RESERVAS
 CREATE TABLE IF NOT EXISTS reservas (
-	id MEDIUMINT NOT NULL AUTO_INCREMENT,
-    identificadorPosada SMALLINT,
-    personaUUID CHAR(36),
-    fechaIngreso DATETIME,
-    fechaEgreso DATETIME,
-	nombrePosada VARCHAR(100),
-	imagen VARCHAR(200),
-	PRIMARY KEY (id)
+	id MEDIUMINT NOT NULL AUTO_INCREMENT, -- Identificador de la reserva
+    identificadorPosada SMALLINT, -- Identificador de la posada
+    personaUUID CHAR(36), -- UUID de la persona que reserva (El UUID es el identificador de la persona en la tabla de usuarios)
+    fechaIngreso DATETIME, -- Fecha de ingreso
+    fechaEgreso DATETIME, -- Fecha de egreso
+	nombrePosada VARCHAR(100), -- Nombre de la posada
+	imagen VARCHAR(200), -- Imagen de la posada
+	PRIMARY KEY (id) -- Clave primaria
 );
 
+-- TABLA DE USUARIOS
 CREATE TABLE IF NOT EXISTS usuarios (
-    UUID CHAR(36) UNIQUE NOT NULL,
-    nombre VARCHAR(30),
-    apellido VARCHAR(50),
-    email VARCHAR(100) UNIQUE,
-    pass VARCHAR(60),
-    PRIMARY KEY (UUID)
+    UUID CHAR(36) UNIQUE NOT NULL, -- Identificador de la persona
+    nombre VARCHAR(30), -- Nombre
+    apellido VARCHAR(50), -- Apellido
+    email VARCHAR(100) UNIQUE, -- Email
+    pass VARCHAR(60), -- Password
+    PRIMARY KEY (UUID) -- Clave primaria
 );
 
+-- TABLA DE RESEÑAS
 CREATE TABLE IF NOT EXISTS resenias (
-    idResena INT PRIMARY KEY AUTO_INCREMENT,
-    identificadorPosada SMALLINT NOT NULL,
-    personaUUID CHAR(36) NOT NULL,
-    fechaResena DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    puntuacion TINYINT NOT NULL CHECK (puntuacion BETWEEN 1 AND 5),
-    comentario VARCHAR(200),
-    FOREIGN KEY (identificadorPosada) REFERENCES posadas(identificador),
-    FOREIGN KEY (personaUUID) REFERENCES usuarios(UUID)
+    idResena INT PRIMARY KEY AUTO_INCREMENT, -- Identificador de la reseña
+    identificadorPosada SMALLINT NOT NULL, -- Identificador de la posada
+    personaUUID CHAR(36) NOT NULL, -- UUID de la persona que realiza la reseña
+    fechaResena DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, -- Fecha de la reseña
+    puntuacion TINYINT NOT NULL CHECK (puntuacion BETWEEN 1 AND 5), -- Puntuación de la reseña
+    comentario VARCHAR(200), -- Comentario de la reseña
+    FOREIGN KEY (identificadorPosada) REFERENCES posadas(identificador), -- Clave foránea de la posada
+    FOREIGN KEY (personaUUID) REFERENCES usuarios(UUID) -- Clave foránea de la persona
 );
 
 -- Usuarios precargados
@@ -65,17 +69,17 @@ INSERT INTO usuarios VALUES ("f4e23110-1234-5678-9abc-def012345678", "Ana", "Ló
 -- Posadas precargadas
 
 INSERT INTO posadas VALUES (
-	101,
-	"Amapola",
-	60000.00,
-	70,
-	3,
-	2,
-	1,
-	1,
-	1,
-	0,
-	"complejo",
+	101, -- identificador
+	"Amapola", -- nombre
+	60000.00, -- precioNoche
+	70, -- metrosCuadrados
+	3, -- ambientes
+	2, -- camasIndividuales
+	1, -- camasMatrimoniales
+	1, -- Booleano calefaccion
+	1, -- Booleano desayuno
+	0, -- Booleano accesoDiscapacitados
+	"complejo", -- vistaHacia
 	"-Heladera -Microondas -Termotanque -Cocina a gas -Cafetera -Calefactor -Aire acondicionado frio-calor - Secador de pelo - Smart TV",
 	"static/images/Amapola/amapola_Living.jpg",
 	"static/images/Amapola/amapola_Camas.jpg",
@@ -85,37 +89,37 @@ INSERT INTO posadas VALUES (
 );
 
 INSERT INTO posadas VALUES (
-	201,
-	"Trucha Dorada",
-	80000.00,
-	100,
-	3,
-	3,
-	1,
-	1,
-	1,
-	1,
-	"complejo",
+	201, -- identificador
+	"Trucha Dorada", -- nombre
+	80000.00, -- precioNoche
+	100, -- metrosCuadrados
+	3, -- ambientes
+	3, -- camasIndividuales
+	1, -- camasMatrimoniales
+	1, -- Booleano calefaccion
+	1, -- Booleano desayuno
+	1, -- Booleano accesoDiscapacitados
+	"complejo", -- vistaHacia
 	"-Hogar a lenia -Aire acondicionado -Baniera de hidromasaje -TV -Cafetera -Heladera  -Cafetera -Microondas -Secador de pelo -Horno - Tostadora",
 	"static/images/TruchaDorada/truchaDorada_Living.jpg",
 	"static/images/TruchaDorada/truchaDorada_Camas.jpg",
 	"static/images/TruchaDorada/truchaDorada_Matrimonial.jpg",
 	"static/images/TruchaDorada/truchaDorada_Cocina.jpg",
-	"static/images/TruchaDorada/truchaDorada_Bano.jpg"
+	"static/images/TruchaDorada/truchaDorada_Bano.jpg" 
 );
 
 INSERT INTO posadas VALUES (
-	301,
-	"Ciervo Blanco",
-	200000.00,
-	120,
-	5,
-	5,
-	1,
-	1,
-	1,
-	0,
-	"lago",
+	301, -- identificador
+	"Ciervo Blanco", -- nombre
+	200000.00, -- precioNoche
+	120, -- metrosCuadrados
+	5, -- ambientes
+	5, -- camasIndividuales
+	1, -- camasMatrimoniales
+	1, -- Booleano calefaccion
+	1, -- Booleano desayuno
+	0, -- Booleano accesoDiscapacitados
+	"lago", -- vistaHacia
 	"-Banio en suite -Cocina completa -Smart TV -Hogar a lenia -Banios completos",
 	"static/images/CiervoBlanco/ciervoBlanco_Living.jpg",
 	"static/images/CiervoBlanco/ciervoBlanco_Camas.jpg",
@@ -125,17 +129,17 @@ INSERT INTO posadas VALUES (
 );
 
 INSERT INTO posadas VALUES (
-	401,
-	"Hierba Alta",
-	40000.00,
-	40,
-	2,
-	0,
-	1,
-	1,
-	1,
-	1,
-	"bosque",
+	401, -- identificador
+	"Hierba Alta", -- nombre
+	40000.00, -- precioNoche
+	40, -- metrosCuadrados
+	2, -- ambientes
+	0, -- camasIndividuales
+	1, -- camasMatrimoniales
+	1, -- Booleano calefaccion
+	1, -- Booleano desayuno
+	1, -- Booleano accesoDiscapacitados
+	"bosque", -- vistaHacia
 	"- Cocina completa - Lavadora -Banio completo -Smart TV  -Secador de pelo -Secadora de ropa ",
 	"static/images/HierbaAlta/hierbaAlta_Cocina.jpg",
 	"static/images/HierbaAlta/hierbaAlta_Cocina_2.jpg",
@@ -145,17 +149,17 @@ INSERT INTO posadas VALUES (
 );
 
 INSERT INTO posadas VALUES (
-	501,
-	"Bosque Alto",
-	250000.00,
-	150,
-	5,
-	6,
-	2,
-	1,
-	1,
-	0,
-	"bosque",
+	501, -- identificador
+	"Bosque Alto", -- nombre
+	250000.00, -- precioNoche
+	150, -- metrosCuadrados
+	5, -- ambientes
+	6, -- camasIndividuales
+	2, -- camasMatrimoniales
+	1, -- Booleano calefaccion
+	1, -- Booleano desayuno
+	0, -- Booleano accesoDiscapacitados
+	"bosque", -- vistaHacia
 	"-Heladera -Microondas -Termotanque -Cocina a gas -Cafetera -Calefactor - Aire acondicionado frio/calor -Secador de pelo -Smart TV",	
 	"static/images/BosqueAlto/bosqueAlto_Living.jpg",
 	"static/images/BosqueAlto/bosqueAlto_Camas.jpg",
@@ -165,17 +169,17 @@ INSERT INTO posadas VALUES (
 );
 
 INSERT INTO posadas VALUES (
-	601,
-	"Carpincho",
-	1250000.00,
-	200,
-	2,
-	0,
-	1,
-	1,
-	1,
-	1,
-	"bosque",
+	601, -- identificador
+	"Carpincho", -- nombre
+	1250000.00, -- precioNoche
+	200, -- metrosCuadrados,
+	2, -- ambientes,
+	0, -- camasIndividuales,
+	1, -- camasMatrimoniales,
+	1, -- Booleano calefaccion,
+	1, -- Booleano desayuno,
+	1, -- Booleano accesoDiscapacitados,
+	"bosque", -- vistaHacia
 	"-Hogar a lenia -Aire acondicionado - Baniera de hidromasaje -Smart TV -Cafetera -Heladera -Cafetera -Microondas -Secador de pelo - Horno -Tostadora",
 	"static/images/Carpincho/carpincho_Living.jpg",
 	"static/images/Carpincho/carpincho_Matrimonial.jpg",

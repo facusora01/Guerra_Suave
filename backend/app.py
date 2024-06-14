@@ -4,6 +4,8 @@ from sqlalchemy.exc import SQLAlchemyError
 from reservas import superposicionReservas, removerUUID, fechaValida
 import sys
 
+#PRE: Recibe una variable booleana que indica si se está en modo testing.
+#POST: Crea una conexión a la base de datos. Devuelve la conexión.
 def create_connection(testing = False):
     password = "securepass"
     dbname = "posadasdb"
@@ -27,15 +29,20 @@ db_connection = create_connection()
 app = Flask(__name__)
 
 
+#PRE: Recibe una query en formato string.
+#POST: Ejecuta la query en la base de datos.
 def run_query(query):
     db_connection.execute(text(query))
     db_connection.commit() 
 
+#PRE: Recibe una query en formato string.
+#POST: Devuelve el resultado de la query, si es que se pudo realizar.
 def search_query(query):
     result = db_connection.execute(text(query))
     return result.mappings().all()
 
-
+#PRE: Recibe una lista de reservas.
+#POST: Devuelve una lista de reservas sin el UUID de la persona.
 def filtrosPosadas(args):
     filters = []
 
@@ -78,7 +85,9 @@ def filtrosPosadas(args):
         return "WHERE " + " AND ".join(filters)
     else:
         return ""
-    
+
+#PRE: Recibe una diccionario con las fechas de ingreso y egreso, y un diccionario con las posada.
+#POST: Devuelve un booleano que indica si la posada está disponible en las fechas dadas.
 def estaDisponible(args, posadas):
  
     posadasValidas = posadas
@@ -93,6 +102,9 @@ def estaDisponible(args, posadas):
     return posadasValidas
 
 @app.route("/posadas")
+
+#PRE: Ninguna.
+#POST: Devuelve un JSON con las posadas disponibles y la cantidad de posadas. Si hay un error, devuelve un JSON con un mensaje de error.
 def posadas():
 
     try:
@@ -110,6 +122,8 @@ def posadas():
         return jsonify({'message': "Error en la solicitud"}), 400
     
 
+#PRE: Ninguna.
+#POST: Devuelve un JSON con las reservas y la cantidad de reservas. Si hay un error, devuelve un JSON con un mensaje de error.
 def obtenerReservas():   
     try:
         filters = ""
@@ -133,6 +147,8 @@ def obtenerReservas():
         return jsonify({'message': "Error en la solicitud"}), 400
 
 
+#PRE: Ninguna.
+#POST: Devuelve un JSON con un mensaje que indica si la reserva fue borrada correctamente o no.
 def borrarReserva():
     try:
         content = request.json
@@ -153,6 +169,8 @@ def borrarReserva():
         return jsonify({'message': 'No se pudo borrar la reserva'}), 500
 
 
+#PRE: Ninguna.
+#POST: Devuelve un JSON con un mensaje de que indica si la reserva fue exitosa o no.
 def crearReserva():
     try:
         content = request.json
@@ -182,6 +200,8 @@ def crearReserva():
         return jsonify({'message': 'Error en la solicitud.'}), 400
 
 
+#PRE: Puede recibir un método GET, POST o DELETE.
+#POST: Si el método es GET, devuelve las reservas. Si el método es POST, crea una reserva. Si el método es DELETE, borra una reserva.
 @app.route("/reservas", methods=["GET", "POST", "DELETE"])
 def reservas():
     if request.method == "GET":
@@ -191,6 +211,8 @@ def reservas():
     elif request.method == "DELETE":
         return borrarReserva()
 
+#PRE: Ninguna.
+#POST: Devuelve un JSON con las reseñas y la cantidad de reseñas. Si hay un error, devuelve un JSON con un mensaje de error.
 def obtenerResenias():
     try:
         result = search_query("""SELECT * FROM resenias""")
@@ -201,6 +223,8 @@ def obtenerResenias():
         print(err)
         return jsonify({'message': "Error en la solicitud"}), 400
 
+#PRE: Ninguna.
+#POST: Devuelve un JSON con un mensaje que indica si la reseña fue publicada correctamente o no.
 def publicarResenias():
     try:
         content = request.json
@@ -232,13 +256,17 @@ def publicarResenias():
     except: 
         return jsonify({'message': 'Error en la solicitud.'}), 400
 
+#PRE: Puede recibir un método GET o POST.
+#POST: Si el método es GET, devuelve las reseñas. Si el método es POST, crea una reseña.
 @app.route("/resenias", methods=["GET", "POST"])
 def listarResenias():
     if request.method == "GET":
         return obtenerResenias()
     if request.method == "POST":
         return publicarResenias()
-    
+
+#PRE: Error handler.
+#POST: Devuelve un JSON con un mensaje de error.   
 @app.errorhandler(404)
 def error(e):
     return jsonify({'message': 'No encontrado'}), 404

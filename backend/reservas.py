@@ -1,5 +1,7 @@
 from datetime import datetime
 
+# PRE: Recibe una lista de reservas, una fecha de ingreso y una fecha de egreso.
+# POST: Devuelve True si no hay superposición de reservas, False en caso contrario.
 def superposicionReservas(reservas, fechaI, fechaE):
 
     listaReservas = [dict(row) for row in reservas]
@@ -24,7 +26,8 @@ def superposicionReservas(reservas, fechaI, fechaE):
 
     return disponible
 
-
+# PRE: Recibe una fecha de ingreso y una fecha de egreso.
+# POST: Devuelve True si la fecha de egreso es mayor a la fecha de ingreso y si la fecha de ingreso es mayor a la fecha actual, False en caso contrario.
 def fechaValida(fechaI, fechaE):
 
     fechaValida = True
@@ -42,6 +45,8 @@ def fechaValida(fechaI, fechaE):
     
     return fechaValida
 
+# PRE: Recibe una lista de reservas.
+# POST: Devuelve una lista de reservas sin el UUID de la persona.
 def removerUUID(data):
     listaDatos = []
     for row in data:
