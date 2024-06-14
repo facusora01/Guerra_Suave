@@ -1,15 +1,15 @@
 CREATE TABLE IF NOT EXISTS posadas (
     identificador SMALLINT UNIQUE,
 	nombre VARCHAR(100),
-    precioNoche DECIMAL(10,2),
-    metrosCuadrados SMALLINT,
+    precio_noche DECIMAL(10,2),
+    metros_cuadrados SMALLINT,
     ambientes TINYINT,
-    camasIndividuales TINYINT,
-    camasMatrimoniales TINYINT,
+    camas_individuales TINYINT,
+    camas_matrimoniales TINYINT,
     calefaccion BOOLEAN,
     desayuno BOOLEAN,
-    accesoDiscapacitados BOOLEAN,
-    vistaHacia VARCHAR(100),
+    acceso_discapacitados BOOLEAN,
+    vista_hacia VARCHAR(100),
     descripcion VARCHAR(500),
     foto1 VARCHAR(200),
     foto2 VARCHAR(200),
@@ -21,11 +21,11 @@ CREATE TABLE IF NOT EXISTS posadas (
 
 CREATE TABLE IF NOT EXISTS reservas (
 	id MEDIUMINT NOT NULL AUTO_INCREMENT,
-    identificadorPosada SMALLINT,
-    personaUUID CHAR(36),
-    fechaIngreso DATETIME,
-    fechaEgreso DATETIME,
-	nombrePosada VARCHAR(100),
+    identificador_posada SMALLINT,
+    persona_UUID CHAR(36),
+    fecha_ingreso DATETIME,
+    fecha_egreso DATETIME,
+	nombre_posada VARCHAR(100),
 	imagen VARCHAR(200),
 	PRIMARY KEY (id)
 );
@@ -41,13 +41,13 @@ CREATE TABLE IF NOT EXISTS usuarios (
 
 CREATE TABLE IF NOT EXISTS resenias (
     idResena INT PRIMARY KEY AUTO_INCREMENT,
-    identificadorPosada SMALLINT NOT NULL,
-    personaUUID CHAR(36) NOT NULL,
-    fechaResena DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    identificador_posada SMALLINT NOT NULL,
+    persona_UUID CHAR(36) NOT NULL,
+    fecha_resena DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     puntuacion TINYINT NOT NULL CHECK (puntuacion BETWEEN 1 AND 5),
     comentario VARCHAR(200),
-    FOREIGN KEY (identificadorPosada) REFERENCES posadas(identificador),
-    FOREIGN KEY (personaUUID) REFERENCES usuarios(UUID)
+    FOREIGN KEY (identificador_posada) REFERENCES posadas(identificador),
+    FOREIGN KEY (persona_UUID) REFERENCES usuarios(UUID)
 );
 
 -- Usuarios precargados
@@ -186,12 +186,12 @@ INSERT INTO posadas VALUES (
 
 -- Reservas
 
-INSERT INTO reservas (identificadorPosada, personaUUID, fechaIngreso, fechaEgreso, nombrePosada, imagen) VALUES (101, "69d07c33-1eec-11ef-bc3d-0242ac120002", "2024-6-10", "2024-6-21", "Amapola", "static/images/Amapola/amapola_Living.jpg");
-INSERT INTO reservas (identificadorPosada, personaUUID, fechaIngreso, fechaEgreso, nombrePosada, imagen) VALUES (501, "c3b1f29f-4567-89ab-cdef-0123456789ab", "2024-5-10", "2024-6-10", "Bosque Alto", "static/images/BosqueAlto/bosqueAlto_Living.jpg");
-INSERT INTO reservas (identificadorPosada, personaUUID, fechaIngreso, fechaEgreso, nombrePosada, imagen) VALUES (301, "69d07c33-1eec-11ef-bc3d-0242ac120002", "2024-5-22", "2024-6-29", "Trucha Dorada", "static/images/CiervoBlanco/ciervoBlanco_Living.jpg");
+INSERT INTO reservas (identificador_posada, persona_UUID, fecha_ingreso, fecha_egreso, nombre_posada, imagen) VALUES (101, "69d07c33-1eec-11ef-bc3d-0242ac120002", "2024-6-10", "2024-6-21", "Amapola", "static/images/Amapola/amapola_Living.jpg");
+INSERT INTO reservas (identificador_posada, persona_UUID, fecha_ingreso, fecha_egreso, nombre_posada, imagen) VALUES (501, "c3b1f29f-4567-89ab-cdef-0123456789ab", "2024-5-10", "2024-6-10", "Bosque Alto", "static/images/BosqueAlto/bosqueAlto_Living.jpg");
+INSERT INTO reservas (identificador_posada, persona_UUID, fecha_ingreso, fecha_egreso, nombre_posada, imagen) VALUES (301, "69d07c33-1eec-11ef-bc3d-0242ac120002", "2024-5-22", "2024-6-29", "Trucha Dorada", "static/images/CiervoBlanco/ciervoBlanco_Living.jpg");
 
 --Resenias
 
-INSERT INTO resenias (identificadorPosada, personaUUID, puntuacion, comentario) VALUES (101, '123e4567-e89b-12d3-a456-426655440001', 3, 'Hermoso complejo. Un lugar unico para disfrutar las vacaciones en familia');
-INSERT INTO resenias (identificadorPosada, personaUUID, puntuacion, comentario) VALUES (301, 'c3b1f29f-4567-89ab-cdef-0123456789ab', 5, 'Las vistas son realmente increibles. Super recomendable Posadas del Lago');
-INSERT INTO resenias (identificadorPosada, personaUUID, puntuacion, comentario) VALUES (601, 'f4e23110-1234-5678-9abc-def012345678', 5, 'Disfrutamos cada momento, vistas impresionante. Nuestra estadia fue simplemente perfecta');
+INSERT INTO resenias (identificador_posada, persona_UUID, puntuacion, comentario) VALUES (101, '123e4567-e89b-12d3-a456-426655440001', 3, 'Hermoso complejo. Un lugar unico para disfrutar las vacaciones en familia');
+INSERT INTO resenias (identificador_posada, persona_UUID, puntuacion, comentario) VALUES (301, 'c3b1f29f-4567-89ab-cdef-0123456789ab', 5, 'Las vistas son realmente increibles. Super recomendable Posadas del Lago');
+INSERT INTO resenias (identificador_posada, persona_UUID, puntuacion, comentario) VALUES (601, 'f4e23110-1234-5678-9abc-def012345678', 5, 'Disfrutamos cada momento, vistas impresionante. Nuestra estadia fue simplemente perfecta');

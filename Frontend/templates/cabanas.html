@@ -31,20 +31,20 @@
 		
 						<div class="col-sm col-md-6 col-lg-4 ftco-animate">
 							<div class="room">
-								<a href="{{ url_for('obtenerPosada', id=posada['identificador'], fechaIngreso=filtros['fechaIngreso'], fechaEgreso=filtros['fechaEgreso']) }}" class="img d-flex justify-content-center align-items-center" style="background-image: url({{ posada['foto1'] }});">
+								<a href="{{ url_for('obtener_posada', id=posada['identificador'], fecha_ingreso=filtros['fecha_ingreso'], fecha_egreso=filtros['fecha_egreso']) }}" class="img d-flex justify-content-center align-items-center" style="background-image: url({{ posada['foto1'] }});">
 									<div class="icon d-flex justify-content-center align-items-center">
 										<span class="icon-search2"></span>
 									</div>
 								</a>
 								<div class="text p-3 text-center">
-									<h3 class="mb-3"><a href="{{ url_for('obtenerPosada', id=posada['identificador'], fechaIngreso=filtros['fechaIngreso'], fechaEgreso=filtros['fechaEgreso']) }}">{{ posada['nombre']}}</a></h3>
-									<p><span class="price mr-2 h4"> {{ posada['precioNoche'] }} </span> <span class="per">Por noche</span></p>
+									<h3 class="mb-3"><a href="{{ url_for('obtener_posada', id=posada['identificador'], fecha_ingreso=filtros['fecha_ingreso'], fecha_egreso=filtros['fecha_egreso']) }}">{{ posada['nombre']}}</a></h3>
+									<p><span class="price mr-2 h4"> {{ posada['precio_noche'] }} </span> <span class="per">Por noche</span></p>
 									<ul class="list">
-										<li><span>Max:</span> {{ posada['camasIndividuales'] + posada['camasMatrimoniales']}} </li>
-										<li><span>Tamaño:</span> {{ posada['metrosCuadrados'] }} </li>
-										<li><span>Vistas:</span> {{ posada['vistaHacia'] }} </li>
-										<li><span>Matrimoniales:</span> {{ posada['camasMatrimoniales'] }} </li>
-										<li><span>Individuales:</span> {{ posada['camasIndividuales'] }} </li>
+										<li><span>Max:</span> {{ posada['camas_individuales'] + posada['camas_matrimoniales']}} </li>
+										<li><span>Tamaño:</span> {{ posada['metros_cuadrados'] }} </li>
+										<li><span>Vistas:</span> {{ posada['vista_hacia'] }} </li>
+										<li><span>Matrimoniales:</span> {{ posada['camas_matrimoniales'] }} </li>
+										<li><span>Individuales:</span> {{ posada['camas_individuales'] }} </li>
 									</ul>
 								</div>
 							</div>
@@ -67,29 +67,29 @@
 		    	<div class="col-lg-3 sidebar">
 	      		<div class="sidebar-wrap bg-light ftco-animate">
 	      			<h3 class="heading mb-4">Filtros</h3>
-	      			<form action="{{ url_for('buscarPosadas') }}" method="post">
+	      			<form action="{{ url_for('buscar_posadas') }}" method="post">
 	      				<div class="fields">
 		              <div class="form-group">
-		                <input type="date" class="form-control" placeholder="Fecha Ingreso" name="fechaIngreso"  value="{{filtros['fechaIngreso']}}">
+		                <input type="date" class="form-control" placeholder="Fecha Ingreso" name="fecha_ingreso"  value="{{filtros['fecha_ingreso']}}">
 		              </div>
 		              <div class="form-group">
-		                <input type="date" class="form-control" placeholder="Fecha Egreso" name="fechaEgreso"  value="{{filtros['fechaEgreso']}}">
+		                <input type="date" class="form-control" placeholder="Fecha Egreso" name="fecha_egreso"  value="{{filtros['fecha_egreso']}}">
 		              </div>
 		               
 					  <div class="form-group">
 						<div class="d-flex justify-content-between w-100">
 							<div>Camas Matrimoniales</div>
-							<div class="font-weight-bold text-dark" id="mostrarCamasMatrimoniales">{{filtros['camasMatrimoniales']}}</div>
+							<div class="font-weight-bold text-dark" id="mostrarCamasMatrimoniales">{{filtros['camas_matrimoniales']}}</div>
 						</div>
-		                <input type="range" min="1" max="2" id="camasMatrimoniales" name="camasMatrimoniales" required value="{{filtros['camasMatrimoniales']}}">
+		                <input type="range" min="1" max="2" id="camas_matrimoniales" name="camas_matrimoniales" required value="{{filtros['camas_matrimoniales']}}">
 		              </div>
 
 					  <div class="form-group">
 						<div class="d-flex justify-content-between w-100">
 							<div>Camas Individuales</div>
-							<div class="font-weight-bold text-dark" id="mostrarCamasIndividuales">{{filtros['camasIndividuales']}}</div>
+							<div class="font-weight-bold text-dark" id="mostrarCamasIndividuales">{{filtros['camas_individuales']}}</div>
 						</div>
-		                <input type="range" min="0" max="6" id="camasIndividuales" name="camasIndividuales" required value="{{filtros['camasIndividuales']}}">
+		                <input type="range" min="0" max="6" id="camas_individuales" name="camas_individuales" required value="{{filtros['camas_individuales']}}">
 		              </div>
 		              <!-- <div class="form-group">
 		              	<div class="range-slider">
@@ -116,11 +116,11 @@
 
 	<script>
 
-		document.getElementById("camasMatrimoniales").addEventListener('input', function(){
-			document.getElementById("mostrarCamasMatrimoniales").innerHTML = document.getElementById("camasMatrimoniales").value;
+		document.getElementById("camas_matrimoniales").addEventListener('input', function(){
+			document.getElementById("mostrarCamasMatrimoniales").innerHTML = document.getElementById("camas_matrimoniales").value;
 		});
-		document.getElementById("camasIndividuales").addEventListener('input', function(){
-			document.getElementById("mostrarCamasIndividuales").innerHTML = document.getElementById("camasIndividuales").value;
+		document.getElementById("camas_individuales").addEventListener('input', function(){
+			document.getElementById("mostrarCamasIndividuales").innerHTML = document.getElementById("camas_individuales").value;
 		});
 
 	</script>

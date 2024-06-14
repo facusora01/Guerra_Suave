@@ -42,20 +42,20 @@
               <div class="shadow p-3 mb-3 w-100 border d-flex justify-content-between">
                
                 <div class="d-flex">
-                  <a class="pr-3" href="{{ url_for('obtenerPosada', id=reserva['identificadorPosada']) }}">
+                  <a class="pr-3" href="{{ url_for('obtener_posada', id=reserva['identificador_posada']) }}">
                     <img alt="Imagen Posada" width="150px" height="90px" src="{{reserva.imagen}}">
                   </a> 
                   
                   <div>
-                    <div class="text-dark pb-1"><span class="font-weight-bold">{{reserva.nombrePosada}} </span>#{{reserva.identificadorPosada}}</div>
-                    <div><span class="text-black-50">Desde:</span> <span class="text-dark">{{reserva.fechaIngreso}}</span></div>
-                    <div><span class="text-black-50">Hasta:</span> <span class="text-dark">{{reserva.fechaEgreso}}</div>
+                    <div class="text-dark pb-1"><span class="font-weight-bold">{{reserva.nombre_posada}} </span>#{{reserva.identificador_posada}}</div>
+                    <div><span class="text-black-50">Desde:</span> <span class="text-dark">{{reserva.fecha_ingreso}}</span></div>
+                    <div><span class="text-black-50">Hasta:</span> <span class="text-dark">{{reserva.fecha_egreso}}</div>
                   </div>
 
                 </div>
 
-                <form action="{{ url_for('cancelarReserva') }}" method="post">
-                  <input name="idReserva" value="{{reserva.id}}" class="d-none">
+                <form action="{{ url_for('cancelar_reserva') }}" method="post">
+                  <input name="id_reserva" value="{{reserva.id}}" class="d-none">
                   <button class="btn btn-primary py-2 px-3 align-self-stretch" type="submit">Cancelar</button>
                 </form>
                 

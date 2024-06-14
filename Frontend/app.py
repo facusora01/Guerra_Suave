@@ -75,43 +75,43 @@ def reservar():
 
     data = {
         "UUID": "69d07c33-1eec-11ef-bc3d-0242ac120002",
-        "fechaIngreso": request.form['fechaIngreso'],
-        "fechaEgreso": request.form['fechaEgreso'],
-        "identificadorPosada": request.form['identificadorPosada'],
+        "fecha_ingreso": request.form['fecha_ingreso'],
+        "fecha_egreso": request.form['fecha_egreso'],
+        "identificador_posada": request.form['identificador_posada'],
     }
 
     response = requests.post('http://127.0.0.1:5050/reservas', json=data)
 
     if(response.status_code == 200):
-        return redirect(url_for('misReservas', correcta=True))
+        return redirect(url_for('mis_reservas', correcta=True))
     
-    return redirect(url_for('obtenerPosada', id=data['identificadorPosada'], fechaIngreso=data['fechaIngreso'], fechaEgreso=data['fechaEgreso'], error=response.json()['message']))
+    return redirect(url_for('obtener_posada', id=data['identificador_posada'], fecha_ingreso=data['fecha_ingreso'], fecha_egreso=data['fecha_egreso'], error=response.json()['message']))
 
 
-@app.route('/misreservas')
-def misReservas():
+@app.route('/mis_reservas')
+def mis_reservas():
     response = requests.get('http://127.0.0.1:5050/reservas?email=p.lopez@gmail.com')
     response = response.json()
-    return render_template('misreservas.html', reservas=response['reservas'], correcta=request.args.get('correcta'))
+    return render_template('mis_reservas.html', reservas=response['reservas'], correcta=request.args.get('correcta'))
 
 
 @app.route('/cancelar', methods=['POST'])
-def cancelarReserva():
+def cancelar_reserva():
 
     data = {
         "UUID": "69d07c33-1eec-11ef-bc3d-0242ac120002",
-        "idReserva": int(request.form['idReserva'])
+        "id_reserva": int(request.form['id_reserva'])
     }
 
     requests.delete('http://127.0.0.1:5050/reservas', json=data)
-    return redirect(url_for('misReservas'))
+    return redirect(url_for('mis_reservas'))
 
 
 @app.route('/posadas/<id>', methods=['GET'])
-def obtenerPosada(id):
+def obtener_posada(id):
     fechas = {
-        "fechaIngreso": request.args.get("fechaIngreso"),
-        "fechaEgreso": request.args.get("fechaEgreso"),
+        "fecha_ingreso": request.args.get("fecha_ingreso"),
+        "fecha_egreso": request.args.get("fecha_egreso"),
     }
     response = requests.get(f"""http://127.0.0.1:5050/posadas?identificador={id}""")
     posada = response.json()['posadas'][0]
@@ -122,7 +122,7 @@ def obtenerPosada(id):
 
 
 @app.route('/buscar', methods=["POST"])
-def buscarPosadas():
+def buscar_posadas():
     response = requests.get('http://127.0.0.1:5050/posadas', params=request.form)
     
     data = response.json()

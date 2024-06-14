@@ -1,51 +1,51 @@
 from datetime import datetime
 
-def superposicionReservas(reservas, fechaI, fechaE):
+def superposicion_reservas(reservas, fecha_in, fecha_eg):
 
-    listaReservas = [dict(row) for row in reservas]
+    lista_reservas = [dict(row) for row in reservas]
 
-    dateFormat = '%Y-%m-%d'
-    fechaIngreso = datetime.strptime(fechaI, dateFormat)
-    fechaEgreso = datetime.strptime(fechaE, dateFormat)
+    date_format = '%Y-%m-%d'
+    fecha_ingreso = datetime.strptime(fecha_in, date_format)
+    fecha_egreso = datetime.strptime(fecha_eg, date_format)
     disponible = True
 
-    for re in listaReservas:
-        if not fechaIngreso <= re['fechaIngreso'] and fechaEgreso <= re['fechaIngreso']:
+    for re in lista_reservas:
+        if not fecha_ingreso <= re['fecha_ingreso'] and fecha_egreso <= re['fecha_ingreso']:
             disponible = False
 
-        elif not fechaIngreso >= re['fechaEgreso'] and fechaEgreso >= re['fechaEgreso']:
+        elif not fecha_ingreso >= re['fecha_egreso'] and fecha_egreso >= re['fecha_egreso']:
             disponible = False
 
-        elif re['fechaIngreso'] < fechaIngreso < re['fechaEgreso']:
+        elif re['fecha_ingreso'] < fecha_ingreso < re['fecha_egreso']:
             disponible = False
 
-        elif re['fechaIngreso'] < fechaEgreso < re['fechaEgreso']:
+        elif re['fecha_ingreso'] < fecha_egreso < re['fecha_egreso']:
             disponible = False
 
     return disponible
 
 
-def fechaValida(fechaI, fechaE):
+def fecha_valida(fecha_in, fecha_eg):
 
-    fechaValida = True
+    fecha_valida = True
 
-    if fechaE and fechaI:
-        dateFormat = '%Y-%m-%d'
-        fechaIngreso = datetime.strptime(fechaI, dateFormat)
-        fechaEgreso = datetime.strptime(fechaE, dateFormat)
+    if fecha_eg and fecha_in:
+        date_format = '%Y-%m-%d'
+        fecha_ingreso = datetime.strptime(fecha_in, date_format)
+        fecha_egreso = datetime.strptime(fecha_eg, date_format)
         
-        if fechaEgreso <= fechaIngreso:
-            fechaValida = False
+        if fecha_egreso <= fecha_ingreso:
+            fecha_valida = False
     
-        if fechaIngreso < datetime.now():
-            fechaValida = False
+        if fecha_ingreso < datetime.now():
+            fecha_valida = False
     
-    return fechaValida
+    return fecha_valida
 
-def removerUUID(data):
-    listaDatos = []
+def remover_UUID(data):
+    lista_datos = []
     for row in data:
         fila = dict(row)
-        fila.pop("personaUUID")
-        listaDatos.append(fila)
-    return listaDatos
+        fila.pop("persona_UUID")
+        lista_datos.append(fila)
+    return lista_datos

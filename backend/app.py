@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 from sqlalchemy import create_engine, text
 from sqlalchemy.exc import SQLAlchemyError
-from reservas import superposicionReservas, removerUUID, fechaValida
+from reservas import superposicion_reservas, remover_UUID, fecha_valida
 import sys
 
 def create_connection(testing = False):
@@ -36,7 +36,7 @@ def search_query(query):
     return result.mappings().all()
 
 
-def filtrosPosadas(args):
+def filtros_posadas(args):
     filters = []
 
     if args.get('identificador'):
@@ -46,31 +46,31 @@ def filtrosPosadas(args):
         except ValueError:
             return jsonify({'message': 'Valor inválido para identificador'}), 400
     
-    if args.get('camasMatrimoniales'):
+    if args.get('camas_matrimoniales'):
         try:
-            camasMatrimoniales = int(args.get('camasMatrimoniales'))
-            filters.append(f"camasMatrimoniales >= {camasMatrimoniales}")
+            camas_matrimoniales = int(args.get('camas_matrimoniales'))
+            filters.append(f"camas_matrimoniales >= {camas_matrimoniales}")
         except ValueError:
             return jsonify({'message': 'Valor inválido para camas matrimoniales'}), 400
 
-    if args.get('camasIndividuales'):
+    if args.get('camas_individuales'):
         try:
-            camasIndividuales = int(args.get('camasIndividuales'))
-            filters.append(f"camasIndividuales >= {camasIndividuales}")
+            camas_individuales = int(args.get('camas_individuales'))
+            filters.append(f"camas_individuales >= {camas_individuales}")
         except ValueError:
             return jsonify({'message': 'Valor inválido para camas individuales'}), 400
     
-    if args.get('precioMax'):
+    if args.get('precio_max'):
         try:
-            precioMax = float(args.get('precioMax'))
-            filters.append(f"precioNoche <= {precioMax}")
+            precio_max = float(args.get('precio_max'))
+            filters.append(f"precio_noche <= {precio_max}")
         except ValueError:
             return jsonify({'message': 'Valor inválido para precio máximo'}), 400
 
-    if args.get('precioMin'):
+    if args.get('precio_min'):
         try:
-            precioMin = float(args.get('precioMin'))
-            filters.append(f"precioNoche >= {precioMin}")
+            precio_min = float(args.get('precio_min'))
+            filters.append(f"precio_noche >= {precio_min}")
         except ValueError:
             return jsonify({'message': 'Valor inválido para precio mínimo'}), 400
 
@@ -79,31 +79,31 @@ def filtrosPosadas(args):
     else:
         return ""
     
-def estaDisponible(args, posadas):
+def esta_disponible(args, posadas):
  
-    posadasValidas = list(posadas)
+    posadas_validas = list(posadas)
 
-    if args.get('fechaIngreso') and args.get('fechaEgreso'):
+    if args.get('fecha_ingreso') and args.get('fecha_egreso'):
 
         for posada in posadas:
             print(posada['identificador'])
-            reservas = search_query(f"""SELECT * FROM reservas WHERE identificadorPosada={posada['identificador']} """)
-            if not superposicionReservas(reservas, args['fechaIngreso'], args['fechaEgreso']):
-                posadasValidas.remove(posada)
+            reservas = search_query(f"""SELECT * FROM reservas WHERE identificador_posada={posada['identificador']} """)
+            if not superposicion_reservas(reservas, args['fecha_ingreso'], args['fecha_egreso']):
+                posadas_validas.remove(posada)
 
-    return posadasValidas
+    return posadas_validas
 
 @app.route("/posadas")
 def posadas():
 
     try:
-        if not fechaValida(request.args.get('fechaIngreso'), request.args.get('fechaEgreso')):
+        if not fecha_valida(request.args.get('fecha_ingreso'), request.args.get('fecha_egreso')):
             return jsonify({'message': 'La fecha debe ser en el futuro y en el orden correcto.'}), 400
 
-        filters = filtrosPosadas(request.args)
+        filters = filtros_posadas(request.args)
         result = search_query(f"""SELECT * FROM posadas {filters}""")
         posadas = [dict(row) for row in result]
-        posadas = estaDisponible(request.args, posadas)
+        posadas = esta_disponible(request.args, posadas)
         return jsonify({'posadas': posadas, 'cantidad': len(posadas), 'filtros': request.args})
     
     except SQLAlchemyError as err:
@@ -111,12 +111,12 @@ def posadas():
         return jsonify({'message': "Error en la solicitud"}), 400
     
 
-def obtenerReservas():   
+def obtener_reservas():   
     try:
         filters = ""
 
-        if request.args.get('identificadorPosada'):
-            filters = f"""WHERE identificadorPosada={request.args.get('identificadorPosada')}"""
+        if request.args.get('identificador_posada'):
+            filters = f"""WHERE identificador_posada={request.args.get('identificador_posada')}"""
 
         elif request.args.get('email'):
             usuario = search_query(f"""SELECT * FROM usuarios WHERE email='{request.args.get('email')}' """)
@@ -124,29 +124,28 @@ def obtenerReservas():
             if not len(usuario):
                 return jsonify({'message': 'Usuario inexistente'}), 400
    
-            filters = f"""WHERE personaUUID='{usuario[0]['UUID']}' """
+            filters = f"""WHERE persona_UUID='{usuario[0]['UUID']}' """
 
         result = search_query(f"""SELECT * FROM reservas {filters}""")
-        reservas = removerUUID(result)
+        reservas = remover_UUID(result)
         return jsonify({'reservas': reservas, 'cantidad': len(reservas), 'filtros': request.args})
     except SQLAlchemyError as err:
         print(err)
         return jsonify({'message': "Error en la solicitud"}), 400
 
 
-def borrarReserva():
+def borrar_reserva():
     try:
         content = request.json
-        print(content)
-        
-        reserva = search_query(f"""SELECT * FROM reservas WHERE id={content['idReserva']}  """)
+
+        reserva = search_query(f"""SELECT * FROM reservas WHERE id={content['id_reserva']}  """)
         if not len(reserva):
             return jsonify({'message': 'No existe la reserva'}), 400
         
-        if not reserva[0]['personaUUID'] == content['UUID']:
+        if not reserva[0]['persona_UUID'] == content['UUID']:
             return jsonify({'message': 'La reserva no pertenece al usuario'}), 400
         
-        run_query(f"""DELETE FROM reservas WHERE id={content['idReserva']} AND personaUUID='{content['UUID']}' """)
+        run_query(f"""DELETE FROM reservas WHERE id={content['id_reserva']} AND persona_UUID='{content['UUID']}' """)
         return jsonify({'message': "Reserva eliminada correctamente"})
 
     except SQLAlchemyError as err:
@@ -154,26 +153,26 @@ def borrarReserva():
         return jsonify({'message': 'No se pudo borrar la reserva'}), 500
 
 
-def crearReserva():
+def crear_reserva():
     try:
         content = request.json
 
-        posada = search_query(f"""SELECT * FROM posadas WHERE identificador={content['identificadorPosada']}""")
+        posada = search_query(f"""SELECT * FROM posadas WHERE identificador={content['identificador_posada']}""")
         if not len(posada):
             return jsonify({'message': 'Posada inexistente'}), 400
         
-        if not fechaValida(content['fechaIngreso'], content['fechaEgreso']):
+        if not fecha_valida(content['fecha_ingreso'], content['fecha_egreso']):
             return jsonify({'message': 'La fecha debe ser en el futuro y en el orden correcto.'}), 400
 
         usuario = search_query(f"""SELECT * FROM usuarios WHERE UUID='{content['UUID']}' """)
         if not len(usuario):
             return jsonify({'message': 'Usuario inexistente'}), 400
 
-        result = search_query(f"""SELECT * FROM reservas WHERE identificadorPosada={content['identificadorPosada']}""")
-        if not superposicionReservas(result, content['fechaIngreso'], content['fechaEgreso']):
+        result = search_query(f"""SELECT * FROM reservas WHERE identificador_posada={content['identificador_posada']}""")
+        if not superposicion_reservas(result, content['fecha_ingreso'], content['fecha_egreso']):
             return jsonify({'message': 'La fecha seleccionada para la reserva se encuentra ocupada.'}), 400
         
-        run_query(f"""INSERT INTO reservas (identificadorPosada, personaUUID, fechaIngreso, fechaEgreso, nombrePosada, imagen) VALUES ({content['identificadorPosada']}, "{content['UUID']}", "{content['fechaIngreso']}", "{content['fechaEgreso']}", "{posada[0]['nombre']}", "{posada[0]['foto1']}")""")
+        run_query(f"""INSERT INTO reservas (identificador_posada, persona_UUID, fecha_ingreso, fecha_egreso, nombre_posada, imagen) VALUES ({content['identificador_posada']}, "{content['UUID']}", "{content['fecha_ingreso']}", "{content['fecha_egreso']}", "{posada[0]['nombre']}", "{posada[0]['foto1']}")""")
         return jsonify({'message': "Reserva correcta"})
     
     except SQLAlchemyError as err:
@@ -186,13 +185,13 @@ def crearReserva():
 @app.route("/reservas", methods=["GET", "POST", "DELETE"])
 def reservas():
     if request.method == "GET":
-        return obtenerReservas()
+        return obtener_reservas()
     elif request.method == "POST":
-        return crearReserva()
+        return crear_reserva()
     elif request.method == "DELETE":
-        return borrarReserva()
+        return borrar_reserva()
 
-def obtenerResenias():
+def obtener_resenias():
     try:
         result = search_query("""SELECT * FROM resenias""")
         resenias = [dict(row) for row in result]
@@ -202,7 +201,7 @@ def obtenerResenias():
         print(err)
         return jsonify({'message': "Error en la solicitud"}), 400
 
-def publicarResenias():
+def publicar_resenias():
     try:
         content = request.json
        
@@ -222,9 +221,9 @@ def publicarResenias():
         if not posada:
             return jsonify({'message': 'Posada no encontrada'}), 400
         else:
-            identificadorPosada = posada[0]['identificador']
+            identificador_posada = posada[0]['identificador']
 
-        run_query(f"""INSERT INTO resenias (identificadorPosada, personaUUID, puntuacion, comentario) VALUES ({identificadorPosada}, '{usuarioUUID}', {puntuacion}, "{comentario}") """)
+        run_query(f"""INSERT INTO resenias (identificador_posada, persona_UUID, puntuacion, comentario) VALUES ({identificador_posada}, '{usuarioUUID}', {puntuacion}, "{comentario}") """)
         return jsonify({'message': "Se ha agregado la reseña correctamente"}), 200
     
     except SQLAlchemyError as err:
@@ -234,11 +233,11 @@ def publicarResenias():
         return jsonify({'message': 'Error en la solicitud.'}), 400
 
 @app.route("/resenias", methods=["GET", "POST"])
-def listarResenias():
+def listar_resenias():
     if request.method == "GET":
-        return obtenerResenias()
+        return obtener_resenias()
     if request.method == "POST":
-        return publicarResenias()
+        return publicar_resenias()
     
 @app.errorhandler(404)
 def error(e):

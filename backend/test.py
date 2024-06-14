@@ -33,25 +33,25 @@ class TestApisUnicas(unittest.TestCase):
         self.assertEqual(response['cantidad'], 6)
 
     def testObtenerPosadasFiltroCamasI(self):
-        response = requests.get('http://127.0.0.1:5050/posadas?camasIndividuales=5').json()
+        response = requests.get('http://127.0.0.1:5050/posadas?camas_individuales=5').json()
         self.assertEqual(response['cantidad'], 2)
 
     def testObtenerPosadasFiltroCamasM(self):
-        response = requests.get('http://127.0.0.1:5050/posadas?camasMatrimoniales=3').json()
+        response = requests.get('http://127.0.0.1:5050/posadas?camas_matrimoniales=3').json()
         self.assertEqual(response['cantidad'], 0)
 
     def testObtenerPosadasFiltroFechas(self):
         data = {
-            "fechaIngreso": (datetime.date.today() + datetime.timedelta(days=2)).strftime('%Y-%m-%d'),
-            "fechaEgreso": (datetime.date.today() + datetime.timedelta(days=5)).strftime('%Y-%m-%d')
+            "fecha_ingreso": (datetime.date.today() + datetime.timedelta(days=2)).strftime('%Y-%m-%d'),
+            "fecha_egreso": (datetime.date.today() + datetime.timedelta(days=5)).strftime('%Y-%m-%d')
         }
         reservaResponse = requests.get('http://127.0.0.1:5050/posadas', data)    
         self.assertEqual(reservaResponse.json()['cantidad'], 4)
 
     def testObtenerPosadasFiltroFechasErroneas(self):
         data = {
-            "fechaIngreso": (datetime.date.today() + datetime.timedelta(days=20)).strftime('%Y-%m-%d'),
-            "fechaEgreso": (datetime.date.today() + datetime.timedelta(days=5)).strftime('%Y-%m-%d')
+            "fecha_ingreso": (datetime.date.today() + datetime.timedelta(days=20)).strftime('%Y-%m-%d'),
+            "fecha_egreso": (datetime.date.today() + datetime.timedelta(days=5)).strftime('%Y-%m-%d')
         }
         reservaResponse = requests.get('http://127.0.0.1:5050/posadas', data)    
         self.assertEqual(reservaResponse.json()['message'], 'La fecha debe ser en el futuro y en el orden correcto.')
@@ -62,14 +62,14 @@ class TestApisUnicas(unittest.TestCase):
 
     def testObtenerReservasUsuario(self):
         response = requests.get('http://127.0.0.1:5050/reservas?email=p.lopez@gmail.com').json()
-        self.assertGreaterEqual(response['reservas'][0]['identificadorPosada'], 101)
+        self.assertGreaterEqual(response['reservas'][0]['identificador_posada'], 101)
 
     def testReservaUsuarioInexistente(self):
         data = {
             "UUID": "3456-789a-b2cd-e12345678901",
-            "identificadorPosada": 201,
-            "fechaIngreso": (datetime.date.today() + datetime.timedelta(days=1)).strftime('%Y-%m-%d'),
-            "fechaEgreso": (datetime.date.today() + datetime.timedelta(days=5)).strftime('%Y-%m-%d')
+            "identificador_posada": 201,
+            "fecha_ingreso": (datetime.date.today() + datetime.timedelta(days=1)).strftime('%Y-%m-%d'),
+            "fecha_egreso": (datetime.date.today() + datetime.timedelta(days=5)).strftime('%Y-%m-%d')
         }
         reservaResponse = requests.post('http://127.0.0.1:5050/reservas', json=data)    
         self.assertEqual(reservaResponse.json()['message'], 'Usuario inexistente')
@@ -77,9 +77,9 @@ class TestApisUnicas(unittest.TestCase):
     def testReservaPosadaInexistente(self):
         data = {
             "UUID": "789a01bc-3456-789a-b2cd-e12345678901",
-            "identificadorPosada": 801,
-            "fechaIngreso": (datetime.date.today() + datetime.timedelta(days=1)).strftime('%Y-%m-%d'),
-            "fechaEgreso": (datetime.date.today() + datetime.timedelta(days=5)).strftime('%Y-%m-%d')
+            "identificador_posada": 801,
+            "fecha_ingreso": (datetime.date.today() + datetime.timedelta(days=1)).strftime('%Y-%m-%d'),
+            "fecha_egreso": (datetime.date.today() + datetime.timedelta(days=5)).strftime('%Y-%m-%d')
         }
         reservaResponse = requests.post('http://127.0.0.1:5050/reservas', json=data)    
         self.assertEqual(reservaResponse.json()['message'], 'Posada inexistente')
@@ -87,9 +87,9 @@ class TestApisUnicas(unittest.TestCase):
     def testReservaFechaIncorrecta(self):
         data = {
             "UUID": "789a01bc-3456-789a-b2cd-e12345678901",
-            "identificadorPosada": 201,
-            "fechaIngreso": (datetime.date.today() - datetime.timedelta(days=20)).strftime('%Y-%m-%d'),
-            "fechaEgreso": (datetime.date.today() + datetime.timedelta(days=5)).strftime('%Y-%m-%d')
+            "identificador_posada": 201,
+            "fecha_ingreso": (datetime.date.today() - datetime.timedelta(days=20)).strftime('%Y-%m-%d'),
+            "fecha_egreso": (datetime.date.today() + datetime.timedelta(days=5)).strftime('%Y-%m-%d')
         }
         reservaResponse = requests.post('http://127.0.0.1:5050/reservas', json=data)    
         self.assertEqual(reservaResponse.json()['message'], 'La fecha debe ser en el futuro y en el orden correcto.')
@@ -103,24 +103,24 @@ class TestFlow(unittest.TestCase):
         with self.subTest():
             data = {
                 "UUID": "789a01bc-3456-789a-b2cd-e12345678901",
-                "identificadorPosada": 201,
-                "fechaIngreso": (datetime.date.today() + datetime.timedelta(days=1)).strftime('%Y-%m-%d'),
-                "fechaEgreso": (datetime.date.today() + datetime.timedelta(days=5)).strftime('%Y-%m-%d')
+                "identificador_posada": 201,
+                "fecha_ingreso": (datetime.date.today() + datetime.timedelta(days=1)).strftime('%Y-%m-%d'),
+                "fecha_egreso": (datetime.date.today() + datetime.timedelta(days=5)).strftime('%Y-%m-%d')
             }
     
             reservaResponse = requests.post('http://127.0.0.1:5050/reservas', json=data)
             self.assertEqual(reservaResponse.status_code, 200)
 
         with self.subTest():
-            reservas = search_query(f"""SELECT * FROM reservas WHERE personaUUID='789a01bc-3456-789a-b2cd-e12345678901' """)
-            self.assertEqual(reservas[0]['fechaIngreso'].date(), (datetime.date.today() + datetime.timedelta(days=1)))
+            reservas = search_query(f"""SELECT * FROM reservas WHERE persona_UUID='789a01bc-3456-789a-b2cd-e12345678901' """)
+            self.assertEqual(reservas[0]['fecha_ingreso'].date(), (datetime.date.today() + datetime.timedelta(days=1)))
         
         with self.subTest():
             response = requests.get('http://127.0.0.1:5050/reservas?email=maria.gomez@hotmail.com').json()
 
             data = {
                 "UUID": "789a01bc-3456-789a-b2cd-e12345678901",
-                "idReserva": response['reservas'][0]['id']
+                "id_reserva": response['reservas'][0]['id']
             }
 
             requests.delete('http://127.0.0.1:5050/reservas', json=data).json()

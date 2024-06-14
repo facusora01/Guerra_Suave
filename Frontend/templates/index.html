@@ -40,13 +40,13 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12">
-				<form action="{{ url_for('buscarPosadas') }}" class="booking-form" method="post">
+				<form action="{{ url_for('buscar_posadas') }}" class="booking-form" method="post">
 					<div class="row justify-content-center">
 						<div class="col-md-3 d-flex">
 							<div class="form-group p-3 align-self-stretch d-flex align-items-end">
 								<div class="wrap">
 									<label for="#">Ingreso</label>
-									<input type="date" class="form-control" placeholder="Check-in date" name="fechaIngreso" required>
+									<input type="date" class="form-control" placeholder="Check-in date" name="fecha_ingreso" required>
 								</div>
 							</div>
 						</div>
@@ -54,7 +54,7 @@
 							<div class="form-group p-3 align-self-stretch d-flex align-items-end">
 								<div class="wrap w-100">
 									<label for="#">Egreso</label>
-									<input type="date" class="form-control" placeholder="Check-out date" name="fechaEgreso" required>
+									<input type="date" class="form-control" placeholder="Check-out date" name="fecha_egreso" required>
 								</div>
 							</div>
 						</div>
