@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for
-from flask import Flask, render_template, request, jsonify, redirect, url_for
 import os
 import requests
+from requests.exceptions import ConnectionError
 
 app = Flask(__name__)
 
@@ -144,6 +144,10 @@ def cabanas():
 @app.errorhandler(404)
 def error(e):
     return render_template('404.html'), 404
+
+@app.errorhandler(ConnectionError)
+def internal_error(e):
+    return render_template('500.html'), 500
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
