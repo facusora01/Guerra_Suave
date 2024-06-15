@@ -7764,7 +7764,13 @@ h1, h2, h3, h4, h5,
     width: 100%;
     display: block;
     margin-bottom: 0;
-    background: #fff; }
+    background: #fff;
+    transition: 0.5s; }
+
+  .booking-form .form-group:hover {
+    background-color: #bdbdbd;
+  }
+
     .booking-form .form-group label {
       font-weight: 400;
       font-size: 15px;
@@ -7794,7 +7800,7 @@ h1, h2, h3, h4, h5,
       width: 100%;
       display: block !important; }
   .booking-form .form-control {
-    border: 2px solid #fff !important;
+    border: 2px transparent !important;
     width: auto !important;
     max-width: 150px;
     height: 40px !important;
@@ -7832,7 +7838,7 @@ h1, h2, h3, h4, h5,
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     -ms-border-radius: 0;
-    border-radius: 0; }
+    border-radius: 15px; }
     .booking-form .btn-primary:hover {
       background: #000000;
       color: #fff; }
@@ -8077,7 +8083,7 @@ h1, h2, h3, h4, h5,
 
 .form-control {
   height: 52px !important;
-  background: #fff !important;
+  background: transparent !important;
   color: #000000 !important;
   font-size: 18px;
   border-radius: 0px;
@@ -9161,4 +9167,12 @@ textarea.form-control {
 .testimonial-section .single-testimonial .carousel-control-next:hover, .testimonial-section .single-testimonial .carousel-control-prev:hover{
   background-color: #b47f41;
   color: #fff;
+}
+
+.rounded-form-group {
+  border-radius: 15px;
+}
+
+input.rounded-form-group {
+  border-radius: 15px;
 }
