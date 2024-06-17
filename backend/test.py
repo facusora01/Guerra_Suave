@@ -94,6 +94,21 @@ class TestApisUnicas(unittest.TestCase):
         reservaResponse = requests.post('http://127.0.0.1:5050/reservas', json=data)    
         self.assertEqual(reservaResponse.json()['message'], 'La fecha debe ser en el futuro y en el orden correcto.')
 
+    def testGenerarResenia(self):
+
+        cantidadOriginal = requests.get('http://127.0.0.1:5050/resenias').json()['cantidad']
+        
+        data = {
+            "email": "p.lopez@gmail.com",
+            "comentario": f"""Increible {cantidadOriginal}""",
+            "puntuacion": 4,
+            "cabaña": "Amapola"
+        }
+
+        requests.post('http://127.0.0.1:5050/resenias', json=data)
+
+        response = requests.get('http://127.0.0.1:5050/resenias').json()
+        self.assertEqual(cantidadOriginal + 1, response['cantidad'])
 
 
 class TestFlow(unittest.TestCase):
@@ -130,23 +145,6 @@ class TestFlow(unittest.TestCase):
 
             self.assertEqual(len(response2['reservas']), 0)
 
-        
-    def testGenerarResenia(self):
-
-        cantidadOriginal = requests.get('http://127.0.0.1:5050/resenias').json()['cantidad']
-        
-        data = {
-            "email": "p.lopez@gmail.com",
-            "comentario": f"""Increible {cantidadOriginal}""",
-            "puntuacion": 4,
-            "cabaña": "Amapola"
-        }
-
-        requests.post('http://127.0.0.1:5050/resenias', json=data)
-
-        response = requests.get('http://127.0.0.1:5050/resenias').json()
-        self.assertEqual(cantidadOriginal + 1, response['cantidad'])
-      
         
 if __name__ == '__main__':
     unittest.main()
