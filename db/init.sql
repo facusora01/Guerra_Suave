@@ -190,7 +190,7 @@ INSERT INTO reservas (identificador_posada, persona_UUID, fecha_ingreso, fecha_e
 INSERT INTO reservas (identificador_posada, persona_UUID, fecha_ingreso, fecha_egreso, nombre_posada, imagen) VALUES (501, "c3b1f29f-4567-89ab-cdef-0123456789ab", "2024-5-10", "2024-6-10", "Bosque Alto", "static/images/BosqueAlto/bosqueAlto_Living.jpg");
 INSERT INTO reservas (identificador_posada, persona_UUID, fecha_ingreso, fecha_egreso, nombre_posada, imagen) VALUES (301, "69d07c33-1eec-11ef-bc3d-0242ac120002", "2024-5-22", "2024-6-29", "Trucha Dorada", "static/images/CiervoBlanco/ciervoBlanco_Living.jpg");
 
---Resenias
+-- Resenias
 
 INSERT INTO resenias (identificador_posada, persona_UUID, puntuacion, comentario) VALUES (101, '123e4567-e89b-12d3-a456-426655440001', 3, 'Hermoso complejo. Un lugar unico para disfrutar las vacaciones en familia');
 INSERT INTO resenias (identificador_posada, persona_UUID, puntuacion, comentario) VALUES (301, 'c3b1f29f-4567-89ab-cdef-0123456789ab', 5, 'Las vistas son realmente increibles. Super recomendable Posadas del Lago');
