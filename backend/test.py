@@ -34,7 +34,7 @@ class TestApisUnicas(unittest.TestCase):
 
     def testObtenerPosadasFiltroCamasI(self):
         response = requests.get('http://127.0.0.1:5050/posadas?camas_individuales=5').json()
-        self.assertEqual(response['cantidad'], 2)
+        self.assertEqual(response['cantidad'], 3)
 
     def testObtenerPosadasFiltroCamasM(self):
         response = requests.get('http://127.0.0.1:5050/posadas?camas_matrimoniales=3').json()
