@@ -15,8 +15,10 @@ def create_connection(testing = False):
         print("USING TESTING DB")
         port = 3309
         
+    # Crear conexión a la base de datos
     engine = create_engine(f"""mysql+pymysql://root:{password}@localhost:{port}/{dbname}""")
 
+    # Intentar conectarse a la base de datos
     try:
         connection = engine.connect()
     except SQLAlchemyError as err:
@@ -25,17 +27,19 @@ def create_connection(testing = False):
 
     return connection
 
+# Crear conexión a la base de datos
 db_connection = create_connection()
 app = Flask(__name__)
 
 
-#PRE: Recibe una query en formato string.
+#PRE: Recibe una query de SQL en formato string.
 #POST: Ejecuta la query en la base de datos.
 def run_query(query):
     db_connection.execute(text(query))
+    # Guardar los cambios
     db_connection.commit() 
 
-#PRE: Recibe una query en formato string.
+#PRE: Recibe una query de SQL en formato string.
 #POST: Devuelve el resultado de la query, si es que se pudo realizar.
 def search_query(query):
     result = db_connection.execute(text(query))

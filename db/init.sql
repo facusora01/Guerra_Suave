@@ -174,7 +174,7 @@ INSERT INTO posadas VALUES (
 	1250000.00, -- precioNoche
 	200, -- metrosCuadrados,
 	2, -- ambientes,
-	0, -- camasIndividuales,
+	8, -- camasIndividuales,
 	1, -- camasMatrimoniales,
 	1, -- Booleano calefaccion,
 	1, -- Booleano desayuno,

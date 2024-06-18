@@ -1,6 +1,6 @@
 function init(){
     // Tomo las coordenadas de nuestro complejo de cabañas
-    var coord = {lat: -40.17650289432094, lng: -71.4325237448777};
+    var coord = {lat: -41.1076917, lng: -71.3957839};
 
     // Creo el mapa
     var map = new google.maps.Map(document.getElementById('map'),{

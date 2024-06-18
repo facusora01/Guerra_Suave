@@ -40,7 +40,7 @@
 									<h3 class="mb-3"><a href="{{ url_for('obtenerPosada', id=posada['identificador'], fechaIngreso=filtros['fechaIngreso'], fechaEgreso=filtros['fechaEgreso']) }}">{{ posada['nombre']}}</a></h3>
 									<p><span class="price mr-2 h4"> {{ posada['precioNoche'] }} </span> <span class="per">Por noche</span></p>
 									<ul class="list">
-										<li><span>Max:</span> {{ posada['camasIndividuales'] + posada['camasMatrimoniales']}} </li>
+										<li><span>Max:</span> {{ posada['camasIndividuales'] + posada['camasMatrimoniales']*2}} </li>
 										<li><span>Tamaño:</span> {{ posada['metrosCuadrados'] }} </li>
 										<li><span>Vistas:</span> {{ posada['vistaHacia'] }} </li>
 										<li><span>Matrimoniales:</span> {{ posada['camasMatrimoniales'] }} </li>

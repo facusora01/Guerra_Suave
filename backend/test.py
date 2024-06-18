@@ -39,12 +39,12 @@ class TestApisUnicas(unittest.TestCase):
         response = requests.get('http://127.0.0.1:5050/posadas').json()
         self.assertEqual(response['cantidad'], 6)
 
-    # Se testea el filtro de camas individuales y se verifica que sean 2.
+    # Se testea el filtro de camas individuales y se verifica que sean 2 posadas.
     def testObtenerPosadasFiltroCamasI(self):
         response = requests.get('http://127.0.0.1:5050/posadas?camasIndividuales=5').json()
         self.assertEqual(response['cantidad'], 2)
 
-    # Se testea el filtro de camas matrimoniales y se verifica que sean 0.
+    # Se testea el filtro de camas matrimoniales y se verifica que sean 0 posadas.
     def testObtenerPosadasFiltroCamasM(self):
         response = requests.get('http://127.0.0.1:5050/posadas?camasMatrimoniales=3').json()
         self.assertEqual(response['cantidad'], 0)
@@ -67,7 +67,7 @@ class TestApisUnicas(unittest.TestCase):
         reservaResponse = requests.get('http://127.0.0.1:5050/posadas', data)    
         self.assertEqual(reservaResponse.json()['message'], 'La fecha debe ser en el futuro y en el orden correcto.')
 
-    # Se testea el obtener reservas y se verifica que sean 2.
+    # Se testea el obtener reservas y se verifica que sean 2 reservas.
     def testObtenerReservas(self):
         response = requests.get('http://127.0.0.1:5050/reservas').json()
         self.assertGreaterEqual(response['cantidad'], 2)
