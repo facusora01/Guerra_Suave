@@ -1,5 +1,5 @@
 function init(){
-    var coord = {lat: -40.17650289432094, lng: -71.4325237448777};
+    var coord = {lat: -41.1076917, lng: -71.3957839};
     var map = new google.maps.Map(document.getElementById('map'),{
       zoom: 10,
       center: coord

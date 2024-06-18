@@ -170,7 +170,7 @@ INSERT INTO posadas VALUES (
 	1250000.00,
 	200,
 	2,
-	0,
+	8,
 	1,
 	1,
 	1,
