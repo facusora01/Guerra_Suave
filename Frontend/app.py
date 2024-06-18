@@ -1,30 +1,15 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for
-import os
 import requests
 from requests.exceptions import ConnectionError
 
 app = Flask(__name__)
 
-#activar debugger
 
-'''
-ESTO ES PARA QUE EL DEBUGGER SE ACTIVE AUTOMATICAMENTE
-============================================================
-============================================================
-''' 
-os.environ['FLASK_DEBUG'] = '1'
-'''
-============================================================
-============================================================
-'''
 
 @app.route('/')
 def index():
     return render_template('index.html', error=request.args.get('error'))
 
-@app.route('/restaurant')
-def restaurant():
-    return render_template('restaurant.html')
 
 @app.route('/about')
 def about():
@@ -150,4 +135,4 @@ def internal_error(e):
     return render_template('500.html'), 500
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    app.run(port=5000)
